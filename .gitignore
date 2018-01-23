@@ -6,6 +6,17 @@ node_modules/
 .zip
 *.log
 
+static/assets/font/
+static/assets/img/svg/
+static/assets/*/*/*.min.*
+
+.enb/tmp/
+
+dist/
+bundles/*/*/*
+!*.bemdecl.js
+bundles/*/*/*.tmpl.bemdecl.js
+!.bem/*
 .swp
 package-lock.json
 shrinkwrap.yaml

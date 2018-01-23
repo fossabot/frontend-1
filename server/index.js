@@ -4,6 +4,7 @@ const fs = require('fs'),
       passport = require('passport'),
       PrettyError = require('pretty-error'),
       router = require('./router'),
+      render = require('./render').render,
       staticFolder = process.env.STATIC_FOLDER,
       port = process.env.PORT,
       isSocket = isNaN(port),
@@ -17,6 +18,7 @@ app
   .enable( 'trust proxy' )
   .use( require( 'compression' )() )
   .use( require( 'serve-favicon' )( path.join( staticFolder, 'favicon.ico' ) ) )
+  .use( __DEV__ ? require('tiny-lr').middleware( { app: app, dashboard: true } ) : _next )
   .use( require( 'serve-static' )( staticFolder ) )
   .use( __DEV__ ? require('express-pino-logger')({
     extreme: true,
@@ -59,9 +61,13 @@ app.get( '*', async ( req, res, next ) => {
     }
 
     res.status( route.status || 200 );
-    
-    return res.send( route );
-    
+
+    if ( route.page ) {
+      console.time('Render');
+      const html = await render( req, res, route );
+      console.timeEnd('Render');
+      return html;
+    }
   } catch ( error ) {
     next( error );
   }
@@ -77,10 +83,12 @@ pe.skipPackage( 'express' );
 // eslint-disable-next-line no-unused-vars
 app.use( ( err, req, res, next ) => {
   console.error( pe.render( err ) );
-  const html = res.json( err );
+  const html = render( req, res, {}, { page: 'error', api: { error: err } } );
   res.status( err.status || 500 );
   return res.send( html );
 });
+
+if ( __DEV__ ) { require( './rebuild' )( app ) }
 
 isSocket && fs.existsSync( port ) && fs.unlinkSync( port );
 app.listen( port, function () {

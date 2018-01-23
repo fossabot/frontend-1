@@ -5,16 +5,12 @@ module.exports = {
     {
       path: '',
       name: 'index',
-      action: ( ctx ) => {
-        return { Hello: 'World' };
-      }
+      load: async () => await require('./home')
     },
     {
       path: '(.*)',
       name: '404',
-      action: ( ctx, z ) => {
-        return { error: 404, pathname: ctx.pathname, query: ctx.query };
-      }
+      load: async () => await require('./404')
     }
   ],
 
