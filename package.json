@@ -1,0 +1,25 @@
+{
+  "author": "Roman @Realetive Ganin",
+  "name": "nevatrip-site",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nevatrip/frontend.git"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "browserslist": [
+    "ie >= 10",
+    "opera 12.1",
+    "> 2%",
+    "last 2 versions"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+  },
+  "private": true
+}
