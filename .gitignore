@@ -1,0 +1,12 @@
+node_modules/
+.DS_Store
+.idea
+.project
+.svn
+.zip
+*.log
+
+.swp
+package-lock.json
+shrinkwrap.yaml
+.env

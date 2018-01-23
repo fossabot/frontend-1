@@ -1,0 +1,18 @@
+parserOptions:
+  sourceType: module
+  ecmaVersion: 8
+  ecmaFeatures:
+    experimentalObjectRestSpread: true
+
+env:
+  browser: true
+  node: true
+  es6: true
+
+globals:
+  modules: true
+
+rules:
+  curly: [error, multi-line]
+
+extends: pedant
