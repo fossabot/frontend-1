@@ -1,5 +1,7 @@
 # NevaTrip
 
+[![GitHub issues](https://img.shields.io/github/issues/Nevatrip/frontend.svg)](https://github.com/Nevatrip/frontend/issues)
+
 ## Установка
 
 ```sh
