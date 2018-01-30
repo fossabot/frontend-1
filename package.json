@@ -20,6 +20,8 @@
   },
   "devDependencies": {
     "babel-preset-env": "^1.6.1",
+    "bem-components": "^6.0.1",
+    "bem-lib-site": "github:bem-site/bem-lib-site#master",
     "bem-tools-core": "^0.0.3",
     "bem-tools-create": "^2.2.0",
     "bemhint": "^0.10.0",

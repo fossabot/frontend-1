@@ -13,6 +13,7 @@ static/assets/*/*/*.min.*
 .enb/tmp/
 
 dist/
+docs/
 bundles/*/*/*
 !*.bemdecl.js
 bundles/*/*/*.tmpl.bemdecl.js
