@@ -10,23 +10,23 @@ module.exports = {
     'node_modules/bem-components': {}
   },
   modules: {
-   'bem-tools': {
+   "bem-tools": {
       plugins: {
         create: {
-          techs: [ 'post.css', 'js', 'bemtree.js', 'bemhtml.js', 'deps.js', 'md' ],
-          templateFolder: '.bem/templates',
+          techs: [ "post.css", "js", "bemtree.js", "bemhtml.js", "deps.js", "md" ],
+          templateFolder: ".bem/templates",
           levels: {
-            'components/common.blocks': {
+            "components/common.blocks": {
               default: true,
+              techs: [ "js", "bemtree.js", "bemhtml.js", "deps.js", "md" ]
             },
-            'components/desktop.blocks': {},
-            'components/touch.blocks': {},
-            'design/common.blocks': {
-              default: true,
-              techs: [ 'post.css' ]
+            "components/desktop.blocks": {},
+            "components/touch.blocks": {},
+            "design/common.blocks": {
+              techs: [ "post.css", "deps.js" ]
             },
-            'design/desktop.blocks': {},
-            'design/touch.blocks': {}
+            "design/desktop.blocks": {},
+            "design/touch.blocks": {}
           },
         }
       }
