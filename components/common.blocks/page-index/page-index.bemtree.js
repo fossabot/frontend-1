@@ -1,3 +1,56 @@
-block('page-index').replace()( node => {
-  return node.i18n('heading', 'main');
+block('page-index').replace()( () => {
+  return [
+    {
+      block: 'trip',
+      mods: { view: 'promo' }
+    },
+    {
+      block: 'list',
+      mods: { of: 'icons' }
+    },
+    {
+      block: 'category',
+      content: [
+        {
+          elem: 'header',
+          content: 'Заголовок категории'
+        },
+        {
+          elem: 'content',
+          content: {
+            block: 'list',
+            mods: { of: 'trips' },
+            items: [
+              {
+                block: 'trip',
+                content: [
+                  {
+                    elem: 'aside'
+                  },
+                  {
+                    elem: 'content',
+                    content: [
+                      {
+                        elem: 'heading',
+                        content: "Название экскурсии"
+                      },
+                      {
+                        elem: 'features',
+                        content: {
+                          block: 'list'
+                        }
+                      },
+                      { elem: 'price', mods: { type: 'adult' } },
+                      { elem: 'price', mods: { type: 'default' } },
+                      { elem: 'show-more' }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
 });
