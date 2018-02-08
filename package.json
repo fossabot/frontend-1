@@ -61,6 +61,7 @@
     "lost": "^8.2.0",
     "markdown-bemjson": "^3.1.1",
     "mkdirp": "^0.5.1",
+    "mobile-detect": "^1.4.1",
     "node-eval": "^2.0.0",
     "node-notifier": "^5.1.2",
     "node-notifier-cli": "^1.0.1",

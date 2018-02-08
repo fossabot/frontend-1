@@ -51,7 +51,7 @@ app.get( '*', async ( req, res, next ) => {
     console.time( 'Route' );
     const route = await router.resolve( {
       pathname: req.path,
-      query: req.query || {},
+      query: req.query || {}
     } );
     console.timeEnd( 'Route' );
 

@@ -14,9 +14,9 @@ static/assets/*/*/*.min.*
 
 dist/
 docs/
-bundles/*/*/*
+bundles/*/*
 !*.bemdecl.js
-bundles/*/*/*.tmpl.bemdecl.js
+bundles/*/*.tmpl.bemdecl.js
 !.bem/*
 .swp
 package-lock.json

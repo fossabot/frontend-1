@@ -6,7 +6,7 @@ block('root').replace()( ( node, ctx ) => {
         data = node.data = ctx.data,
         meta = data.meta || {},
         og = meta.og || {},
-        bundle = data.bundle || 'desktop';
+        bundle = data.bundle || 'nevatrip-desktop';
 
   if ( ctx.context ) {
     return ctx.context;
