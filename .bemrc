@@ -1,32 +1,61 @@
 module.exports = {
   levels: {
-    'components/common.blocks': {},
-    'components/desktop.blocks': {},
-    'components/touch.blocks': {},
-    'design/common.blocks': {},
-    'design/desktop.blocks': {},
-    'design/touch.blocks': {}
+    "components/common.blocks": { default: true },
+    "components/desktop.blocks": {},
+    "components/touch.blocks": {},
+    "components/api.blocks": {},
+    "design/common.blocks": {},
+    "design/desktop.blocks": {},
+    "design/touch.blocks": {},
+    "design/nevatrip.blocks": {},
+    "design/moskvatrip.blocks": {},
+    "design/busguide.blocks": {}
+  },
+  libs: {
+    "node_modules/bem-core/common.blocks": {},
+    "node_modules/bem-core/desktop.blocks": {},
+    "node_modules/bem-core/touch.blocks": {},
+    "node_modules/bem-components/common.blocks": {},
+    "node_modules/bem-components/desktop.blocks": {},
+    "node_modules/bem-components/touch.blocks": {},
+    "node_modules/bem-forms/common.blocks": {}
   },
   modules: {
-   'bem-tools': {
+   "bem-tools": {
       plugins: {
         create: {
-          techs: [ 'post.css', 'js', 'bemtree.js', 'bemhtml.js', 'deps.js' ],
-          templateFolder: '.bem/templates',
+          techs: [ "post.css", "js", "bemtree.js", "bemhtml.js", "deps.js", "md" ],
+          templateFolder: ".bem/templates",
           levels: {
-            'components/common.blocks': {
+            "components/common.blocks": {
               default: true,
+              techs: [ "js", "bemtree.js", "bemhtml.js", "deps.js", "md" ]
             },
-            'components/desktop.blocks': {},
-            'components/touch.blocks': {},
-            'design/common.blocks': {
-              default: true,
-              techs: [ 'post.css' ]
+            "components/desktop.blocks": {},
+            "components/touch.blocks": {},
+            "design/common.blocks": {
+              techs: [ "post.css", "deps.js" ]
             },
-            'design/desktop.blocks': {},
-            'design/touch.blocks': {}
+            "design/desktop.blocks": {},
+            "design/touch.blocks": {}
           },
         }
+      }
+    },
+    "bem-lib-site" : {
+      data : {
+        outputFolder : ".enb/docs/data",
+      },
+      view : {
+        outputFolder : "docs",
+      },
+      libs : {}
+    },
+    "bem-lib-site-data": {
+      outputFolder: "docs",
+      langs: [ "ru" ],
+      libs: {
+        docstest: {},
       }
     }
   }

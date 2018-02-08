@@ -1,0 +1,31 @@
+block(heading) {
+  @each $size, $fontSize, $lineHeight in
+    (  xs,    s,    m,    l,   xl,  xxl),
+    (17px, 20px, 24px, 32px, 40px, 56px),
+    (1.17,  1.2, 1.17, 1.25,  1.2, 1.14) {
+    .mod(size $size) {
+      font-size: $fontSize;
+      line-height: $lineHeight;
+    }
+  }
+
+  .mod(size l) {
+    letter-spacing: 1px;
+  }
+  
+  .mod(size xs),
+  .mod(size xl),
+  .mod(size xxl) {
+    font-weight: bold;
+  }
+
+  .mod(has-dot):after {
+    content: '';
+    display: inline-block;
+    width: 0.25em;
+    height: 0.25em;
+    background-color: #f3203b;
+    margin-left: 0.1em;
+    margin-right: -0.2em; /* prevent wrap to next line */
+  }
+}

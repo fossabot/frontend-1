@@ -1,3 +1,6 @@
 ({
-  shouldDeps: 'livereload'
+  shouldDeps: [
+    'livereload',
+    // 'debug'
+  ]
 });
