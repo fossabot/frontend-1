@@ -15,7 +15,7 @@ module.exports = function(entity) {
       (entity.modName && !entity.elem ? modPart : '') +
       (entity.elem ? elemPart : '') +
       (entity.elem && entity.modName ? modPart : '') +
-      ".content()(function() {",
+      ".content()( ( node, ctx ) => {",
     "  return;",
     "});",
     ""

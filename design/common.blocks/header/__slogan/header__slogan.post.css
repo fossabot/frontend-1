@@ -1,0 +1,6 @@
+block(header).elem(slogan) {
+  flex: 1;
+  font-size: 21px;
+  color: #777;
+  margin-right: 15px;
+}

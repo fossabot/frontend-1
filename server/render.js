@@ -1,6 +1,7 @@
 const fs       = require('fs'),
       path     = require('path'),
       nodeEval = require('node-eval'),
+      MobileDetect = require('mobile-detect'),
       __DEV__  = process.env.NODE_ENV.toLowerCase() !== 'production',
       cacheTTL = parseInt( process.env.CACHE_TTL ),
       config   = require('dotenv').config(),
@@ -37,12 +38,16 @@ const render = ( req, res, data = {}, context ) => {
       meta: data.meta,
       params: req.params,
       url: req._parsedUrl,
-      // csrf: req.csrfToken(),
+      csrf: req.csrfToken(),
       user: user
     }
   };
 
-  const templates = getTemplates( data.page, data.bundle );
+  const md = new MobileDetect( req.headers[ 'user-agent' ] );
+
+  const level = md.mobile() || md.tablet() ? 'nevatrip-touch' : 'nevatrip-desktop';
+
+  const templates = getTemplates( data.page, level );
 
   let bemjson;
   try {
@@ -81,12 +86,12 @@ function evalFile( filename ) {
   return nodeEval( fs.readFileSync( filename, 'utf8' ), filename );
 }
 
-function getTemplates( bundleName = 'index', level = 'desktop' ) {
-  const pathToBundle = path.resolve( 'bundles', level + '.bundles', bundleName );
+function getTemplates( bundleName = 'index', level ) {
+  const pathToBundle = path.resolve( 'bundles', bundleName );
   return langs.reduce( ( tmpls, lang ) => {
     tmpls[ lang ] = {
-      BEMTREE: evalFile( path.resolve( pathToBundle, bundleName + '.' + lang + '.bemtree.js' ) ).BEMTREE,
-      BEMHTML: evalFile( path.resolve( pathToBundle, bundleName + '.bemhtml.js' ) ).BEMHTML
+      BEMTREE: evalFile( path.resolve( pathToBundle, bundleName + '.' + level + '.' + lang + '.bemtree.js' ) ).BEMTREE,
+      BEMHTML: evalFile( path.resolve( pathToBundle, bundleName + '.' + level + '.' + lang + '.bemhtml.js' ) ).BEMHTML
     };
     return tmpls;
   }, {} )

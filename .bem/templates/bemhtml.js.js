@@ -15,9 +15,9 @@ module.exports = function(entity) {
       (entity.modName && !entity.elem ? modPart : '') +
       (entity.elem ? elemPart : '') +
       (entity.elem && entity.modName ? modPart : '') +
-      ".content()(function() {",
-    "  return;",
-    "});",
+      "(",
+      "  ",
+      ");",
     ""
   ].join(EOL);
 };

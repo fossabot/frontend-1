@@ -1,0 +1,33 @@
+block(page).elem(content) {
+  lost-center: 1428px;
+  width: 100%;
+  position: relative;
+  margin-bottom: auto;
+  box-sizing: border-box;
+  padding-left: 56px;
+  padding-right: 56px;
+
+  @media (max-width: 1400px) {
+    lost-center: 1288px;
+  }
+
+  @media (max-width: 1280px) {
+    lost-center: 1232px;
+  }
+
+  .mod(width narrow) {
+    lost-center: 982px;
+  }
+
+  .mod(width tiny) {
+    lost-center: 756px;
+  }
+
+  .mod(gap top) {
+    margin-top: 80px;
+  }
+
+  .mod(gap bottom) {
+    margin-bottom: 104px;
+  }
+}

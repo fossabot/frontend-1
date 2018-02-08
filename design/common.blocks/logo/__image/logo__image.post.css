@@ -1,0 +1,5 @@
+block(logo).elem(image) {
+  display: block;
+  height: 43px;
+  margin-right: 15px;
+}
