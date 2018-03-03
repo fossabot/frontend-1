@@ -1,6 +1,7 @@
 # NevaTrip
 
 [![GitHub issues](https://img.shields.io/github/issues/Nevatrip/frontend.svg)](https://github.com/Nevatrip/frontend/issues)
+[![Build Status](https://travis-ci.org/Nevatrip/frontend.svg?branch=master)](https://travis-ci.org/Nevatrip/frontend)
 
 ## Установка
 
