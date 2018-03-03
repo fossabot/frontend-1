@@ -2,58 +2,67 @@ module.exports = {
   path: '',
   name: 'root',
   children: [
-    { // Главная страница
+    {
+      // Главная страница
       path: '',
       name: 'index',
-      load: async () => await require('./home')
+      load: async () => await require( './home' ),
     },
-    { // Письмо успешно отправлено, заказ оплачен и т. д.
+    {
+      // Письмо успешно отправлено, заказ оплачен и т. д.
       path: '/thanks',
       name: 'thanks',
     },
-    { // Покупка билета
+    {
+      // Покупка билета
       path: '/buy-tickets',
       children: [
-        { // Заказ
+        {
+          // Заказ
           path: '',
           name: 'order',
         },
-        { // Перенаправление к платёжному шлюзу
-          path: 'redirect'
-        }
-      ]
+        {
+          // Перенаправление к платёжному шлюзу
+          path: 'redirect',
+        },
+      ],
     },
-    { // О проекте
+    {
+      // О проекте
       path: '/about',
-      name: 'about'
+      name: 'about',
     },
-    { // Партнёрство
+    {
+      // Партнёрство
       path: '/partnership',
-      name: 'partnership'
+      name: 'partnership',
     },
-    { // Разделы
+    {
+      // Разделы
       path: '/:section',
       children: [
         {
           path: '',
-          name: 'section'
+          name: 'section',
         },
-        { // Экскурсия
+        {
+          // Экскурсия
           path: '/:trip',
-          name: 'trip'
-        }
-      ]
+          name: 'trip',
+        },
+      ],
     },
 
     {
       path: '(.*)',
       name: '404',
-      load: async () => await require('./404')
-    }
+      load: async () => await require( './404' ),
+    },
   ],
 
   async action( { next } ) {
-    const route = await next() || {};
+    const route = ( await next() ) || {};
     return route;
-  }
+  },
 };

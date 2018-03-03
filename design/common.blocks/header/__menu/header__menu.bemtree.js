@@ -1,4 +1,6 @@
-block('header').elem('menu').content()( () => {
+block( 'header' )
+  .elem( 'menu' )
+  .content()( () => {
   return {
     block: 'navigation',
     mods: { view: 'header' },
@@ -10,29 +12,29 @@ block('header').elem('menu').content()( () => {
       content: [
         {
           heading: 'Дневные экскурсии',
-          subheading: 'по реками и каналам'
+          subheading: 'по реками и каналам',
         },
         {
           heading: 'Ночные прогулки',
-          subheading: 'под развод мостов'
+          subheading: 'под развод мостов',
         },
         {
           heading: 'Метеор',
-          subheading: 'в Петергоф и пригороды'
+          subheading: 'в Петергоф и пригороды',
         },
         {
           heading: 'Аренда теплохода',
-          subheading: 'на свадьбу, корпоратив'
-        }        
-      ].map( link => {
+          subheading: 'на свадьбу, корпоратив',
+        },
+      ].map( ( link ) => {
         return {
           elem: 'item',
           mix: { block: 'navigation', elem: 'item' },
-          content: { 
+          content: {
             block: 'button',
             mods: {
               type: 'link',
-              width: 'available'
+              width: 'available',
             },
             mix: { block: 'navigation', elem: 'link' },
             url: '#',
@@ -40,17 +42,17 @@ block('header').elem('menu').content()( () => {
               {
                 block: 'navigation',
                 elem: 'subheading',
-                content: link.heading
+                content: link.heading,
               },
               {
                 block: 'navigation',
                 elem: 'subheading',
-                content: link.subheading
-              }
-            ]
-          }
-        }
-      } )
-    }
-  }
-});
+                content: link.subheading,
+              },
+            ],
+          },
+        };
+      } ),
+    },
+  };
+} );

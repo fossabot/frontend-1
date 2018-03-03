@@ -1,4 +1,6 @@
-block('trip').mod('view', 'promo').content()( () => {
+block( 'trip' )
+  .mod( 'view', 'promo' )
+  .content()( () => {
   return {
     elem: 'section',
     elemMods: { content: 'content' },
@@ -17,14 +19,14 @@ block('trip').mod('view', 'promo').content()( () => {
               elemMods: { content: 'price' },
               content: [
                 { elem: 'price', elemMods: { type: 'adult' } },
-                { elem: 'price', elemMods: { type: 'default' } }
-              ]
+                { elem: 'price', elemMods: { type: 'default' } },
+              ],
             },
             { elem: 'buy' },
-            { elem: 'show-more' }
-          ]
-        }
-      ]
-    }
-  }
-});
+            { elem: 'show-more' },
+          ],
+        },
+      ],
+    },
+  };
+} );

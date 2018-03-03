@@ -1,12 +1,14 @@
-block('trip').elem('buy').replace()( ( node ) => {
+block( 'trip' )
+  .elem( 'buy' )
+  .replace()( ( node ) => {
   return {
     block: 'button',
     mods: {
       type: 'link',
       view: 'action',
-      size: 'l'
+      size: 'l',
     },
     url: '#',
-    text: node.i18n('trip', 'buy')
-  }
-} )
+    text: node.i18n( 'trip', 'buy' ),
+  };
+} );

@@ -1,9 +1,9 @@
-block('page').content()( () => {
+block( 'page' ).content()( () => {
   return [
     applyNext(),
     {
       elem: 'js',
-      url: '/livereload.js?snipver=1'
-    }
+      url: '/livereload.js?snipver=1',
+    },
   ];
-});
+} );

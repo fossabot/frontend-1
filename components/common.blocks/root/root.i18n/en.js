@@ -1,8 +1,8 @@
 module.exports = {
   site: {
-    name: 'Title'
+    name: 'Title',
   },
   meta: {
-    description: 'Description'
-  }
-}
+    description: 'Description',
+  },
+};

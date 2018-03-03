@@ -1,3 +1,1 @@
-block('category')(
-  tag()('section')
-)
+block( 'category' )( tag()( 'section' ) );

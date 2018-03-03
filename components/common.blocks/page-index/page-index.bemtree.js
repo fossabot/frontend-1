@@ -1,19 +1,19 @@
-block('page-index').replace()( () => {
+block( 'page-index' ).replace()( () => {
   return [
     {
       block: 'trip',
-      mods: { view: 'promo' }
+      mods: { view: 'promo' },
     },
     {
       block: 'list',
-      mods: { of: 'icons' }
+      mods: { of: 'icons' },
     },
     {
       block: 'category',
       content: [
         {
           elem: 'header',
-          content: 'Заголовок категории'
+          content: 'Заголовок категории',
         },
         {
           elem: 'content',
@@ -25,32 +25,32 @@ block('page-index').replace()( () => {
                 block: 'trip',
                 content: [
                   {
-                    elem: 'aside'
+                    elem: 'aside',
                   },
                   {
                     elem: 'content',
                     content: [
                       {
                         elem: 'heading',
-                        content: "Название экскурсии"
+                        content: 'Название экскурсии',
                       },
                       {
                         elem: 'features',
                         content: {
-                          block: 'list'
-                        }
+                          block: 'list',
+                        },
                       },
                       { elem: 'price', mods: { type: 'adult' } },
                       { elem: 'price', mods: { type: 'default' } },
-                      { elem: 'show-more' }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      ]
-    }
-  ]
-});
+                      { elem: 'show-more' },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+    },
+  ];
+} );

@@ -1,3 +1,1 @@
-block('navigation')(
-  tag()('nav')
-)
+block( 'navigation' )( tag()( 'nav' ) );

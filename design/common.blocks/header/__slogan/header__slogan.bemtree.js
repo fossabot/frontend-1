@@ -1,8 +1,10 @@
-block('header').elem('slogan').content()( () => {
+block( 'header' )
+  .elem( 'slogan' )
+  .content()( () => {
   return {
     block: 'logo',
     content: {
-      elem: 'slogan'
-    }
-  }
-});
+      elem: 'slogan',
+    },
+  };
+} );

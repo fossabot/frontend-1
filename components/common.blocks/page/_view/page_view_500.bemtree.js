@@ -1,8 +1,8 @@
-block('page').mod('view', '500')(
+block( 'page' ).mod( 'view', '500' )(
   def()( () => {
-    return applyNext( { 'data.view': '' } )
+    return applyNext( { 'data.view': '' } );
   } ),
   content()( () => {
-    return '500'
-  })
-)
+    return '500';
+  } ),
+);

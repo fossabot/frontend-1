@@ -1,6 +1,8 @@
-block('page').elem('header').replace()( ( node ) => {
+block( 'page' )
+  .elem( 'header' )
+  .replace()( ( node ) => {
   return {
     block: 'header',
-    mix: { block: node.block, elem: node.elem }
+    mix: { block: node.block, elem: node.elem },
   };
-});
+} );

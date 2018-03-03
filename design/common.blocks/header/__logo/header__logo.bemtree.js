@@ -1,4 +1,6 @@
-block('header').elem('logo').content()( () => {
+block( 'header' )
+  .elem( 'logo' )
+  .content()( () => {
   return {
     block: 'link',
     mods: { view: 'text' },
@@ -6,8 +8,8 @@ block('header').elem('logo').content()( () => {
     content: {
       block: 'logo',
       content: {
-        elem: 'image'
-      }
-    }
-  }
-});
+        elem: 'image',
+      },
+    },
+  };
+} );
