@@ -1,8 +1,8 @@
 const action = ( context ) => {
-	return {
-		page: 'error',
-    reason: context.reason
-	}
+  return {
+    page: 'error',
+    reason: context.reason,
+  };
 };
 
 module.exports = action;

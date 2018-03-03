@@ -1,3 +1,5 @@
-block('trip').elem('price').content()( () => {
+block( 'trip' )
+  .elem( 'price' )
+  .content()( () => {
   return 100500;
-});
+} );

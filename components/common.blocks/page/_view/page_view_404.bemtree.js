@@ -1,8 +1,8 @@
-block('page').mod('view', '404')(
+block( 'page' ).mod( 'view', '404' )(
   def()( () => {
-    return applyNext( { 'data.view': '' } )
+    return applyNext( { 'data.view': '' } );
   } ),
   content()( () => {
-    return '404'
-  } )
-)
+    return '404';
+  } ),
+);

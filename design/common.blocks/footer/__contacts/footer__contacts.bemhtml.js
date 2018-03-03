@@ -1,3 +1,1 @@
-block('footer').elem('contacts')(
-  addMix()( { block: 'page', elem: 'content' } )
-);
+block( 'footer' ).elem( 'contacts' )( addMix()( { block: 'page', elem: 'content' } ) );

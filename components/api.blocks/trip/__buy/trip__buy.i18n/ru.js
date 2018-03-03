@@ -1,5 +1,5 @@
 module.exports = {
   trip: {
-    buy: 'Купить'
-  }
-}
+    buy: 'Купить',
+  },
+};

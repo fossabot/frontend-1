@@ -1,16 +1,16 @@
-block('footer').content()( () => {
+block( 'footer' ).content()( () => {
   return [
     { elem: 'header' },
     {
       elem: 'content',
-      content: 'list'
+      content: 'list',
     },
     {
       elem: 'footer',
       content: {
         elem: 'contacts',
-        content: 'zzz'
-      }
-    }
-  ]
-});
+        content: 'zzz',
+      },
+    },
+  ];
+} );

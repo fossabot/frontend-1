@@ -1,3 +1,5 @@
-block('form').mod('view', 'subscribe').content()( () => {
+block( 'form' )
+  .mod( 'view', 'subscribe' )
+  .content()( () => {
   return;
-});
+} );

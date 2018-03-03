@@ -1,3 +1,5 @@
-block('trip').elem('heading').content()( () => {
+block( 'trip' )
+  .elem( 'heading' )
+  .content()( () => {
   return 'Название экскурсии';
-});
+} );

@@ -1,3 +1,5 @@
-block('list').mod('view', 'sight-gallery').content()( () => {
+block( 'list' )
+  .mod( 'view', 'sight-gallery' )
+  .content()( () => {
   return;
-});
+} );

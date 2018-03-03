@@ -1,28 +1,32 @@
-const fs       = require('fs'),
-      path     = require('path'),
-      nodeEval = require('node-eval'),
-      MobileDetect = require('mobile-detect'),
-      __DEV__  = process.env.NODE_ENV.toLowerCase() !== 'production',
-      cacheTTL = parseInt( process.env.CACHE_TTL ),
-      config   = require('dotenv').config(),
-      langs    = JSON.parse( process.env.LANGS ),
-      useCache = cacheTTL > 0;
+const fs = require( 'fs' ),
+  path = require( 'path' ),
+  nodeEval = require( 'node-eval' ),
+  MobileDetect = require( 'mobile-detect' ),
+  __DEV__ = process.env.NODE_ENV.toLowerCase() !== 'production',
+  cacheTTL = parseInt( process.env.CACHE_TTL ),
+  config = require( 'dotenv' ).config(),
+  langs = JSON.parse( process.env.LANGS ),
+  useCache = cacheTTL > 0;
 
 let cache = {};
 
 const render = ( req, res, data = {}, context ) => {
-  if ( __DEV__ && req.query.json || req.xhr ) {
+  if ( ( __DEV__ && req.query.json ) || req.xhr ) {
     return res.json( data );
   }
 
-  const currentLang = data.lang || langs[ 0 ];
+  const currentLang = data.lang || langs[0];
 
   const user = req.isAuthenticated() ? req.user : false,
-        cacheKey = req.originalUrl + currentLang + ( context ? JSON.stringify( context ) : '' ) + ( user ? JSON.stringify( user ) : '' );
+    cacheKey =
+      req.originalUrl +
+      currentLang +
+      ( context ? JSON.stringify( context ) : '' ) +
+      ( user ? JSON.stringify( user ) : '' );
 
-  let cached = cache[ cacheKey ];
+  let cached = cache[cacheKey];
 
-  if ( useCache && cached && ( new Date() - cached.timestamp < cacheTTL ) && !req.query.dropCache ) {
+  if ( useCache && cached && new Date() - cached.timestamp < cacheTTL && !req.query.dropCache ) {
     return res.send( cached.html );
   }
 
@@ -39,11 +43,11 @@ const render = ( req, res, data = {}, context ) => {
       params: req.params,
       url: req._parsedUrl,
       csrf: req.csrfToken(),
-      user: user
-    }
+      user: user,
+    },
   };
 
-  const md = new MobileDetect( req.headers[ 'user-agent' ] );
+  const md = new MobileDetect( req.headers['user-agent'] );
 
   const level = md.mobile() || md.tablet() ? 'nevatrip-touch' : 'nevatrip-desktop';
 
@@ -51,8 +55,8 @@ const render = ( req, res, data = {}, context ) => {
 
   let bemjson;
   try {
-    bemjson = templates[ currentLang ].BEMTREE.apply( bemtreeCtx );
-  } catch( err ) {
+    bemjson = templates[currentLang].BEMTREE.apply( bemtreeCtx );
+  } catch ( err ) {
     console.error( 'BEMTREE error', err.stack );
     console.trace( 'server stack' );
     return res.sendStatus( 500 );
@@ -64,19 +68,20 @@ const render = ( req, res, data = {}, context ) => {
 
   let html;
   try {
-    html = templates[ currentLang ].BEMHTML.apply( bemjson );
-  } catch( err ) {
+    html = templates[currentLang].BEMHTML.apply( bemjson );
+  } catch ( err ) {
     console.error( 'BEMHTML error', err.stack );
     return res.sendStatus( 500 );
   }
 
-  useCache && ( cache[ cacheKey ] = {
-    timestamp: new Date(),
-    html: html
-  } );
+  useCache &&
+    ( cache[cacheKey] = {
+      timestamp: new Date(),
+      html: html,
+    } );
 
   return res.send( html );
-}
+};
 
 function dropCache() {
   cache = {};
@@ -89,15 +94,19 @@ function evalFile( filename ) {
 function getTemplates( bundleName = 'index', level ) {
   const pathToBundle = path.resolve( 'bundles', bundleName );
   return langs.reduce( ( tmpls, lang ) => {
-    tmpls[ lang ] = {
-      BEMTREE: evalFile( path.resolve( pathToBundle, bundleName + '.' + level + '.' + lang + '.bemtree.js' ) ).BEMTREE,
-      BEMHTML: evalFile( path.resolve( pathToBundle, bundleName + '.' + level + '.' + lang + '.bemhtml.js' ) ).BEMHTML
+    tmpls[lang] = {
+      BEMTREE: evalFile(
+        path.resolve( pathToBundle, bundleName + '.' + level + '.' + lang + '.bemtree.js' ),
+      ).BEMTREE,
+      BEMHTML: evalFile(
+        path.resolve( pathToBundle, bundleName + '.' + level + '.' + lang + '.bemhtml.js' ),
+      ).BEMHTML,
     };
     return tmpls;
-  }, {} )
+  }, {} );
 }
 
 module.exports = {
   render: render,
-  dropCache: dropCache
+  dropCache: dropCache,
 };

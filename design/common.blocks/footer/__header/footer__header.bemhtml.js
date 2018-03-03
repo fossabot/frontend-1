@@ -1,3 +1,1 @@
-block('footer').elem('header')(
-  addMix()( { block: 'page', elem: 'content' } )
-);
+block( 'footer' ).elem( 'header' )( addMix()( { block: 'page', elem: 'content' } ) );

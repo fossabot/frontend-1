@@ -1,3 +1,5 @@
-block('footer').elem('content').content()( () => {
+block( 'footer' )
+  .elem( 'content' )
+  .content()( () => {
   return;
-});
+} );

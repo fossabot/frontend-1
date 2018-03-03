@@ -1,5 +1,5 @@
 module.exports = {
   heading: {
-    main: 'Главная страница'
-  }
+    main: 'Главная страница',
+  },
 };

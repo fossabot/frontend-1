@@ -1,3 +1,3 @@
-block('page-error').replace()( () => {
-  return 'Error…'
-});
+block( 'page-error' ).replace()( () => {
+  return 'Error…';
+} );

@@ -1,3 +1,1 @@
-block('list').elem('item')(
-  tag()('li')
-);
+block( 'list' ).elem( 'item' )( tag()( 'li' ) );

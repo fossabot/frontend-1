@@ -1,8 +1,8 @@
 module.exports = {
   site: {
-    name: 'Заголовок'
+    name: 'Заголовок',
   },
   meta: {
-    description: 'Описание'
-  }
-}
+    description: 'Описание',
+  },
+};
