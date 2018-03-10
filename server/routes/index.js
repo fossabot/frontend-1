@@ -20,7 +20,8 @@ module.exports = {
         {
           // Заказ
           path: '',
-          name: 'order',
+          name: 'cart',
+          load: async () => await require( './cart' ),
         },
         {
           // Перенаправление к платёжному шлюзу
