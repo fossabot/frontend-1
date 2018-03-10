@@ -40,11 +40,12 @@ module.exports = {
     },
     {
       // Разделы
-      path: '/:section',
+      path: '/:category',
       children: [
         {
           path: '',
-          name: 'section',
+          name: 'category',
+          load: async () => await require( './category' ),
         },
         {
           // Экскурсия
