@@ -49,8 +49,9 @@ module.exports = {
         },
         {
           // Экскурсия
-          path: '/:trip',
-          name: 'trip',
+          path: '/:tour',
+          name: 'tour',
+          load: async () => await require( './tour' ),
         },
       ],
     },
