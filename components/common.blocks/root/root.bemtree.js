@@ -22,10 +22,20 @@ block( 'root' ).replace()( ( node, ctx ) => {
     title: data.title || node.i18n( 'site', 'name' ),
     lang: data.lang,
     favicon: '/favicon.ico',
-    styles: {
-      elem: 'css',
-      url: '/assets/css/' + bundle + '/' + bundle + '.min.css',
-    },
+    styles: [
+      {
+        elem: 'css',
+        url: '/assets/css/' + bundle + '/' + bundle + '.min.css',
+      },
+      {
+        elem: 'css',
+        url: '/assets/css/font-awesome.min.css',
+      },
+      {
+        elem: 'css',
+        url: '/assets/css/bootstrap.css',
+      },
+    ],
     scripts: {
       elem: 'js',
       url: '/assets/js/' + bundle + '/' + bundle + '.' + data.lang + '.min.js',
