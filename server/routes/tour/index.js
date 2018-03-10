@@ -9,13 +9,13 @@ const data = async ( context, params ) => {
   const response = await Promise.all( [
     getStructure( { lang: params.lang } ),
     getSetting( { lang: params.lang } ),
-    getTour( { lang: params.lang } ),
+    getTour( { lang: params.lang, name: params.tour } ),
   ] );
   return normalize(
     {
       structure: response[0],
       setting: response[1],
-      tour: response[2],
+      // tour: response[2],
     },
     {
       // structure: { object: schema.structure },
@@ -27,7 +27,7 @@ const data = async ( context, params ) => {
 
 const action = async ( context, params ) => {
   return {
-    page: 'index',
+    page: 'tour',
     api: await data( context, params ),
     lang: params.lang,
   };

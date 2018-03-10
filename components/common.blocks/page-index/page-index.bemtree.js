@@ -1,4 +1,4 @@
-block( 'page-index' ).replace()( () => {
+block( 'page-index' ).replace()( ( node ) => {
   return [
     {
       block: 'trip',
@@ -50,6 +50,10 @@ block( 'page-index' ).replace()( () => {
             ],
           },
         },
+        {
+          tag: 'pre',
+          content: JSON.stringify( node.api.result.tour, null, 2 ),
+        }
       ],
     },
   ];
