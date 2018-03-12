@@ -38,3 +38,113 @@ NO_AUTOMAKE=1 npm run dev
 
 * Добавить `?json=1` к URL, чтобы увидеть сырые данные
 * Добавить `?bemjson=1` к URL, чтобы увидеть генерируемый BEMJSON с BEMTREE-шаблонами.
+
+## Idea
+
+Возможная структура блоков:
+
+```
+page
+  _no-scroll
+  __gtm
+  __header
+  __footer
+
+attach
+button
+checkbox
+checkbox-group
+control-group
+dropdown
+fieldset
+form
+  _view
+    _payment Платёжная форма
+    _rent Аренда транспортного средства
+form-field
+icon
+image
+input
+label
+link
+menu
+message
+modal
+popup
+progressbar
+radio
+radio-group
+select
+spin
+textarea
+
+navigation
+  _type
+    _breadcrumbs
+    _menu
+list
+  _
+logo
+  __image
+  __text
+  __slogan
+address
+header
+footer
+
+trip
+  Экскурсия
+    _api
+      _nevatravel
+      _astramarin
+      _radisson
+    _type
+      _nevatrip
+      _moskvatrip
+      _busguide
+    _view
+      _card
+      _page
+      _form
+      _ticket
+    __cover Изображение
+      _preview Миниатюра
+      _fullpage На всю ширину
+    __features (.list) Преимущества
+    __langs (.list) Список языков
+    __on-boat (.list) Список услуг на борту
+    __gallery (.list) Фотоальбом
+    __pier (.list) Связь «Место отправления»
+    __vechicle (.list) Связь «Транспортное средство»
+    __sights (.list) Список достопримечательностей
+    __route (.list) Название маршрута, связь «Маршрут»
+    __map Карта маршрута
+    __appeal Текст с призывом
+    __advice Совет от организатора
+    __navigation-start Дата начала навигации
+    __navigation-finish ата окончания навигации
+    __ticket-print Пользователю нужно распечатать билет
+    __name Название экскурсии
+      _operator Название экскурсии для партнёра
+    __operator Партнёры Связь «Партнёры»
+    __date Дата отправления
+    __time Время отправления
+    __buy Ссылка «Купить»
+    __show-more Ссылка «Подробнее об экскурси»
+
+    __price (.list)
+      _type
+        _adult
+        _child
+        _discount
+        _on-pier
+    __price-description
+
+    __api-id
+    __api-pier
+    __api-fixed-time
+
+pier
+sight
+rent
+```

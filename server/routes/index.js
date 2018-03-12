@@ -20,7 +20,8 @@ module.exports = {
         {
           // Заказ
           path: '',
-          name: 'order',
+          name: 'cart',
+          load: async () => await require( './cart' ),
         },
         {
           // Перенаправление к платёжному шлюзу
@@ -40,16 +41,18 @@ module.exports = {
     },
     {
       // Разделы
-      path: '/:section',
+      path: '/:category',
       children: [
         {
           path: '',
-          name: 'section',
+          name: 'category',
+          load: async () => await require( './category' ),
         },
         {
           // Экскурсия
-          path: '/:trip',
-          name: 'trip',
+          path: '/:tour',
+          name: 'tour',
+          load: async () => await require( './tour' ),
         },
       ],
     },
