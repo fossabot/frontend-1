@@ -4,9 +4,10 @@ const Request = require( './_request' );
 
 const url = '/tour';
 
-const getTour = async ( { name, category, filter = {}, page = 1, perPage = 0, lang = 'ru' } = {} ) => {
+const getTour = async ( { name, id, category, filter, page = 1, perPage = 0, lang = 'ru' } = {} ) => {
   const params = {
-    id: name,
+    id: id,
+    alias: name,
     filter: filter,
     page: page,
     perPage: perPage,

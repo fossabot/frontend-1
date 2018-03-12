@@ -2,16 +2,18 @@ block( 'page-tour' ).replace()( ( node ) => {
   return [
     // {
     //   tag: 'pre',
-    //   content: JSON.stringify( node.api.result.tour, null, 2 ),
+    //   content: JSON.stringify( node.api.result.tour.results[ 0 ], null, 2 ),
     // },
     {
       content: {
         html: `
-          <div class="jumbotron img-bg" style="background-image: url('https://nevatrip.ru/assets/img/e/${ node.api.result.tour.object.uri }_bg.jpg');">
+          <div class="jumbotron img-bg" style="background-image: url('https://nevatrip.ru/assets/img/e/${
+            node.api.result.tour.results[0].uri
+          }_bg.jpg');">
              <p>&nbsp;</p>
              <div class="container">
                 <div class="alpha-bg">
-                   <h1>${ node.api.result.tour.object.pagetitle }</h1>
+                   <h1>${node.api.result.tour.results[0].pagetitle}</h1>
                 </div>
              </div>
              <p>&nbsp;</p>
@@ -85,10 +87,10 @@ block( 'page-tour' ).replace()( ( node ) => {
                          &nbsp;
                          <span class="lead">
                          <b>Скидки:</b> 20% при бронировании онлайн! Есть <button type="button" class="btn-link inner"
-                            data-toggle="tooltip" 
+                            data-toggle="tooltip"
                             title="Школьники, пенсионеры, инвалиды. Необходимо предъявить подтверждающие документы в кассе."
                             >льготный</button> (690р) и <button type="button" class="btn-link inner"
-                            data-toggle="tooltip" 
+                            data-toggle="tooltip"
                             title="Дети 3-12 лет или 5-12 лет (см. конкр.экск.). До 3 или 5 - бесплатно без представления отдельного места. Необходимо предъявить подтверждающие документы в кассе.">
                          детский
                          </button>
@@ -98,7 +100,9 @@ block( 'page-tour' ).replace()( ( node ) => {
                    </ul>
                    <div style="margin-top: 20px;margin-bottom: 34px;">
                       <div class="pull-left">
-                         <span class="price">${ node.api.result.tour.object.e_price } <i class="fa fa-rub fa-xs"></i></span>
+                         <span class="price">${
+                           node.api.result.tour.results[0].e_price
+                         } <i class="fa fa-rub fa-xs"></i></span>
                          <small class="sub-price">не реализуется <i class="fa fa-rub fa-xs"></i> на причале</small>
                       </div>
                       &nbsp;&nbsp;
@@ -262,15 +266,15 @@ block( 'page-tour' ).replace()( ( node ) => {
                 <div class="col-sm-8 col-sm-pull-4">
                    <h3 class="h4">Об экскурсии</h3>
                    <div class="lead">
-                      ${ node.api.result.tour.object.content }
+                      ${node.api.result.tour.results[0].content}
                    </div>
                    <hr class="short"/ id="route">
                    <h3 class="h4">Карта маршрута</h3>
-                   ${ node.api.result.tour.object.e_map }
+                   ${node.api.result.tour.results[0].e_map}
                    <div class="divider"></div>
                    <div class="well">
                       <h3 class="h4">Совет от организатора</h3>
-                      <div class="lead">${ node.api.result.tour.object.e_advice }</div>
+                      <div class="lead">${node.api.result.tour.results[0].e_advice}</div>
                    </div>
                 </div>
              </div>
@@ -279,9 +283,8 @@ block( 'page-tour' ).replace()( ( node ) => {
           <p class="lead text-center">
              <a href="/">Посмотреть все водные экскурсии по Санкт-Петербургу &rarr;</a>
           </p>
-        `
-        
-      }      
-    }
+        `,
+      },
+    },
   ];
 } );
