@@ -2,7 +2,7 @@
 
 const Request = require( './_request' );
 
-const url = '/setting';
+const url = '/settings';
 
 const getSetting = async ( { key, page = 1, perPage = 0, lang = 'ru' } = {} ) => {
   const params = {
