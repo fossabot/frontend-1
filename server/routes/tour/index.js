@@ -15,7 +15,7 @@ const data = async ( context, params ) => {
     {
       structure: response[0],
       setting: response[1],
-      // tour: response[2],
+      tour: response[2],
     },
     {
       // structure: { object: schema.structure },
