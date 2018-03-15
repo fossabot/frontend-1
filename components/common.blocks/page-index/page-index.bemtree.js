@@ -1,4 +1,5 @@
 block( 'page-index' ).replace()( ( node ) => {
+  console.log( node.api.entities );
   return [
     {
       block: 'trip',
@@ -8,53 +9,62 @@ block( 'page-index' ).replace()( ( node ) => {
       block: 'list',
       mods: { of: 'icons' },
     },
-    {
-      block: 'category',
-      content: [
-        {
-          elem: 'header',
-          content: 'Заголовок категории',
-        },
-        {
-          elem: 'content',
-          content: {
-            block: 'list',
-            mods: { of: 'trips' },
-            items: [
-              {
-                block: 'trip',
-                content: [
-                  {
-                    elem: 'aside',
-                  },
-                  {
-                    elem: 'content',
-                    content: [
-                      {
-                        elem: 'heading',
-                        content: 'Название экскурсии',
-                      },
-                      {
-                        elem: 'features',
-                        content: {
-                          block: 'list',
-                        },
-                      },
-                      { elem: 'price', mods: { type: 'adult' } },
-                      { elem: 'price', mods: { type: 'default' } },
-                      { elem: 'show-more' },
-                    ],
-                  },
-                ],
-              },
-            ],
+    [ 'day', 'night', 'meteors' ].map( category => {
+      const categoryObject = node.api.entities.structureFlat[ category ];
+      const categoryId = categoryObject.id;
+      const categoryTitle = categoryObject.pagetitle;
+      const categoryChildren = node.api.result.structureTree.object[ categoryId ].children;
+      const tours = Object.keys( categoryChildren ).map( tourId => {
+        console.log( tourId );
+        return []
+      } );
+
+      return {
+        block: 'category',
+        content: [
+          {
+            elem: 'header',
+            content: categoryTitle,
           },
-        },
-        {
-          tag: 'pre',
-          content: JSON.stringify( node.api.result.tour, null, 2 ),
-        }
-      ],
-    },
+          {
+            elem: 'content',
+            content: {
+              block: 'list',
+              mods: { of: 'trips' },
+              items: tours.map( tour => {
+                console.log( tour );
+                return {
+                  block: 'trip',
+                  content: [
+                    {
+                      elem: 'aside',
+                    },
+                    {
+                      elem: 'content',
+                      content: [
+                        // {
+                        //   elem: 'heading',
+                        //   content: tour.pagetitle,
+                        // },
+                        // {
+                        //   elem: 'features',
+                        //   content: {
+                        //     block: 'list',
+                        //   },
+                        // },
+                        // { elem: 'price', mods: { type: 'adult' } },
+                        // { elem: 'price', mods: { type: 'default' } },
+                        // { elem: 'show-more' },
+                      ],
+                    },
+                  ],
+                }                
+              } ),
+            },
+          },
+        ],
+
+      }
+    } )
   ];
 } );
