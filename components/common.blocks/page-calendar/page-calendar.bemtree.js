@@ -1,6 +1,5 @@
 block( 'page' )(
   def()( ( node ) => {
-    console.log( node );
     return {
       ...applyNext(),
       styles: [
@@ -98,7 +97,7 @@ block( 'page' )(
               <div class="container">
                 <div class="k-edit-label"><label for="tourId">ID экскурсии</label></div>
                 <div data-container-for="tourId" class="k-edit-field">
-                  <input type="text" class="k-input k-textbox" name="tourId" required="required" data-bind="value:tourId">
+                  <input type="text" class="k-input k-textbox" name="tourId" required="required" data-bind="value:tourId" readonly>
                 </div>
                 <div class="k-edit-label"><label for="title">Название рейса</label></div>
                 <div data-container-for="title" class="k-edit-field">
@@ -222,6 +221,12 @@ block( 'page' )(
           tag: 'script',
           content: {
             html: `
+              /*
+               * Tour
+               ************
+              ${ JSON.stringify( node.api.result.tour.object, null, 2 ) }
+              */
+
               // Получаем список пунктов отправления
               const getPiers = request => {
                 request.success( [
@@ -289,7 +294,7 @@ block( 'page' )(
               // Сюда передаём данные экскурсии — они будут подставляться в значения
               // по умолчанию для дальнейшего переопределения
               const tour = {
-                name: "АКЦИЯ - Экскурсия под развод мостов на 2-палубном теплоходе",
+                name: "${ node.api.result.tour.object.longtitle }",
                 description: 'Описание экскурсии',
                 ticketType: 3,
                 pierStartId: 2,
@@ -439,19 +444,19 @@ block( 'page' )(
                     batch: true,
                     transport: {
                       read: {
-                        url: "https://nevatrip.dev.compaero.ru/rest/tour/10/trip/getlist",
+                        url: "https://nevatrip.dev.compaero.ru/rest/tour/${ node.api.result.tour.object.id }/trip/getlist",
                         dataType: "json"
                       },
                       update: {
-                        url: "https://nevatrip.dev.compaero.ru/rest/tour/10/trip/update",
+                        url: "https://nevatrip.dev.compaero.ru/rest/tour/${ node.api.result.tour.object.id }/trip/update",
                         dataType: "json"
                       },
                       create: {
-                        url: "https://nevatrip.dev.compaero.ru/rest/tour/10/trip/create",
+                        url: "https://nevatrip.dev.compaero.ru/rest/tour/${ node.api.result.tour.object.id }/trip/create",
                         dataType: "json"
                       },
                       destroy: {
-                        url: "https://nevatrip.dev.compaero.ru/rest/tour/10/trip/destroy",
+                        url: "https://nevatrip.dev.compaero.ru/rest/tour/${ node.api.result.tour.object.id }/trip/delete",
                         dataType: "json"
                       },
                       parameterMap: function(options, operation) {
@@ -469,7 +474,7 @@ block( 'page' )(
                           // ID рейса
                           taskId: { from: "id", type: "number" },
                           // ID экскурсии
-                          tourId: { from: "parent", type: "number", defaultValue: 0 },
+                          tourId: { from: "parent", type: "number", defaultValue: ${ node.api.result.tour.object.id } },
                           // Название экскурсии
                           title: { from: "pagetitle", defaultValue: tour.name, validation: { required: true } },
                           // Начало рейса
