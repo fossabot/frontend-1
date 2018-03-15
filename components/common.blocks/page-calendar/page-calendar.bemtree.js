@@ -149,11 +149,11 @@ block( 'page' )(
                 </div>
                 <div class="k-edit-label"><label for="pierStartId">Причал отправления</label></div>
                 <div data-container-for="pierStartId" class="k-edit-field">
-                  <select id="pierStartId" data-bind="value:pierStartId" data-source="{transport: {read: getPiers}}" data-role="dropdownlist" data-value-field="value" data-text-field="text"></select>
+                  <select id="pierStartId" data-bind="value:pierStartId" data-role="dropdownlist"></select>
                 </div>
                 <div class="k-edit-label"><label for="pierFinishId">Причал прибытия</label></div>
                 <div data-container-for="pierFinishId" class="k-edit-field">
-                  <select id="pierFinishId" data-bind="value:pierFinishId" data-source="{transport: {read: getPiers}}" data-role="dropdownlist" data-value-field="value" data-text-field="text"></select>
+                  <select id="pierFinishId" data-bind="value:pierFinishId" data-role="dropdownlist"></select>
                 </div>
                 <div class="k-edit-label"><label for="mapUrl">Карта маршрута</label></div>
                 <div data-container-for="mapUrl" class="k-edit-field">
@@ -316,19 +316,6 @@ block( 'page' )(
               $(function() {
                 kendo.culture("ru-RU");
 
-                /*
-                console.log('123');
-                const tour = async () => {
-                  return await $.get( '/rest/tour/?lang=ru&alias=razvod-mostov' )
-                    .always( () => { console.log( '!!!' ) } )
-                    .done( response => {
-                      return response.results[ 0 ]
-                    } )
-                };
-                */
-
-                console.log( tour );
-
                 $("#scheduler").kendoScheduler({
                   date: new Date(),
                   startTime: new Date(),
@@ -338,6 +325,36 @@ block( 'page' )(
                     template: $("#customEditorTemplate").html(),
                   },
                   edit: e => {
+
+                    $("#pierStartId, #pierFinishId").kendoDropDownList({
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: {
+                          batch: true,
+                          schema: {
+                            type: "json",
+                            data: "object",
+                            model: {
+                              id: "value",
+                              fields: {
+                                value: { field: "value", type: "number" },
+                                text: { field: "text", type: "string" },
+                              }
+                            }
+                          },
+                          transport: {
+                            read: {
+                              url: "https://9836511c-0527-4059-ac18-7966ba3f6793.mock.pstmn.io/fake/pier/",
+                              data: {
+                                page: 1,
+                                perPage: 0,
+                                lang: "ru",
+                              }
+                            }
+                          }
+                        }
+                    });
+
                     $('#grid-ticket').kendoGrid({
                       dataSource: new kendo.data.DataSource({
                         pageSize: 6,
