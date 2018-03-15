@@ -95,10 +95,12 @@ block( 'page' )(
           content: {
             html: `
               <div class="container">
+                <!--
                 <div class="k-edit-label"><label for="tourId">ID экскурсии</label></div>
                 <div data-container-for="tourId" class="k-edit-field">
                   <input type="text" class="k-input k-textbox" name="tourId" required="required" data-bind="value:tourId" readonly>
                 </div>
+                -->
                 <div class="k-edit-label"><label for="title">Название рейса</label></div>
                 <div data-container-for="title" class="k-edit-field">
                   <textarea name="title" class="k-textbox" data-bind="value:title" required="required"></textarea>
@@ -226,33 +228,6 @@ block( 'page' )(
                ************
               ${ JSON.stringify( node.api.result.tour.object, null, 2 ) }
               */
-
-              // Получаем список пунктов отправления
-              const getPiers = request => {
-                request.success( [
-                  { text: "Дворцовая набережная", value: 1 },
-                  { text: "Сенатская пристань", value: 2 },
-                  { text: "Петропавловская крепость", value: 3 }
-                ] );
-              }
-
-              // Получаем список транспортных средств
-              const getVehicle = request => {
-                request.success( [
-                  { text: "Однопалубный теплоход с закрытой и открытой палубой", value: 1 },
-                  { text: "Теплоход «А. Скрябин»", value: 2 },
-                  { text: "Комфортабельный двухпалубный теплоход-ресторан", value: 3 }
-                ] );
-              }
-
-              // Получаем список достопримечательностей
-              const getSight = request => {
-                request.success( [
-                  { text: "Адмиралтейство", value: 1 },
-                  { text: "Эрмитаж", value: 2 },
-                  { text: "Стрелка Васильевского острова", value: 3 }
-                ] );
-              }
 
               // Получаем список языков
               const getLang = request => {
