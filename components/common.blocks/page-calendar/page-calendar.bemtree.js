@@ -299,7 +299,8 @@ block( 'page' )(
                   editable: {
                     template: $("#customEditorTemplate").html(),
                   },
-                  edit: e => {
+                  edit: function(e) {
+                    e.event.set("isAllDay", false);
 
                     $("#pierStartId, #pierFinishId").kendoDropDownList({
                         dataTextField: "text",
@@ -504,7 +505,7 @@ block( 'page' )(
                           // Окончание рейса
                           end: { type: "date", from: "tv_tripDateTimeEnd" },
                           // Рейс длится весь день
-                          isAllDay: { type: "boolean", defaultValue: false, from: "tv_isAllDay" },
+                          isAllDay: { type: "boolean", from: "tv_isAllDay" },
                           // Повторение
                           recurrenceId: { from: "tv_recurrenceID" },
                           // Правило повторения
