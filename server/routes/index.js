@@ -40,6 +40,21 @@ module.exports = {
       name: 'partnership',
     },
     {
+      path: '/calendar',
+      children: [
+        {
+          path: '',
+          name: 'calendar-all',
+          load: async () => await require( './calendar' ),
+        },
+        {
+          path: '/:tour',
+          name: 'calendar-tour',
+          load: async () => await require( './calendar' ),
+        }
+      ]
+    },
+    {
       // Разделы
       path: '/:category',
       children: [
