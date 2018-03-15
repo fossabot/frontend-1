@@ -24,12 +24,12 @@ block( 'page-category' ).replace()( ( node ) => {
             content: {
               html: `
                 <div class="col-sm-5">
-                  <a href="/day/salut-na-teplohode-9-maya">
-                  <img src="https://nevatrip.ru/assets/img/e/${ tour.uri }.jpg" srcset="https://nevatrip.ru/assets/img/e/${ tour.uri }_x2.jpg 2x" alt="Салют на теплоходе 9 мая" class="img-responsive h3 img-rounded img-item">
+                  <a href="/${ tour.parent }/${ tour.alias }">
+                    <img src="https://nevatrip.ru/assets/img/e/${ tour.uri }.jpg" srcset="https://nevatrip.ru/assets/img/e/${ tour.uri }_x2.jpg 2x" alt="Салют на теплоходе 9 мая" class="img-responsive h3 img-rounded img-item">
                   </a>
                 </div>
                 <div class="col-sm-6">
-                  <a href="/day/salut-na-teplohode-9-maya" class="h3">
+                  <a href="/${ tour.parent }/${ tour.alias }" class="h3">
                     <h3>${ tour.pagetitle }</h3>
                   </a>
                   <ul class="fa-ul">
@@ -56,7 +56,7 @@ block( 'page-category' ).replace()( ( node ) => {
                     </div>
                     &nbsp;
                     &nbsp;
-                    <a href="/day/salut-na-teplohode-9-maya" class="btn btn-warning btn-lg">Подробнее  →</a>
+                    <a href="/${ tour.parent }/${ tour.alias }" class="btn btn-warning btn-lg">Подробнее  →</a>
                   </div>
                 </div>
               `

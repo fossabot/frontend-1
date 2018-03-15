@@ -2,13 +2,13 @@
 
 const { schema } = require( 'normalizr' );
 
-const structure = new schema.Entity( 'structure' );
-const structureSchema = new schema.Values( structure );
+const structureFlat = new schema.Entity( 'structureFlat', {}, { idAttribute: 'alias' } );
+
 const settingsSchema = new schema.Entity( 'setting' );
 const tourSchema = new schema.Entity( 'tour' );
 
 module.exports = {
-  structure: structureSchema,
+  structureFlat: structureFlat,
   settings: settingsSchema,
   tour: tourSchema,
 };
