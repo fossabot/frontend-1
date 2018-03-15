@@ -165,7 +165,7 @@ block( 'page' )(
                 </div>
                 <div class="k-edit-label"><label for="vehicleId">Транспортное средство</label></div>
                 <div data-container-for="vehicleId" class="k-edit-field">
-                  <select id="vehicleId" data-bind="value:vehicleId" data-source="{transport: {read: getVehicle}}" data-role="dropdownlist" data-value-field="value" data-text-field="text"></select>
+                  <select id="vehicleId" data-bind="value:vehicleId" data-role="dropdownlist"></select>
                 </div>
                 <div class="k-edit-label"><label for="vehicleFeaturesArray">На борту</label></div>
                 <div data-container-for="vehicleFeaturesArray" class="k-edit-field">
@@ -345,6 +345,35 @@ block( 'page' )(
                           transport: {
                             read: {
                               url: "https://9836511c-0527-4059-ac18-7966ba3f6793.mock.pstmn.io/fake/pier/",
+                              data: {
+                                page: 1,
+                                perPage: 0,
+                                lang: "ru",
+                              }
+                            }
+                          }
+                        }
+                    });
+
+                    $("#vehicleId").kendoDropDownList({
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: {
+                          batch: true,
+                          schema: {
+                            type: "json",
+                            data: "object",
+                            model: {
+                              id: "value",
+                              fields: {
+                                value: { field: "value", type: "number" },
+                                text: { field: "text", type: "string" },
+                              }
+                            }
+                          },
+                          transport: {
+                            read: {
+                              url: "https://9836511c-0527-4059-ac18-7966ba3f6793.mock.pstmn.io/fake/vehicle/",
                               data: {
                                 page: 1,
                                 perPage: 0,
