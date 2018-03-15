@@ -173,7 +173,7 @@ block( 'page' )(
                 </div>
                 <div class="k-edit-label"><label for="sightArray">Достопримечательности</label></div>
                 <div data-container-for="sightArray" class="k-edit-field">
-                  <select id="sightArray" data-bind="value:sightArray" data-source="{transport: {read: getSight}}" data-role="multiselect" multiple="multiple" data-value-field="value" data-text-field="text"></select>
+                  <select id="sightArray" data-bind="value:sightArray" multiple="multiple"></select>
                 </div>
                 <div class="k-edit-label"><label for="langArray">Язык экскурсии</label></div>
                 <div data-container-for="langArray" class="k-edit-field">
@@ -374,6 +374,35 @@ block( 'page' )(
                           transport: {
                             read: {
                               url: "https://9836511c-0527-4059-ac18-7966ba3f6793.mock.pstmn.io/fake/vehicle/",
+                              data: {
+                                page: 1,
+                                perPage: 0,
+                                lang: "ru",
+                              }
+                            }
+                          }
+                        }
+                    });
+
+                    $("#sightArray").kendoMultiSelect({
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: {
+                          batch: true,
+                          schema: {
+                            type: "json",
+                            data: "object",
+                            model: {
+                              id: "value",
+                              fields: {
+                                value: { field: "value", type: "number" },
+                                text: { field: "text", type: "string" },
+                              }
+                            }
+                          },
+                          transport: {
+                            read: {
+                              url: "https://9836511c-0527-4059-ac18-7966ba3f6793.mock.pstmn.io/fake/sight/",
                               data: {
                                 page: 1,
                                 perPage: 0,
