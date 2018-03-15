@@ -1,5 +1,4 @@
-block( 'footer' ).content()( ( node ) => {
-  console.log( node );
+block( 'footer' ).content()( () => {
   let items = [];
   // if ( node.api && node.api.result ) {
   //   items = Object.keys( node.api.result.structure.object[ 61 ].children ).map( id => {

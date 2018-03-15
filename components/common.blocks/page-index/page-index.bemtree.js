@@ -1,5 +1,4 @@
 block( 'page-index' ).replace()( ( node ) => {
-  console.log( node.api.entities );
   return [
     {
       block: 'trip',
@@ -14,10 +13,7 @@ block( 'page-index' ).replace()( ( node ) => {
       const categoryId = categoryObject.id;
       const categoryTitle = categoryObject.pagetitle;
       const categoryChildren = node.api.result.structureTree.object[ categoryId ].children;
-      const tours = Object.keys( categoryChildren ).map( tourId => {
-        console.log( tourId );
-        return []
-      } );
+      const tours = Object.keys( categoryChildren );
 
       return {
         block: 'category',
@@ -31,7 +27,8 @@ block( 'page-index' ).replace()( ( node ) => {
             content: {
               block: 'list',
               mods: { of: 'trips' },
-              items: tours.map( tour => {
+              items: tours.map( tourId => {
+                const tour = categoryChildren[ tourId ];
                 console.log( tour );
                 return {
                   block: 'trip',
