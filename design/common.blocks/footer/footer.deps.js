@@ -9,6 +9,7 @@
         'footer'
       ]
     },
-    { block: 'page', elem: 'section'}
+    { block: 'page', elem: 'section'},
+    { block: 'list' }
   ]
 }]
