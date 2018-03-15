@@ -388,30 +388,12 @@ block( 'page' )(
                         }
                     });
 
+                    let event = JSON.stringify( e.event );
+
                     $('#grid-ticket').kendoGrid({
                       dataSource: new kendo.data.DataSource({
                         pageSize: 6,
-                        data: [
-                          {
-                            productID : 1,
-                            productName : "Взрослый",
-                            price : 320,
-                            buyed: 50,
-                            description : "Bla-bla-bla…"
-                          }, {
-                            productID : 2,
-                            productName : "Детский",
-                            price : 280,
-                            buyed: 50,
-                            description : "Bla-bla-bla…"
-                          }, {
-                            productID : 3,
-                            productName : "Льготный",
-                            price : 260,
-                            buyed: 50,
-                            description : "Bla-bla-bla…"
-                          }
-                        ],
+                        data: e.event.tickets,
                         autoSync: true,
                         schema: {
                           model: {
@@ -441,31 +423,14 @@ block( 'page' )(
                     $('#grid-additional').kendoGrid({
                       dataSource: new kendo.data.DataSource({
                         pageSize: 6,
-                        data: [
-                          {
-                            productID : 1,
-                            productName : "Дождевик",
-                            price : 320,
-                            description : "Bla-bla-bla…"
-                          }, {
-                            productID : 2,
-                            productName : "Зонт",
-                            price : 280,
-                            description : "Bla-bla-bla…"
-                          }, {
-                            productID : 3,
-                            productName : "Кокаин",
-                            price : 260,
-                            description : "Bla-bla-bla…"
-                          }
-                        ],
+                        data: e.event.additional,
                         autoSync: true,
                         schema: {
                           model: {
                             id: "productID",
                             fields: {
                               productID: { editable: false, nullable: true },
-                              productName: { defaultValue: "Взрослый", validation: { required: true } },
+                              productName: { defaultValue: "Товар", validation: { required: true } },
                               description: { defaultValue: "" },
                               price: { type: "number", validation: { required: true, min: 0 } }
                             }
@@ -483,6 +448,12 @@ block( 'page' )(
                       editable: true
                     });
                   },
+                  save: function(e) {
+                    let ticket = $('#grid-ticket').data("kendoGrid").dataSource.data();
+                    let additional = $('#grid-additional').data("kendoGrid").dataSource.data();
+                    e.event.ticket = ticket;
+                    e.event.additional = additional;
+                  },
                   views: [
                     "day",
                     "week",
@@ -495,6 +466,7 @@ block( 'page' )(
                     transport: {
                       read: {
                         url: "https://nevatrip.dev.compaero.ru/rest/tour/${ node.api.result.tour.object.id }/trip/getlist",
+                        // url: "https://9836511c-0527-4059-ac18-7966ba3f6793.mock.pstmn.io/fake/tour/${ node.api.result.tour.object.id }/trip/getlist",
                         dataType: "json"
                       },
                       update: {
@@ -575,6 +547,10 @@ block( 'page' )(
                           ticketPrint: { from: "tv_ticketPrint", defaultValue: tour.ticketPrint },
                           // Количество билетов на продажу
                           count: { from: "tv_ticketCount", defaultValue: tour.count },
+                          // Билеты
+                          tickets: { from: "tv_tickets" },
+                          // Доп. услуги
+                          additional: { from: "tv_additional" },
                         }
                       }
                     },
