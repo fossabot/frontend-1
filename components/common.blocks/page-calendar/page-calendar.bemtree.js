@@ -95,12 +95,6 @@ block( 'page' )(
           content: {
             html: `
               <div class="container">
-                <!--
-                <div class="k-edit-label"><label for="tourId">ID экскурсии</label></div>
-                <div data-container-for="tourId" class="k-edit-field">
-                  <input type="text" class="k-input k-textbox" name="tourId" required="required" data-bind="value:tourId" readonly>
-                </div>
-                -->
                 <div class="k-edit-label"><label for="title">Название рейса</label></div>
                 <div data-container-for="title" class="k-edit-field">
                   <textarea name="title" class="k-textbox" data-bind="value:title" required="required"></textarea>
@@ -450,9 +444,9 @@ block( 'page' )(
                     });
                   },
                   save: function(e) {
-                    let ticket = $('#grid-ticket').data("kendoGrid").dataSource.data();
+                    let tickets = $('#grid-ticket').data("kendoGrid").dataSource.data();
                     let additional = $('#grid-additional').data("kendoGrid").dataSource.data();
-                    e.event.ticket = ticket;
+                    e.event.tickets = tickets;
                     e.event.additional = additional;
                   },
                   views: [
