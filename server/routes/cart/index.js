@@ -4,12 +4,17 @@ const { normalize } = require( 'normalizr' );
 const getStructure = require( '../../queries/getStructure' );
 const getSetting = require( '../../queries/getSetting' );
 const getCart = require( '../../queries/getCart' );
+const postCart = require( '../../queries/postCart' );
 
 const data = async ( context, params ) => {
+  if ( context.body ) {
+    const response = await postCart( context.body );
+    console.log( response );
+  }
   const response = await Promise.all( [
     getStructure( { lang: params.lang } ),
     getSetting( { lang: params.lang } ),
-    getCart( { lang: params.lang, group: params.category } ),
+    getCart(),
   ] );
   return normalize(
     {

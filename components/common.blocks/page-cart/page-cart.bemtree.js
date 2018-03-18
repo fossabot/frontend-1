@@ -2,7 +2,7 @@ block( 'page-cart' ).replace()( ( node ) => {
   return [
     {
       tag: 'pre',
-      content: JSON.stringify( node.api )
+      content: JSON.stringify( node.api.result.cart, null, 2 )
     },
     {
       html: `
@@ -215,6 +215,6 @@ block( 'page-cart' ).replace()( ( node ) => {
         </div>
 
       `,
-    }
+    },
   ];
 } );

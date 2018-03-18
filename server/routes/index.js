@@ -73,7 +73,7 @@ module.exports = {
     },
 
     {
-      path: '(.*)',
+      path: '*',
       name: '404',
       load: async () => await require( './404' ),
     },

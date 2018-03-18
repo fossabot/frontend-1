@@ -4,9 +4,9 @@ const Request = require( './_request' );
 
 const url = '/cart';
 
-const getCart = async () => {
+const getOrder = async () => {
   const tour = new Request( url, {} );
   return await tour.request();
 };
 
-module.exports = getCart;
+module.exports = getOrder;

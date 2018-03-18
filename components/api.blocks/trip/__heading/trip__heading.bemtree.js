@@ -1,5 +1,5 @@
-block( 'trip' )
-  .elem( 'heading' )
-  .content()( () => {
-  return 'Название экскурсии';
-} );
+// block( 'trip' )
+//   .elem( 'heading' )
+//   .content()( () => {
+//   return 'Название экскурсии';
+// } );

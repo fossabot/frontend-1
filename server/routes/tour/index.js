@@ -9,7 +9,7 @@ const data = async ( context, params ) => {
   const response = await Promise.all( [
     getStructure( { lang: params.lang } ),
     getSetting( { lang: params.lang } ),
-    getTour( { lang: params.lang, name: params.tour } ),
+    getTour( { lang: params.lang, /*name: params.tour,*/ id: context.query.id } ),
   ] );
   return normalize(
     {

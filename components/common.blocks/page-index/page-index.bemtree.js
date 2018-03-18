@@ -29,7 +29,6 @@ block( 'page-index' ).replace()( ( node ) => {
               mods: { of: 'trips' },
               items: tours.map( tourId => {
                 const tour = categoryChildren[ tourId ];
-                console.log( tour );
                 return {
                   block: 'trip',
                   content: [
@@ -39,10 +38,10 @@ block( 'page-index' ).replace()( ( node ) => {
                     {
                       elem: 'content',
                       content: [
-                        // {
-                        //   elem: 'heading',
-                        //   content: tour.pagetitle,
-                        // },
+                        {
+                          elem: 'heading',
+                          content: tour.pagetitle,
+                        },
                         // {
                         //   elem: 'features',
                         //   content: {
