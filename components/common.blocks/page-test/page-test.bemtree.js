@@ -10,8 +10,12 @@ block( 'page-test' ).replace()( () => {
   return [
     {
       block: 'link',
-      url: '/',
-      content: 'Test'
+      mods: {
+        theme: 'islands',
+        size: 'm'
+      },
+      url: 'https://bem.info/',
+      content: 'bem.info'
     }
   ];
 } );
