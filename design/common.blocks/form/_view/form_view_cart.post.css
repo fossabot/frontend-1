@@ -1,0 +1,11 @@
+block(form).mod(view cart) {
+  
+  elem(content) {
+    lost-center: 100%;
+  }
+
+  elem(section) {
+    lost-column: 1/2;
+  }
+
+}

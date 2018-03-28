@@ -1,0 +1,6 @@
+@each $flag in ru {
+  block(icon).mod(flag $(flag)) {
+    background-image: svg-load('icon_flag_$(flag).svg');
+    background-origin: border-box;
+  }
+}

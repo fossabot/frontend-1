@@ -1,0 +1,74 @@
+block(button) {
+  display         : inline-block;
+  position        : relative;
+  border-radius   : 0;
+  border          : 0;
+  padding         : 0;
+  text-decoration : none;
+  box-shadow      : none;
+  outline         : none;
+  vertical-align  : middle;
+  text-align      : center;
+  transition      : color .2s,
+                    background-color .2s;
+  -webkit-tap-highlight-color : rgba(0, 0, 0, 0);
+
+  cursor          : pointer;                    
+
+  &::-moz-focus-inner {
+    padding : 0;
+    border  : 0;
+  }
+
+  .elem(text) {
+    display        : inline-block;
+    flex           : 1;
+    font           : inherit;
+    color          : inherit;
+    line-height    : inherit;
+    vertical-align : middle;
+    text-align     : inherit;
+    box-sizing     : border-box;
+    margin         : 0;
+    border         : 0;
+    overflow       : hidden; /* Для текста, который всё же выходит за края */
+  }
+
+  block(icon) + block(button).elem(text) {
+    text-align: left;
+    padding-left: 0;
+  }
+
+  @each $size,
+    $fontSize,
+    $lineHeight,
+    $paddingVertical,
+    $paddingHorizontal in
+    (  xs,    s,    m,    l,   xl,  xxl),
+    (14px, 14px, 14px, 16px, 16px, 18px),
+    (20px, 20px, 20px, 20px, 20px, 24px),
+    ( 2px,  4px,  6px, 10px, 14px, 16px),
+    (46px, 12px, 46px, 32px, 32px, 40px) {
+    .mod(size $size) {
+      font-size: $fontSize;
+      line-height: $lineHeight;
+
+      .elem(text) {
+        padding: $paddingVertical $paddingHorizontal;
+      }
+    }
+  }
+
+  .mod(view plain) {
+    padding: 0;
+    background-color: transparent;
+
+    &:before {
+      content: none;
+    }
+  }
+
+  .mod(disabled) {
+    opacity: .5;
+  }
+}

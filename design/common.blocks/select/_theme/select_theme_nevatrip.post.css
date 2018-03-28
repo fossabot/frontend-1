@@ -1,0 +1,30 @@
+block(select).mod(theme nevatrip) {
+  color: #23232C;
+
+  .elem(tick) {
+    background-image: svg-load('../../icon/_symbol/icon_symbol_chevron-down.svg', fill="#000");
+  }
+
+  .elem(button) {
+    background-color: transparent;
+    color: inherit;
+  }
+
+  .mod(type suggest) {
+    block(button) {
+      .mod(hovered),
+      .mod(focused) {
+        background-color: transparent;
+        color: #f3203b;
+
+        .mod(checked) {
+          background-color: #fff;
+        }
+
+        block(select).elem(tick) {
+          background-image: svg-load('../../icon/_symbol/icon_symbol_chevron-down.svg', fill="#f3203b");
+        }
+      }
+    }
+  }
+}

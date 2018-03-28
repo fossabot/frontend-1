@@ -1,0 +1,8 @@
+@use postcss-map {
+  basePath: "./theme/";
+  maps: ["fbs-cabinet.yml"]
+}
+
+block(icon).mod(symbol connection) {
+  background-image: svg-load( 'icon_symbol_connection.svg', fill="map(fbs-cabinet, color, bermuda_light)" );
+}

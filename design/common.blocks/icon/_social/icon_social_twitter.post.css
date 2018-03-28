@@ -1,0 +1,14 @@
+block(icon).mod(social twitter) {
+  background-image: svg-load('icon_social_twitter.svg', fill="#777684");
+  background-origin: padding-box;
+  box-sizing: content-box;
+
+  &:hover {
+    background-image: svg-load('icon_social_twitter.svg', fill="#fff");
+  }
+
+  &.mod(bright) {
+    background-image: svg-load('icon_social_twitter.svg', fill="#f5f5f5");
+  }
+
+}

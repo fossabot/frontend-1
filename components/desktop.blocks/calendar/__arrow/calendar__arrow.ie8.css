@@ -1,0 +1,9 @@
+.calendar__arrow_direction_left
+{
+    background: url(../../../common.blocks/calendar/__arrow/calendar__arrow_direction_left.png);
+}
+
+.calendar__arrow_direction_right
+{
+    background: url(../../../common.blocks/calendar/__arrow/calendar__arrow_direction_right.png);
+}

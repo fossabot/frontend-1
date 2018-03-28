@@ -1,0 +1,15 @@
+block(icon).mod(social vkontakte) {
+  /*background-color: #45668e;*/
+  background-image: svg-load('icon_social_vkontakte.svg', fill="#777684");
+  background-origin: padding-box;
+  box-sizing: content-box;
+
+
+  &:hover {
+    background-image: svg-load('icon_social_vkontakte.svg', fill="#fff");
+  }
+
+  &.mod(bright) {
+    background-image: svg-load('icon_social_vkontakte.svg', fill="#f5f5f5");
+  }
+}

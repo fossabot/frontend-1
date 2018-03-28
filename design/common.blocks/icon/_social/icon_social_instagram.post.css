@@ -1,0 +1,14 @@
+block(icon).mod(social instagram) {
+  background-image: svg-load('icon_social_instagram.svg', fill="#777684");
+  background-origin: padding-box;
+  box-sizing: content-box;
+
+
+  &:hover {
+    background-image: svg-load('icon_social_instagram.svg', fill="#f5f5f5");
+  }
+
+  &.mod(bright) {
+    background-image: svg-load('icon_social_instagram.svg', fill="#fff");
+  }
+}

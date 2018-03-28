@@ -107,8 +107,8 @@ block( 'page-tour' ).replace()( ( node ) => {
                       </div>
                       &nbsp;&nbsp;
                       <form action="/buy-tickets" method="POST">
-                        <input name="_csrf" value="${ node.data.csrf }">
-                        <input name="id" value="${ node.api.result.tour.object.id }">
+                        <input type="hidden" name="_csrf" value="${ node.data.csrf }">
+                        <input type="hidden" name="id" value="${ node.api.result.tour.object.id }">
                         <button href="https://nevatrip.ru/buy-tickets" class="btn btn-warning btn-lg"style="font-size: 20px"style="font-size: 20px">Выбрать дату</button>
                       </form>
                    </div>

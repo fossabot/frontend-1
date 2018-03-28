@@ -1,0 +1,8 @@
+@use postcss-map {
+  basePath: "./theme/";
+  maps: ["fbs-cabinet.yml"]
+}
+
+block(icon).mod(symbol chevron-down) {
+  background-image: svg-load( 'icon_symbol_chevron-down.svg', fill="map(fbs-cabinet, color, bermuda_light)" );
+}

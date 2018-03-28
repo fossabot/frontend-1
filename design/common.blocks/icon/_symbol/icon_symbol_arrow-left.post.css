@@ -1,0 +1,8 @@
+@use postcss-map {
+  basePath: "./theme/";
+  maps: ["fbs-cabinet.yml"]
+}
+
+block(icon).mod(symbol arrow-left) {
+  background-image: svg-load( 'icon_symbol_arrow-left.svg', fill="map(fbs-cabinet, color, bermuda_light)" );
+}

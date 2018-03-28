@@ -1,11 +1,34 @@
 const axios = require( 'axios' );
+const { cacheAdapterEnhancer } = require( 'axios-extensions' );
 
-const API = axios.create( { baseURL: process.env.API } );
+const API = axios.create( {
+  baseURL: process.env.API,
+  headers: { 'Cache-Control': 'no-cache' },
+  // cache will be enabled by default
+  adapter: cacheAdapterEnhancer( axios.defaults.adapter, false ),
+} );
 
 const fetch = async ( options ) => {
-  let response;
   try {
-    response = await API( options );
+
+    // if ( options.clientRequest ) {
+    //   options.headers = Object.assign(
+    //     options.headers || {},
+    //     {
+    //       Cookie:
+    //         (options.clientRequest.user && options.clientRequest.user.cookies)
+    //           ? options.clientRequest.user.cookies.join('')
+    //           : ''
+    //     }
+    //   );
+    // }
+
+    // const source = axios.CancelToken.source();
+    // options.cancelToken = source.token;
+    // options.cancelSource = source;
+
+    const response = await API( options );
+    return response;
   } catch ( error ) {
     console.error( 'Request Failed:', error.config );
     if ( error.response ) {
@@ -17,23 +40,22 @@ const fetch = async ( options ) => {
     }
     throw new Error( error.response || error.message );
   }
-  return response.data;
 };
 
 class Request {
-  constructor( url, params = {}, schema = {} ) {
+  constructor( url, params = {}, session ) {
     this.pathname = url.replace( /\/?$/, '/' );
     this.search = params;
-    this.schema = schema;
+    this.session = session;
   }
 
   get url() {
     const params = Object.keys( this.search )
       .map( ( param ) => {
-        return `${param}=${this.search[param]}`;
+        return `${ param }=${ this.search[ param ] }`;
       } )
       .join( '&' );
-    return `${this.pathname}/?${params}`;
+    return `${ this.pathname }/?${ params }`;
   }
 
   set url( url ) {
@@ -62,10 +84,23 @@ class Request {
       method: type,
       url: this.pathname,
       params: this.params,
-      data: this.params,
+      ...type === 'post' ? { data: this.params } : {},
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Cookie': this.session && this.session.__api ? this.session.__api.join( '' ) : ''
+      },
+      withCredentials: true,
     };
     return fetch( options )
-      .then( ( response ) => response )
+      .then( ( response ) => {
+        if ( response.headers['set-cookie'] && this.session ) {
+          this.session.__api = this.session.__api || response.headers['set-cookie'];
+          // if (options.clientRequest && options.clientRequest.user ) {
+          //   options.clientRequest.user.cookies = response.headers['set-cookie'];
+          // }
+        }
+        return response.data;
+      } )
       .catch( ( error ) => error );
   }
 }

@@ -28,7 +28,7 @@ block( 'footer' ).content()( () => {
             <div class="col-sm-5 text-left">
               <div class="media">
                 <div class="media-left">
-                  <img class="media-object" src="/assets/img/golden-light.png" width="64" alt="1-е место">
+                  <img class="media-object" src="https://nevatrip.ru/assets/img/golden-light.png" width="64" alt="1-е место">
                 </div>
                 <div class="media-body">
                   <p>Лучшая компания 2014 года всероссийской программы «Ты&nbsp;— предприниматель» в&nbsp;Санкт-Петербурге</p>
@@ -38,7 +38,7 @@ block( 'footer' ).content()( () => {
             <div class="col-sm-4 text-left">
               <div class="media">
                 <div class="media-left">
-                  <img class="media-object" src="/assets/img/golden-light.png" width="64" alt="1-е место">
+                  <img class="media-object" src="https://nevatrip.ru/assets/img/golden-light.png" width="64" alt="1-е место">
                 </div>
                 <div class="media-body">
                   <p>1 место «Молодой предприниматель России 2015» в номинации «Сфера услуг»</p>
