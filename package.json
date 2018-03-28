@@ -18,8 +18,9 @@
   "dependencies": {
     "bem-calendar": "github:bem/bem-calendar",
     "bem-components": "^6.0.1",
-    "bem-core": "^3.2.1",
-    "bem-forms": "github:bem-contrib/bem-forms#v2.0.0"
+    "bem-core": "^4.2.1",
+    "bem-forms": "github:bem-contrib/bem-forms#v2.0.0",
+    "moment": "^2.21.0"
   },
   "devDependencies": {
     "axios": "^0.17.1",
