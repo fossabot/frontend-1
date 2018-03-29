@@ -1,5 +1,7 @@
 [{
-  mustDeps: 'i18n',
+  mustDeps: [
+    'i18n'
+  ],
   shouldDeps: [
     { block: 'page' }
   ]

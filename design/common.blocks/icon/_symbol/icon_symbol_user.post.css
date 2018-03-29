@@ -1,0 +1,3 @@
+block(icon).mod(symbol user) {
+  background-image: svg-load( 'icon_symbol_user.svg' );
+}

@@ -6,7 +6,7 @@
     },
     {
       block: 'list',
-      mods: { of: ['trips', 'features'] }
+      mods: { of: ['trips', 'features'], type: 'unstyled' }
     },
     { block: 'category' }
   ]

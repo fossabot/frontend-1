@@ -18,7 +18,7 @@ block( 'page-category' ).replace()( ( node ) => {
     {
       block: 'container',
       content: [
-        node.api.result.tour.results.map( tour => {
+        node.api.result.tour.results && node.api.result.tour.results.length && node.api.result.tour.results.map( tour => {
           return {
             block: 'row',
             content: {

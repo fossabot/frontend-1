@@ -9,7 +9,9 @@ function getLevels( platform ) {
   platformNames.forEach( ( name ) => {
     levels.push( { path: path.join( 'node_modules', 'bem-core', name + '.blocks' ), check: false } );
     levels.push( { path: path.join( 'node_modules', 'bem-components', name + '.blocks' ), check: false } );
+    levels.push( { path: path.join( 'node_modules', 'bem-components', 'design', name + '.blocks' ), check: false } );
     levels.push( { path: path.join( 'node_modules', 'bem-forms', name + '.blocks' ), check: false } );
+    // levels.push( { path: path.join( 'node_modules', 'bem-calendar', name + '.blocks' ), check: false } );
     levels.push( { path: path.join( 'components', name + '.blocks' ), check: true } );
     levels.push( { path: path.join( 'design', name + '.blocks' ), check: true } );
   });

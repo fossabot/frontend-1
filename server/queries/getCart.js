@@ -2,11 +2,11 @@
 
 const Request = require( './_request' );
 
-const url = '/tour';
+const url = '/cart';
 
-const getOrder = async () => {
-  const tour = new Request( url, {} );
+const getCart = async ( session ) => {
+  const tour = new Request( url, {}, session );
   return await tour.request();
 };
 
-module.exports = getOrder;
+module.exports = getCart;

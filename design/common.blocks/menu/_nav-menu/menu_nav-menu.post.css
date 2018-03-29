@@ -1,0 +1,54 @@
+block(menu).mod(nav-menu) {
+  background-color: #23232c;
+  color: #fff;
+  column-count: 6;
+  box-sizing: border-box;
+  padding-top: 56px;
+  padding-bottom: 56px;
+
+  @media (max-width: 1024px) {
+    column-count: 5;
+  }
+
+  &:before,
+  &:after {
+    content: none
+  }
+
+  .elem(item) {
+    line-height: 32px;
+    padding: 0;
+
+    .mod(checked) {
+      background: none;
+      position: relative;
+      color: #f3203b;
+
+      padding-left: 20px;
+      box-sizing: border-box;
+
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 6px;
+        display: block;
+        width: 12px;
+        height: 12px;
+        background-color: red;
+      }
+    }
+
+    .mod(hovered) {
+      cursor: pointer;
+      background: none;
+      color: #f3203b;
+    }
+
+    block(link) {
+      font-size: 14px;
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+}

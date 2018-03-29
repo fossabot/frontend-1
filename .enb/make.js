@@ -54,18 +54,18 @@ module.exports = ( config ) => {
           forceBaseTemplates: true,
           engineOptions: {
             elemJsInstances: true,
-            runtimeLint: true
-          },
-          requires: {
-            moment: {
-              globals: 'moment',
-              commonJS: 'moment'
-            },
-            moment_ru: {
-              globals: 'moment/locale/ru',
-              commonJS: 'moment/locale/ru'
+            runtimeLint: true,
+            requires: {
+              moment: {
+                globals: 'moment',
+                commonJS: 'moment'
+              },
+              moment_ru: {
+                globals: 'moment/locale/ru',
+                commonJS: 'moment/locale/ru'
+              }
             }
-          }
+          },
         }]
       ]);
 

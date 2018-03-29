@@ -2,9 +2,13 @@ const fs = require( 'fs' ),
   path = require( 'path' ),
   app = require( 'express' )(),
   passport = require( 'passport' ),
+  expressSession = require( 'express-session' ),
+  MemcachedStore = require( 'connect-memcached' )( expressSession ),
+  LocalStrategy = require( 'passport-local' ).Strategy,
   PrettyError = require( 'pretty-error' ),
   router = require( './router' ),
   render = require( './render' ).render,
+  Request = require( './queries/_request' ),
   staticFolder = process.env.STATIC_FOLDER,
   port = process.env.PORT,
   isSocket = isNaN( port ),
@@ -15,13 +19,44 @@ if ( __DEV__ ) {
   require( 'debug-http' )();
 }
 
+passport.use( new LocalStrategy( {
+    usernameField: 'username',
+    passwordField: 'password'
+  }, ( username, password, done ) => {
+    let result = {
+      credentials: { username: username, password: password }
+    };
+    const auth = new Request( '/auth', result.credentials );
+    auth.request( 'post' )
+      .then( api => {
+        if ( api.error ) {
+          return done( null, false, api );
+        } else {
+          result.cookies = api.__set_cookie;
+          result.status = api.status;
+          result.data   = api.user;
+          return done( null, result )
+        }
+      } )
+      .catch( () => console.log( 'Passport error' ) )
+} ) );
+
+passport.serializeUser( ( user, done ) => {
+  done( null, JSON.stringify( user ) );
+} );
+
+passport.deserializeUser( ( user, done ) => {
+  done( null, JSON.parse( user ) );
+} );
+
 app
   .disable( 'x-powered-by' )
   .enable( 'trust proxy' )
   .use( require( 'compression' )() )
-  .use( require( 'serve-favicon' )( path.join( staticFolder, 'favicon.ico' ) ) )
-  .use( __DEV__ ? require( 'tiny-lr' ).middleware( { app: app, dashboard: true } ) : _next )
+  .use( require( 'body-parser' ).urlencoded( { extended: true } ) )
+  // .use( __DEV__ ? require( 'tiny-lr' ).middleware( { app: app, dashboard: true } ) : _next )
   .use( require( 'serve-static' )( staticFolder ) )
+  .use( require( 'serve-favicon' )( path.join( staticFolder, 'favicon.ico' ) ) )
   .use(
     __DEV__
       ? require( 'express-pino-logger' )( {
@@ -31,35 +66,51 @@ app
       : _next,
   )
   .use( require( 'cookie-parser' )() )
-  .use( require( 'body-parser' ).urlencoded( { extended: true } ) )
   .use(
-    require( 'express-session' )( {
-      resave: true,
+    expressSession( {
+      name: 'user',
+      resave: false,
       saveUninitialized: true,
+      key: 'test',
+      proxy: 'true',
       secret: process.env.SESSION_SECRET,
+      // cookie: {
+      //   secure: !__DEV__,
+      //   httpOnly: true,
+      //   // domain: 'localhost',
+      //   path: '/',
+      //   expires: new Date( Date.now() + 365 * 24 * 60 * 60 * 1000 ), // 1 hour
+      // },
+      store: new MemcachedStore( {
+        hosts: ['127.0.0.1:11211'],
+        secret: process.env.SESSION_SECRET,
+      } ),
     } ),
   )
   .use( passport.initialize() )
   .use( passport.session() )
-  .use( ( req, res, next ) => {
-    req.apiRequests = [];
-    req.on( 'close', () => {
-      req.apiRequests.map( ( request ) => {
-        request.cancelSource.cancel();
-        return null;
-      } );
-    } );
-    next();
-  } )
-  .use( require( 'csurf' )() )
+  // .use( ( req, res, next ) => {
+  //   // Close connection
+  //   req.apiRequests = [];
+  //   req.on( 'close', () => {
+  //     req.apiRequests.map( ( request ) => {
+  //       request.cancelSource.cancel();
+  //       return null;
+  //     } );
+  //   } );
+  //   next();
+  // } )
+  .use( require( 'csurf' )( /* { cookie: true } */ ) )
   .use( __DEV__ ? _next : require( 'connect-slashes' )() );
 
-app.get( '*', async ( req, res, next ) => {
+app.all( '*', async ( req, res, next ) => {
   try {
     console.time( 'Route' );
     const route = await router.resolve( {
       pathname: req.path,
       query: req.query || {},
+      body: req.body || {},
+      session: req.session,
     } );
     console.timeEnd( 'Route' );
 

@@ -1,0 +1,188 @@
+block(input) {
+  position: relative;
+  display: inline-block;
+  color: inherit;
+  border-radius: 0;
+  box-sizing: border-box;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+  /* Decorative element (inner background) */
+  &:before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    left: 1px;
+    border-radius: 0;
+  }
+
+  .elem(box) {
+    position: relative;
+    user-select: none;
+    font-size: inherit;
+    line-height: inherit;
+
+    -webkit-touch-callout: none;
+  }
+
+  .elem(control) {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    outline: none;
+    background: 0 0;
+    font-size: inherit;
+    line-height: inherit;
+
+    -webkit-appearance: none;
+
+    /* лишние отступы у текста */
+    &::-webkit-search-decoration {
+      -webkit-appearance: none
+    }
+
+    /* нативный крестик */
+    &::-webkit-search-cancel-button {
+      display: none
+    }
+
+    &:placeholder {
+      color: #a0a0ac;
+      text-indent: 0;
+      opacity: 1;
+      text-overflow: ellipsis;
+      font-family: 'PT Mono', monospace;
+    }
+
+    &::-ms-clear {
+      display: none
+    }
+
+    &:-webkit-autofill {
+      /*color: inherit;*/
+      /*background-color: transparent;*/
+      /*background-clip: padding-box;*/
+      /*border: 1px solid transparent;*/
+      box-sizing: border-box;
+    }
+  }
+
+  .elem(clear) {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 2em;
+    background-image: svg-load('../icon/_symbol/icon_symbol_times.svg', fill: #000);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+
+    .mod(visible) {
+      opacity: 0.3;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 1
+      }
+    }
+  }
+
+  @each $size,
+    $fontSize,
+    $lineHeight,
+    $paddingVertical,
+    $paddingHorizontal in
+    (  xs,    s,    m,    l,   xl,  xxl),
+    (14px, 14px, 14px, 16px, 16px, 18px),
+    (20px, 20px, 20px, 20px, 20px, 24px),
+    ( 2px,  4px,  6px, 10px, 14px, 16px),
+    (20px,  8px, 20px, 20px, 20px, 24px) {
+    .mod(size $size) {
+      font-size: $fontSize;
+      line-height: $lineHeight;
+
+      .elem(control) {
+        padding: $paddingVertical $paddingHorizontal;
+      }
+    }
+  }
+
+  .mod(has-clear) .elem(control) {
+    text-overflow: ellipsis;
+    padding-right: 2em;
+  }
+
+  .mod(focused) {
+    z-index: 1;
+
+    &:before {
+      box-shadow: #969;
+    }
+
+    .elem(control) {
+      text-overflow: clip /* fix ellipsis bug in Chrome */
+    }
+  }
+
+  .mod(disabled) {
+    background: rgba(0, 0, 0, 0.08);
+
+    &:before,
+    .elem(clear) {
+      display: none
+    }
+
+    .elem(box),
+    .elem(control) {
+      color: rgba(0, 0, 0, 0.4);
+      cursor: default
+    }
+  }
+
+  .mod(invalid) {
+    background-color: red;
+
+    &:before {
+      background-color: #273c48;
+    }
+  }
+
+  .mod(width available) {
+    width: 100%
+  }
+
+  .mod(type password) .elem(control) {
+    text-overflow: clip
+  }
+
+  .mod(type search) .elem(control)::placeholder {
+    font-family: unset;
+  }
+
+}
+
+block(control-group) {
+  block(input) {
+    &:before {
+      right: 0
+    }
+  }
+
+  > block(input):last-child,
+  > :last-child block(input) {
+    &:before {
+      right: 1px
+    }
+  }
+}
+
+
+

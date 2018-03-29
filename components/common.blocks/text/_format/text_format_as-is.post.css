@@ -1,0 +1,4 @@
+block(text).mod(format as-is) {
+  hyphens: none;
+  text-transform: none
+}

@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   path: '',
   name: 'root',
@@ -7,6 +9,12 @@ module.exports = {
       path: '',
       name: 'index',
       load: async () => await require( './home' ),
+    },
+
+    {
+      path: '/test',
+      name: 'test',
+      load: async () => await require( './test' ),
     },
     {
       // Письмо успешно отправлено, заказ оплачен и т. д.
@@ -73,7 +81,7 @@ module.exports = {
     },
 
     {
-      path: '(.*)',
+      path: '*',
       name: '404',
       load: async () => await require( './404' ),
     },

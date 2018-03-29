@@ -2,18 +2,18 @@ block( 'page-tour' ).replace()( ( node ) => {
   return [
     // {
     //   tag: 'pre',
-    //   content: JSON.stringify( node.api.result.tour.results[ 0 ], null, 2 ),
+    //   content: JSON.stringify( node.api, null, 2 ),
     // },
     {
       content: {
         html: `
           <div class="jumbotron img-bg" style="background-image: url('https://nevatrip.ru/assets/img/e/${
-            node.api.result.tour.results[0].uri
+            node.api.result.tour.object.uri
           }_bg.jpg');">
              <p>&nbsp;</p>
              <div class="container">
                 <div class="alpha-bg">
-                   <h1>${node.api.result.tour.results[0].pagetitle}</h1>
+                   <h1>${node.api.result.tour.object.pagetitle}</h1>
                 </div>
              </div>
              <p>&nbsp;</p>
@@ -101,12 +101,16 @@ block( 'page-tour' ).replace()( ( node ) => {
                    <div style="margin-top: 20px;margin-bottom: 34px;">
                       <div class="pull-left">
                          <span class="price">${
-                           node.api.result.tour.results[0].e_price
+                           node.api.result.tour.object.e_price
                          } <i class="fa fa-rub fa-xs"></i></span>
                          <small class="sub-price">не реализуется <i class="fa fa-rub fa-xs"></i> на причале</small>
                       </div>
                       &nbsp;&nbsp;
-                      <a href="https://nevatrip.ru/buy-tickets?id=27" class="btn btn-warning btn-lg"style="font-size: 20px"style="font-size: 20px">Выбрать дату</a>
+                      <form action="/buy-tickets" method="POST">
+                        <input type="hidden" name="_csrf" value="${ node.data.csrf }">
+                        <input type="hidden" name="id" value="${ node.api.result.tour.object.id }">
+                        <button href="https://nevatrip.ru/buy-tickets" class="btn btn-warning btn-lg"style="font-size: 20px"style="font-size: 20px">Выбрать дату</button>
+                      </form>
                    </div>
                 </div>
              </div>
@@ -115,57 +119,6 @@ block( 'page-tour' ).replace()( ( node ) => {
                 <div class="col-sm-4 col-sm-push-8">
                    <h3 class="h4">Галерея</h3>
                    <div id="links">
-                      <div class="row">
-                         <div class="col-xs-6">
-                            <div class="gallery-item">
-                               <a href="/assets/components/gallery/connector.php?action=web/phpthumb&amp;ctx=web&amp;w=940&amp;h=940&amp;zc=0&amp;far=&amp;q=90&amp;src=%2Fassets%2Fgallery%2F12%2F160.jpg" title=""  data-gallery>
-                               <img class="img-responsive" src="/assets/components/gallery/connector.php?action=web/phpthumb&amp;ctx=web&amp;w=150&amp;h=150&amp;zc=1&amp;far=C&amp;q=90&amp;src=%2Fassets%2Fgallery%2F12%2F160.jpg" alt="NevaTrip_night-63.jpg"  />
-                               </a>
-                            </div>
-                         </div>
-                         <div class="col-xs-6">
-                            <div class="gallery-item">
-                               <a href="/assets/components/gallery/connector.php?action=web/phpthumb&amp;ctx=web&amp;w=940&amp;h=940&amp;zc=0&amp;far=&amp;q=90&amp;src=%2Fassets%2Fgallery%2F12%2F156.jpg" title=""  data-gallery>
-                               <img class="img-responsive" src="/assets/components/gallery/connector.php?action=web/phpthumb&amp;ctx=web&amp;w=150&amp;h=150&amp;zc=1&amp;far=C&amp;q=90&amp;src=%2Fassets%2Fgallery%2F12%2F156.jpg" alt="NevaTrip_night-28.jpg"  />
-                               </a>
-                            </div>
-                         </div>
-                         <div class="col-xs-6">
-                            <div class="gallery-item">
-                               <a href="/assets/components/gallery/connector.php?action=web/phpthumb&amp;ctx=web&amp;w=940&amp;h=940&amp;zc=0&amp;far=&amp;q=90&amp;src=%2Fassets%2Fgallery%2F12%2F159.jpg" title=""  data-gallery>
-                               <img class="img-responsive" src="/assets/components/gallery/connector.php?action=web/phpthumb&amp;ctx=web&amp;w=150&amp;h=150&amp;zc=1&amp;far=C&amp;q=90&amp;src=%2Fassets%2Fgallery%2F12%2F159.jpg" alt="NevaTrip_night-77.jpg"  />
-                               </a>
-                            </div>
-                         </div>
-                         <div class="col-xs-6">
-                            <div class="gallery-item">
-                               <a href="/assets/components/gallery/connector.php?action=web/phpthumb&amp;ctx=web&amp;w=940&amp;h=940&amp;zc=0&amp;far=&amp;q=90&amp;src=%2Fassets%2Fgallery%2F12%2F157.jpg" title=""  data-gallery>
-                               <img class="img-responsive" src="/assets/components/gallery/connector.php?action=web/phpthumb&amp;ctx=web&amp;w=150&amp;h=150&amp;zc=1&amp;far=C&amp;q=90&amp;src=%2Fassets%2Fgallery%2F12%2F157.jpg" alt="NevaTrip_night-31.jpg"  />
-                               </a>
-                            </div>
-                         </div>
-                         <div class="col-xs-6">
-                            <div class="gallery-item">
-                               <a href="/assets/components/gallery/connector.php?action=web/phpthumb&amp;ctx=web&amp;w=940&amp;h=940&amp;zc=0&amp;far=&amp;q=90&amp;src=%2Fassets%2Fgallery%2F12%2F153.jpg" title=""  data-gallery>
-                               <img class="img-responsive" src="/assets/components/gallery/connector.php?action=web/phpthumb&amp;ctx=web&amp;w=150&amp;h=150&amp;zc=1&amp;far=C&amp;q=90&amp;src=%2Fassets%2Fgallery%2F12%2F153.jpg" alt="NevaTrip_night-8.jpg"  />
-                               </a>
-                            </div>
-                         </div>
-                         <div class="col-xs-6">
-                            <div class="gallery-item">
-                               <a href="/assets/components/gallery/connector.php?action=web/phpthumb&amp;ctx=web&amp;w=940&amp;h=940&amp;zc=0&amp;far=&amp;q=90&amp;src=%2Fassets%2Fgallery%2F12%2F158.jpg" title=""  data-gallery>
-                               <img class="img-responsive" src="/assets/components/gallery/connector.php?action=web/phpthumb&amp;ctx=web&amp;w=150&amp;h=150&amp;zc=1&amp;far=C&amp;q=90&amp;src=%2Fassets%2Fgallery%2F12%2F158.jpg" alt="NevaTrip_night-56.jpg"  />
-                               </a>
-                            </div>
-                         </div>
-                         <div class="col-xs-6">
-                            <div class="gallery-item">
-                               <a href="/assets/components/gallery/connector.php?action=web/phpthumb&amp;ctx=web&amp;w=940&amp;h=940&amp;zc=0&amp;far=&amp;q=90&amp;src=%2Fassets%2Fgallery%2F12%2F154.jpg" title=""  data-gallery>
-                               <img class="img-responsive" src="/assets/components/gallery/connector.php?action=web/phpthumb&amp;ctx=web&amp;w=150&amp;h=150&amp;zc=1&amp;far=C&amp;q=90&amp;src=%2Fassets%2Fgallery%2F12%2F154.jpg" alt="NevaTrip_night.jpg"  />
-                               </a>
-                            </div>
-                         </div>
-                      </div>
                    </div>
                    <h3 class="h4">Вы увидите:</h3>
                    <ul class="fa-ul">
@@ -264,18 +217,18 @@ block( 'page-tour' ).replace()( ( node ) => {
                    </div>
                 </div>
                 <div class="col-sm-8 col-sm-pull-4">
-                   <h3 class="h4">Об экскурсии</h3>
-                   <div class="lead">
-                      ${node.api.result.tour.results[0].content}
-                   </div>
-                   <hr class="short"/ id="route">
-                   <h3 class="h4">Карта маршрута</h3>
-                   ${node.api.result.tour.results[0].e_map}
-                   <div class="divider"></div>
-                   <div class="well">
-                      <h3 class="h4">Совет от организатора</h3>
-                      <div class="lead">${node.api.result.tour.results[0].e_advice}</div>
-                   </div>
+                  <h3 class="h4">Об экскурсии</h3>
+                  <div class="lead">
+                    ${node.api.result.tour.object.content}
+                  </div>
+                  <hr class="short"/ id="route">
+                  <h3 class="h4">Карта маршрута</h3>
+                    {node.api.result.tour.object.e_map}
+                  <div class="divider"></div>
+                  <div class="well">
+                    <h3 class="h4">Совет от организатора</h3>
+                    <div class="lead">${node.api.result.tour.object.e_advice}</div>
+                  </div>
                 </div>
              </div>
           </div>

@@ -1,0 +1,8 @@
+@use postcss-map {
+  basePath: "./theme/";
+  maps: ["fbs-cabinet.yml"]
+}
+
+block(icon).mod(symbol search) {
+  background-image: svg-load( 'icon_symbol_search.svg');
+}

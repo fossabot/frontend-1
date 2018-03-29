@@ -1,0 +1,122 @@
+block(menu) {
+  box-sizing: border-box;
+  user-select: none;
+  outline: 0;
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+  }
+
+  .elem(item) {
+    position: relative;
+    white-space: nowrap;
+    line-height: 2.5;
+    background-origin: content-box;
+
+    .mod(disabled) {
+      opacity: 0.3;
+    }
+
+    block(link).mod(disabled) {
+      cursor: text;
+    }
+
+    .mod(checked) {
+      background-image: svg-load('../icon/_symbol/icon_symbol_tip.svg', fill="#f3203b");
+      background-repeat: no-repeat;
+      background-origin: padding-box;
+      color: #f3203b;
+    }
+
+    .mod(hovered) {
+      cursor: pointer;
+      background-color: #eee;
+    }
+
+    .mod(type link) {
+      block(link) {
+        text-decoration: none;
+
+        color: inherit;
+        outline: none;
+
+        /* Fit clickable area to `menu__item` size */
+        &:after {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+
+          content: '';
+        }
+      }
+    }
+  }
+
+  .elem(group) {
+    border-style: solid;
+    border-width: 1px 0;
+
+    & + .elem(group) {
+      border-top: 0;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+
+      border-bottom: 0;
+    }
+
+    &:first-child {
+      padding-top: 0;
+
+      border-top: 0;
+    }
+  }
+
+  @each $size, $fontSize, $lineHeight, $paddingLeft, $paddingVert, $paddingHor in
+    (   s,    m,    l,   xl),  /* size        */
+    (14px, 14px, 16px, 18px),  /* fontSize    */
+    (24px, 24px, 28px, 32px),  /* lineHeight  */
+    (30px, 30px, 34px, 40px),  /* paddingLeft */
+    ( 3px,  4px,  5px,  6px),  /* paddingVert */
+    (10px, 13px, 15px, 20px),  /* paddingHor  */
+    (14px, 14px, 15px, 15px)   /* tipSize     */ {
+    .mod(size $size) {
+      font-size: $fontSize;
+      line-height: $lineHeight;
+
+      &:before,
+      &:after {
+        height: $paddingVert;
+      }
+
+      .elem(group-title) ~ .elem(item) {
+        padding: 0 $paddingLeft;
+      }
+
+      .elem(item) {
+        padding: 0 $paddingHor;
+        padding-left: $paddingLeft;
+        /*background-size: $tipSize $tipSize;*/
+        background-position: 9px 50%;
+      }
+
+      .elem(item) + .elem(group) {
+        margin-top: $paddingVert;
+      }
+
+      .elem(group) {
+        padding: $paddingVert 0;
+      }
+
+      .elem(group-title) {
+        padding: 0 $paddingHor;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,8 @@
+@use postcss-map {
+  basePath: "./theme/";
+  maps: ["fbs-cabinet.yml"]
+}
+
+block(icon).mod(symbol success) {
+  background-image: svg-load( 'icon_symbol_success.svg', fill="map(fbs-cabinet, color, white)" );
+}

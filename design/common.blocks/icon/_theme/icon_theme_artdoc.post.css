@@ -1,0 +1,16 @@
+block(icon).mod(theme artdoc) {
+
+  .mod(state positive) {
+    background-color: green;
+  }
+
+  .mod(state negative) {
+    background-color: red;
+    color: white;
+  }
+
+  .mod(bordered) {
+    border-width: 2px;
+    border-color: #000;
+  }
+}

@@ -1,0 +1,140 @@
+block(select) {
+  max-width: 100%;
+  vertical-align: bottom;
+
+  .elem(button) {
+    display: inline-flex;
+    width: 100%;
+    vertical-align: top;
+    text-align: left;
+    max-width: 255px;
+    white-space: nowrap;
+  }
+
+  .elem(clear) {
+    display: none;
+    position: relative;
+    z-index: 1;
+    width: 2em; /* magic */
+    height: 2em; /* magic */
+    margin-left: 1px;
+    background-color: #e0e0e9;
+    box-sizing: border-box;
+    padding: .5em;
+    background-image: svg-load('../icon/_symbol/icon_symbol_times.svg', fill: #000);
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-size: cover;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+
+    .mod(visible) {
+      cursor: pointer;
+      opacity: 1;
+      display: table;
+
+      &:hover {
+        background-color: #bdbdbd;
+      }
+    }
+  }
+
+  .elem(footer) {
+    padding: 1em;
+    box-sizing: border-box;
+    border-top: 1px solid #ddd;
+  }
+
+  .elem(header) {
+    padding: 1em;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+  }
+
+  .elem(tick) {
+    position: absolute;
+    top: 50%;
+    margin-top: -0.75em;
+    bottom: 0;
+    right: 0;
+    transition: transform 0.1s ease-out;
+    width: 2em;
+    padding: .5em;
+
+    &:empty:after {
+      content: none
+    }
+  }
+
+  block(button) {
+    box-shadow: inset 0 0 0 1px;
+
+    .elem(text) {
+      padding-left: 12px;
+      padding-right: 2em;
+      text-overflow: ellipsis;
+
+      &:empty:before {
+        content: '\00a0'
+      }
+    }
+
+    .mod(checked) {
+      .elem(text) {
+        padding-right: .25em;
+      }
+    }    
+  }
+
+  @each $size, $fontSize in
+    (  xs,    s,    m,    l,   xl,  xxl),
+    (14px, 14px, 14px, 16px, 16px, 18px) {
+    .mod(size $size) {
+      font-size: $fontSize;
+    }
+  }
+
+  .mod(has-clear) {
+    display: flex;
+  }
+
+  .mod(opened) {
+    color: #f3203b;
+
+    .elem(tick) {
+      transform: rotate(-180deg);
+      background-image: svg-load('../icon/_symbol/icon_symbol_chevron-down.svg', fill="#f3203b");
+    }
+  }
+
+  .mod(width available) {
+    width: 100%
+  }
+
+  .mod(type suggest) {
+
+    block(button) {
+      box-shadow: none;
+      
+      .elem(text) {
+        padding-left: 0;
+      }
+
+      .mod(checked) {
+        .elem(text) {
+          padding-left: 12px;
+          padding-right: 12px;
+          background-color: #fff;
+          color: #000;
+        }
+
+        block(select).elem(tick) {
+          display: none;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@each $icon, $background in
+  (    cent,   micro, standart, unlimited,    zero ),
+  ( #65a33e, #7a6492,  #457a93,   #5b5b5b, #a77d3b ) {
+  block(icon).mod(account-type $(icon)) {
+    background-image: svg-load('icon_account-type_$(icon).svg', fill=#fff);
+    background-color: $(background);
+    background-origin: border-box;
+  }
+}
