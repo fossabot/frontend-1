@@ -112,18 +112,18 @@ module.exports = ( config ) => {
           forceBaseTemplates: true,
           engineOptions: {
             elemJsInstances: true,
-            runtimeLint: true
-          },
-          requires: {
-            moment: {
-              globals: 'moment',
-              commonJS: 'moment'
-            },
-            moment_ru: {
-              globals: 'moment/locale/ru',
-              commonJS: 'moment/locale/ru'
+            runtimeLint: true,
+            requires: {
+              moment: {
+                globals: 'moment',
+                commonJS: 'moment'
+              },
+              moment_ru: {
+                globals: 'moment/locale/ru',
+                commonJS: 'moment/locale/ru'
+              }
             }
-          }
+          },
         }],
 
         // client templates
@@ -146,18 +146,18 @@ module.exports = ( config ) => {
           filesTarget: '?.tmpl.files',
           sourceSuffixes: ['bemhtml', 'bemhtml.js'],
           engineOptions: {
-            elemJsInstances: true
-          },
-          requires: {
-            moment: {
-              globals: 'moment',
-              commonJS: 'moment'
-            },
-            moment_ru: {
-              globals: 'moment/locale/ru',
-              commonJS: 'moment/locale/ru'
+            elemJsInstances: true,
+            requires: {
+              moment: {
+                globals: 'moment',
+                commonJS: 'moment'
+              },
+              moment_ru: {
+                globals: 'moment/locale/ru',
+                commonJS: 'moment/locale/ru'
+              }
             }
-          }
+          },
         }],
 
         // js
