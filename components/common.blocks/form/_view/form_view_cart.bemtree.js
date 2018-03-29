@@ -1,31 +1,10 @@
 block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
-  // const cart = node.api.result.cart.object.cart;
+  const cart = node.api.result.cart.object.cart;
 
   if ( !node.api.result.cart.object.total_count ) {
     return 'Корзина пуста';
   }
 
-  return {
-      block: 'menu',
-      mods: {
-          theme: 'islands',
-          size: 'm',
-          mode: 'radio'
-      },
-      content: [
-          {
-              elem: 'item',
-              val: 1,
-              content: 'Отдых в горах'
-          },
-          {
-              elem: 'item',
-              val: 2,
-              content: 'Отдых на море'
-          }
-      ]
-  };
-/*
   return [
     {
       elem: 'header',
@@ -711,5 +690,4 @@ block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
       ]
     }
   ]
-*/
 } );
