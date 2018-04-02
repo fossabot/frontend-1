@@ -1,0 +1,52 @@
+block(calendar).elem(day) {
+  line-height: 18px;
+  width: 18px;
+  padding: 5px;
+  text-align: center;
+
+  & elem(inner) {
+    cursor: pointer;
+  }
+
+  mod(type weekend) {
+    color: #d00;
+  }
+
+  mod(state current) {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    margin: 0 -1px 0 0;
+    text-align: center;
+    outline: 0;
+    user-select: none;
+
+    &:after,
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: -1px;
+      bottom: 0;
+      left: -1px;
+      border-radius: 3px;
+    }
+    
+    &:after {
+      top: 1px;
+      right: 0;
+      bottom: 1px;
+      left: 0;
+    }
+
+    & elem(inner) {
+      position: relative;
+      z-index: 1;
+    }
+  }
+}
+
+block(ua).mod(js no) block(calendar).elem(day).mod(state current):after,
+block(ua).mod(js no) block(calendar).elem(day).mod(state current):before {
+  display: none;
+}

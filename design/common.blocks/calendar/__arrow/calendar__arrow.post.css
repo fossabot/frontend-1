@@ -1,0 +1,29 @@
+block(calendar).elem(arrow) {
+  width: 8px;
+  height: 8px;
+  margin: 4px;
+  cursor: pointer;
+
+  mod(direction left) {
+    float: left;
+    background: url(calendar__arrow_direction_left.svg);
+  }
+
+  mod(direction right) {
+    float: right;
+    background: url(calendar__arrow_direction_right.svg);
+  }
+
+  mod(disabled) {
+    opacity: 0.2;
+    cursor: default;
+  }
+}
+
+block(ua).mod(svg no) block(calendar).elem(arrow).mod(direction left) {
+  background-image: url(calendar__arrow_direction_left.png);
+}
+
+block(ua).mod(svg no) block(calendar).elem(arrow).mod(direction right) {
+  background-image: url(calendar__arrow_direction_right.png);
+}

@@ -1,0 +1,16 @@
+@media all and (min-width: 0px) {
+  block(calendar).mod(theme nevatrip) {
+
+    /* :before — border */
+    elem(day).mod(state current):before {
+      border: 1px solid rgba(0, 0, 0, .2);
+      border-radius: 3px;
+    }
+
+    /* :after — background */
+    elem(day).mod(state current):after {
+      background: #ffeca6;
+    }
+  }
+
+}
