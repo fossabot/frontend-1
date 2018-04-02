@@ -4,7 +4,7 @@
       mods: {
         type: [ 'input', 'checkbox', 'radio-group', 'select', 'checkbox-group' ],
         required: true,
-        message: 'text',
+        message: ['text', 'popup'],
       },
     },
     {

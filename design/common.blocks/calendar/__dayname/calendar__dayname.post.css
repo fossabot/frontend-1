@@ -1,0 +1,12 @@
+block(calendar).elem(dayname) {
+    font-weight: normal;
+    line-height: 16px;
+
+    cursor: default;
+    text-align: center;
+
+    mod(type weekend) {
+      color: #d00;
+    }
+}
+

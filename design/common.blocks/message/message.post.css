@@ -1,0 +1,13 @@
+block(message) {
+  .mod(type text) {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: "PT Mono";
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  .mod(invalid) {
+    color: #f3203b;
+  }
+}
