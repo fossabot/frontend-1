@@ -27,14 +27,6 @@ block( 'root' ).replace()( ( node, ctx ) => {
         elem: 'css',
         url: '/assets/css/' + bundle + '/' + bundle + '.min.css',
       },
-      // {
-      //   elem: 'css',
-      //   url: '/assets/css/font-awesome.min.css',
-      // },
-      {
-        elem: 'css',
-        url: '/assets/css/bootstrap.css',
-      },
     ],
     scripts: {
       elem: 'js',
