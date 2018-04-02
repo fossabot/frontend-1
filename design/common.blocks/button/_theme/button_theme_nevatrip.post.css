@@ -1,36 +1,23 @@
 block(button).mod(theme nevatrip) {
-  color: #fff;
-  background-color: #111;
+  color: #000;
+  background-color: #f5d400;
 
-  .mod(checked) {
+  mod(checked) {
     background-color: #eeeef2;
   }
 
-  .mod(hovered) {
-    color: #fff;
+  mod(hovered) {
+    color: #000;
     background-color: #f3203b;
   }
 
-  .mod(focused) {
-    /*color: #fff;*/
-    /*background-color: #bebec1;*/
+  mod(focused) {
+    color: #222;
+    background-color: #dcbe00;
   }
 
-  .mod(pressed) {
-    color: #fff;
+  mod(pressed) {
+    color: #000;
     background-color: #ce1b32;
-  }
-
-  .mod(show-more) {
-    color: #23232c;
-    background-color: #eeeef2;
-
-    &.mod(hovered) {
-      background-color: #d5d5d9;
-    }
-
-    &.mod(pressed) {
-      background-color: #bebec1;
-    }
   }
 }

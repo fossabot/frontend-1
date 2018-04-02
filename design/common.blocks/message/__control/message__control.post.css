@@ -1,0 +1,5 @@
+block(message).elem(control) {
+  max-width: 300px;
+  padding: 5px;
+  background-color: #eee;
+}

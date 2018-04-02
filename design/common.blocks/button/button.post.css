@@ -48,7 +48,7 @@ block(button) {
     (14px, 14px, 14px, 16px, 16px, 18px),
     (20px, 20px, 20px, 20px, 20px, 24px),
     ( 2px,  4px,  6px, 10px, 14px, 16px),
-    (46px, 12px, 46px, 32px, 32px, 40px) {
+    (.75em, .75em, .75em, .75em, .75em, .75em) {
     .mod(size $size) {
       font-size: $fontSize;
       line-height: $lineHeight;
