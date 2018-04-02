@@ -461,7 +461,6 @@ block( 'page' )(
                     transport: {
                       read: {
                         url: "https://nevatrip.dev.compaero.ru/rest/tour/${ node.api.result.tour.object.id }/trip/getlist",
-                        // url: "https://9836511c-0527-4059-ac18-7966ba3f6793.mock.pstmn.io/fake/tour/${ node.api.result.tour.object.id }/trip/getlist",
                         dataType: "json"
                       },
                       update: {
