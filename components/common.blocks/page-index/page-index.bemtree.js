@@ -66,7 +66,6 @@ block( 'page-index' ).replace()( ( node ) => {
               cls: 'container',
               items: tours.map( tourId => {
                 const tour = node.api.entities.tour[ tourId ];
-                console.log( tour.tv_e_points );
                 return {
                   html: `
                     <div class="row">
