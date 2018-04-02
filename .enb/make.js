@@ -73,16 +73,43 @@ module.exports = ( config ) => {
         '?.' + platform + '.{lang}.bemtree.js',
         '?.' + platform + '.{lang}.bemhtml.js'
       ]);
-    } );
+    });
     
     config.node( 'dist/' + platform, function( nodeConfig ) {
       nodeConfig.addTechs([
         [techs.bem.levels, { levels: levels }],
-        [techs.bem.levelsToBemdecl ],
+        [techs.bem.levelsToBemdecl, { target: '.tmp.bemdecl.js' } ],
 
         // essential
-        [techs.bem.deps, { target: '.?.deps.js' } ],
-        [techs.bem.files, { depsFile: '.?.deps.js' } ],
+        [techs.bem.deps, { bemdeclFile: '.tmp.bemdecl.js', target: '.tmp.deps.js' } ],
+        [techs.fileWrite, {
+          target: '.tmp.i-bem-dom-init-auto.deps.js',
+          content: 'module.exports = ' + JSON.stringify({
+            deps: [
+              {
+                block: 'i-bem-dom',
+                elem: 'init',
+                mod: 'auto',
+                val: true
+              },
+              {
+                block: 'i-bem-dom',
+                elem: 'init',
+                mod: 'auto'
+              }
+            ]
+          })
+        }],
+        [techs.bem.subtractDeps, {
+          from: '.tmp.deps.js',
+          target: '.tmp.no-autoinit.deps.js',
+          what: '.tmp.i-bem-dom-init-auto.deps.js' }],
+        [techs.bem.files, { depsFile: '.tmp.deps.js' } ],
+        [techs.bem.files, {
+          depsFile: '.tmp.no-autoinit.deps.js',
+          filesTarget: '.tmp.no-autoinit-files.files',
+          dirsTarget: '.tmp.no-autoinit-files.dirs'
+        }],
 
         // css
         [techs.postcss, {
@@ -90,40 +117,23 @@ module.exports = ( config ) => {
           oneOfSourceSuffixes: ['post.css', 'css'],
           plugins: techs.postcssPlugins
         }],
+        [techs.borschik, { minify: !__DEV__, freeze: true,  source: '?.css', target: '?.min.css' }],
+        [techs.fileCopy, { source: '?.min.css', target: '../../static/assets/css/' + platform + '/?.min.css' }],
 
-        // i18n
-        [techs.keysets, { lang: '{lang}' }],
+        // build core of i18n
+        [techs.keysets, {
+          target: '.tmp.keysets.{lang}.js',
+          lang: '{lang}'
+        }],
         [techs.i18n, {
-          exports: { ym: true, commonJS: true },
-          lang: '{lang}'
-        }],
-
-        // bemtree
-        [techs.bemtreeI18N, {
-          sourceSuffixes: ['bemtree', 'bemtree.js'],
-          target: '?.' + platform + '.{lang}.bemtree.js',
-          lang: '{lang}'
-        }],
-
-        // templates
-        [techs.bemhtml, {
-          sourceSuffixes: ['bemhtml', 'bemhtml.js'],
-          target: '?.' + platform + '.bemhtml.js',
-          forceBaseTemplates: true,
-          engineOptions: {
-            elemJsInstances: true,
-            runtimeLint: true,
-            requires: {
-              moment: {
-                globals: 'moment',
-                commonJS: 'moment'
-              },
-              moment_ru: {
-                globals: 'moment/locale/ru',
-                commonJS: 'moment/locale/ru'
-              }
-            }
+          target: '.tmp.lang.{lang}.js',
+          keysetsFile: '.tmp.keysets.{lang}.js',
+          exports: {
+            ym: true,
+            commonJS: true,
+            globals: true
           },
+          lang: '{lang}'
         }],
 
         // client templates
@@ -146,51 +156,36 @@ module.exports = ( config ) => {
           filesTarget: '?.tmpl.files',
           sourceSuffixes: ['bemhtml', 'bemhtml.js'],
           engineOptions: {
-            elemJsInstances: true,
-            requires: {
-              moment: {
-                globals: 'moment',
-                commonJS: 'moment'
-              },
-              moment_ru: {
-                globals: 'moment/locale/ru',
-                commonJS: 'moment/locale/ru'
-              }
-            }
+            elemJsInstances: true
           },
         }],
-
+        
         // js
         [techs.browserJs, {
           target: '.?.browser.js',
         }],
         [techs.fileMerge, {
           target: '.?.pre.es6.{lang}.js',
-          sources: ['?.lang.{lang}.js', '.?.browser.bemhtml.js', '.?.browser.js'],
+          sources: ['.tmp.lang.{lang}.js', '.?.browser.bemhtml.js', '.?.browser.js'],
           lang: '{lang}'
         }],
-
         __DEV__
           ? [techs.fileCopy, { target: '?.pre.{lang}.js', source: '.?.pre.es6.{lang}.js' }]
           : [techs.babel, { target: '?.pre.{lang}.js', sourceTarget: '.?.pre.es6.{lang}.js', babelOptions: { presets: [ [ "env", { "targets": { "browsers": ["last 2 versions", "safari >= 7"] } } ] ] } }],
-
         [techs.prependYm, {
           source: '?.pre.{lang}.js',
           target: '?.{lang}.js'
         }],
-
         [techs.borschik, { minify: !__DEV__, freeze: false, source: '?.{lang}.js', target: '?.{lang}.min.js' }],
-        [techs.borschik, { minify: !__DEV__, freeze: true,  source: '?.css', target: '?.min.css' }],
-        [techs.borschik, { minify: !__DEV__, freeze: false, source: '?.bemhtml.js', target: '?.bemhtml.min.js' }],
-
         [techs.fileCopy, { source: '?.{lang}.min.js', target: '../../static/assets/js/' + platform + '/?.{lang}.min.js' }],
-        [techs.fileCopy, { source: '?.min.css', target: '../../static/assets/css/' + platform + '/?.min.css' }]
+
       ]);
 
       nodeConfig.addTargets([
         '../../static/assets/css/' + platform + '/?.min.css',
         '../../static/assets/js/' + platform + '/?.{lang}.min.js'
       ]);
+
     } );
 
   } );

@@ -2,6 +2,7 @@ module.exports = {
   fileProvider: require('enb/techs/file-provider'),
   fileMerge: require('enb/techs/file-merge'),
   fileCopy: require('enb/techs/file-copy'),
+  fileWrite : require('enb/techs/write-file'),
   borschik: require('enb-borschik/techs/borschik'),
   postcss: require('enb-postcss/techs/enb-postcss'),
   postcssPlugins: [
@@ -21,6 +22,7 @@ module.exports = {
   babel: require('enb-babelify/techs/babel-browser-js'),
   prependYm: require('enb-modules/techs/prepend-modules'),
   bemtreeI18N: require('enb-bemxjst-i18n/techs/bemtree-i18n'),
+  bemhtmlI18N: require('enb-bemxjst-i18n/techs/bemhtml-i18n'),
   bemhtml: require('enb-bemxjst/techs/bemhtml'),
   keysets: require('enb-bem-i18n/techs/keysets'),
   i18n: require('enb-bem-i18n/techs/i18n'),
