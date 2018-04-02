@@ -3,7 +3,9 @@
     {
       block: 'form',
       mods: {
-        view: 'cart'
+        view: 'cart',
+        'has-validation': true,
+        message: ['popup', 'text'],
       }
     }
   ]

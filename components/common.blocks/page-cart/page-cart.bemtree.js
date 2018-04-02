@@ -25,10 +25,11 @@ block( 'page-cart' ).replace()( () => {
           mods: {
             view: 'cart',
             'has-validation': true,
-            message: 'text',
+            message: 'popup',
           },
-          action: 'https://nevatrip.ru/payment/go',
-          method: 'post'
+          directions: ['right-top'],
+          action: '/',
+          method: 'get'
         }
       ]
     }
