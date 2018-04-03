@@ -580,6 +580,7 @@ block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
                 },
                 {
                     block: 'radio-group',
+                    mods: { type: 'block' },
                     val: 1,
                     options: [
                       {

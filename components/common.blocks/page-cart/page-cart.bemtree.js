@@ -1,8 +1,3 @@
-block( 'page' ).def()( ( node, ctx ) => {
-  ctx.styles = [ { elem: 'css', url: '/assets/css/nevatrip-desktop/nevatrip-desktop.min.css' } ];
-  return applyNext();
-} )
-
 block( 'page-cart' ).replace()( () => {
   return [
     // {
@@ -14,6 +9,7 @@ block( 'page-cart' ).replace()( () => {
     },
     {
       elem: 'content',
+      elemMods: { width: 'tiny' },
       content: [
         {
           block: 'heading',
