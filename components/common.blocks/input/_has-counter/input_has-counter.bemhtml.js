@@ -1,4 +1,4 @@
-block('input').mod('has-counter', true)(
+block( 'input' ).mod( 'has-counter', true )(
   elem( 'box' ).content()( ( node ) => {
     return [
       {
