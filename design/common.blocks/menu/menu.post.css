@@ -32,7 +32,7 @@ block(menu) {
 
     .mod(hovered) {
       cursor: pointer;
-      background-color: #eee;
+      background-color: #ccc;
     }
 
     .mod(type link) {

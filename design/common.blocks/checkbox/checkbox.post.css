@@ -1,0 +1,7 @@
+block(checkbox) {
+  display: flex;
+
+  elem(text) {
+    margin-left: 5px;
+  }
+}

@@ -1,6 +1,6 @@
 block(button).mod(theme nevatrip) {
-  color: #000;
-  background-color: #f5d400;
+  color: #8a7f7f;
+  background-color: #edeceb;
 
   mod(checked) {
     background-color: #eeeef2;

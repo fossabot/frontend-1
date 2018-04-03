@@ -20,7 +20,7 @@ block(select) {
     background-color: #e0e0e9;
     box-sizing: border-box;
     padding: .5em;
-    background-image: svg-load('../icon/_symbol/icon_symbol_times.svg', fill: #000);
+    background-image: svg-load('../icon/_symbol/icon_symbol_times.svg', fill: #ccc);
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-origin: content-box;
@@ -69,7 +69,7 @@ block(select) {
   }
 
   block(button) {
-    box-shadow: inset 0 0 0 1px;
+    box-shadow: inset 0 0 0 1px #ccc;
 
     .elem(text) {
       padding-left: 12px;
@@ -90,7 +90,7 @@ block(select) {
 
   @each $size, $fontSize in
     (  xs,    s,    m,    l,   xl,  xxl),
-    (14px, 14px, 14px, 16px, 16px, 18px) {
+    (14px, 14px, 15px, 16px, 16px, 18px) {
     .mod(size $size) {
       font-size: $fontSize;
     }
@@ -105,7 +105,7 @@ block(select) {
 
     .elem(tick) {
       transform: rotate(-180deg);
-      background-image: svg-load('../icon/_symbol/icon_symbol_chevron-down.svg', fill="#f3203b");
+      background-image: svg-load('../icon/_symbol/icon_symbol_chevron-down.svg', fill="#ccc");
     }
   }
 

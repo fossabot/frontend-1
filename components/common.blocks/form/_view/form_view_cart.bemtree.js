@@ -92,6 +92,7 @@ block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
                     ]
                   },
                 },
+/*
                 {
                   block: 'fieldset',
                   content: {
@@ -146,6 +147,8 @@ block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
                     ]
                   },
                 },
+*/
+/*
                 {
                   block: 'fieldset',
                   content: {
@@ -187,6 +190,8 @@ block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
                     ]
                   },
                 },
+*/
+/*
                 {
                   block: 'fieldset',
                   content: [
@@ -317,6 +322,7 @@ block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
                     }
                   ]
                 },
+*/
                 {
                   block: 'fieldset',
                   legend: 'Билеты',
@@ -325,6 +331,7 @@ block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
                       block: 'form-field',
                       mods: {
                         type: 'input',
+                        inline: true,
                       },
                       id: 'adult',
                       name: 'ticket[adult]',
@@ -334,17 +341,11 @@ block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
                           content: 'Взрослый'
                         },
                         {
-                          block: 'button',
-                          text: '-'
-                        },
-                        {
                           block: 'input',
+                          mods: { 'has-counter': true },
+                          maxLength: 2,
                           val: 1,
                           placeholder: 0
-                        },
-                        {
-                          block: 'button',
-                          text: '+'
                         },
                       ]
                     },
@@ -352,6 +353,7 @@ block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
                       block: 'form-field',
                       mods: {
                         type: 'input',
+                        inline: true,
                       },
                       id: 'child',
                       name: 'ticket[child]',
@@ -361,16 +363,10 @@ block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
                           content: 'Детский'
                         },
                         {
-                          block: 'button',
-                          text: '-'
-                        },
-                        {
                           block: 'input',
+                          mods: { 'has-counter': true },
+                          maxLength: 2,
                           placeholder: 0
-                        },
-                        {
-                          block: 'button',
-                          text: '+'
                         },
                       ]
                     },
@@ -378,6 +374,7 @@ block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
                       block: 'form-field',
                       mods: {
                         type: 'input',
+                        inline: true,
                       },
                       id: 'preferential',
                       name: 'ticket[preferential]',
@@ -387,21 +384,16 @@ block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
                           content: 'Льготовый'
                         },
                         {
-                          block: 'button',
-                          text: '-'
-                        },
-                        {
                           block: 'input',
+                          mods: { 'has-counter': true },
+                          maxLength: 2,
                           placeholder: 0
-                        },
-                        {
-                          block: 'button',
-                          text: '+'
                         },
                       ]
                     },
                   ]
                 },
+/*
                 {
                   block: 'fieldset',
                   legend: 'Выбор мест',
@@ -478,6 +470,7 @@ block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
                     ]
                   }
                 }
+*/
               ]
             };
           } )
@@ -693,47 +686,15 @@ block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
               block: 'button',
               mods: {
                 type: 'submit',
-                size: 'xl'
+                view: 'action',
+                size: 'xl',
               },
+              mix: { block: node.block, elem: 'submit' },
               text: 'Перейти к оплате'
             }
           ]
         }
       ]
     },
-    {
-      elem: 'footer',
-      content: [
-        {
-          block: 'paragraph',
-          content: 'Оплата билетов осуществляется через сервис Яндекс.Касса. Это современный и абсолютно безопасный метод. Контактные данные конфиденциальны и используются только для связи по данной прогулке.'
-        },
-        {
-          block: 'paragraph',
-          content: 'Вы можете осуществить покупку без комиссии любым удобным вам способом внесения платежа. Обратите внимание, что Выбор оплаты наличными не бронирует для вас места, они будут забронированы только после осуществления оплаты. При оплате наличными через Связной, Евросеть и Сбербанк комиссия 0%.'
-        },
-        {
-          block: 'paragraph',
-          content: [
-            'Осуществление оплаты означает Ваше согласие ',
-            {
-              block: 'link',
-              url: '/oferta',
-              target: '_blank',
-              content: 'с правилами покупки билета'
-            },
-            '. Возврат билетов по инициативе клиентов более, чем за 24 часа - комиссия платежной системы 5% от суммы заказа и 25 рублей за банковский перевод при возврате, менее 24 часов - 50% от стоимости билетов и 25 рублей, менее 12 часов - 100%.'
-          ]
-        },
-        {
-          block: 'paragraph',
-          content: 'После оплаты нажмите "Вернуться в магазин". Вы будете перенаправлены на страницу с вашим номером билета. Пожалуйста, запишите его. Ваш электронный билет также будет отправлен вам на электронную почту, которую вы укажете на данной странице. По этому билету вы сможете осуществить посадку на теплоход.'
-        },
-        {
-          block: 'paragraph',
-          content: 'Если у вас возникли вопросы по покупке билета, пожалуйста, позвоните в нашу круглосуточную службу поддержки и мы обязательно поможем Вам.'
-        }
-      ]
-    }
   ]
 } );

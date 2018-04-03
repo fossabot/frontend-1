@@ -1,0 +1,24 @@
+block(input).mod(has-counter) {
+  elem(box) {
+    display: flex;
+  }
+
+  elem(counter) {
+    margin: 1px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  elem(control) + elem(counter) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  elem(control) {
+    text-align: center;
+  }
+}

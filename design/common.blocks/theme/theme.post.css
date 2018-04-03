@@ -1,0 +1,10 @@
+::root {
+  --control-border-width: 1px;
+  --control-border-color: #ccc;
+  --control-border-radius: 6px;
+
+  --control-line-height: 1.5em;
+
+  --control-padding-vertical: .35em;
+  --control-padding-horizontal: .75em;
+}

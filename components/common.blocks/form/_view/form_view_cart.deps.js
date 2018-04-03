@@ -5,14 +5,16 @@
         type: [ 'input', 'checkbox', 'radio-group', 'select', 'checkbox-group' ],
         required: true,
         message: ['text', 'popup'],
+        inline: true,
       },
     },
     {
       block: 'input',
       mods: {
         'has-calendar': true,
+        'has-counter': true,
         width: 'available',
-        type: 'date'
+        type: 'date',
       },
     },
     {
@@ -42,6 +44,10 @@
     {
       block : 'checkbox-group',
       mods: { type: 'button' },
+    },
+    {
+      block: 'button',
+      mods: { view: 'action' },
     },
     'fieldset',
     'label',

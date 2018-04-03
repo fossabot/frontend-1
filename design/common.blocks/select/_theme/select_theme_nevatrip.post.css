@@ -2,7 +2,7 @@ block(select).mod(theme nevatrip) {
   color: #23232C;
 
   .elem(tick) {
-    background-image: svg-load('../../icon/_symbol/icon_symbol_chevron-down.svg', fill="#000");
+    background-image: svg-load('../../icon/_symbol/icon_symbol_chevron-down.svg', fill="#ccc");
   }
 
   .elem(button) {

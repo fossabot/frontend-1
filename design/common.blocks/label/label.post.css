@@ -1,3 +1,6 @@
 block(label) {
   display: block;
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 5px;
 }
