@@ -1,0 +1,5 @@
+block(form-field).mod(inline) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

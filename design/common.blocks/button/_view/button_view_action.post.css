@@ -1,0 +1,5 @@
+block(button).mod(view action) {
+  color: #312d2d;
+  background-color: #f5d400;
+  border-color: #dcbe00;
+}

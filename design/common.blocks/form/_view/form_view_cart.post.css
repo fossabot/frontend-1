@@ -8,4 +8,10 @@ block(form).mod(view cart) {
     lost-column: 1/2;
   }
 
+  elem(sum) {
+    font-size: 23px;
+    margin-top: 10.5px;
+    margin-bottom: 10.5px;
+    font-weight: bold;
+  }
 }
