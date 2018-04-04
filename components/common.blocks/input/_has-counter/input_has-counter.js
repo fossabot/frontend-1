@@ -5,11 +5,10 @@ modules.define( 'input', ['button'], function( provide, Button, Input ) {
       js: {
         inited: function() {
           this.__base.apply( this, arguments );
-          let _this = this;
-          this._domEvents( 'counter' ).on( 'click', function( event ) {
-            const inputVal = parseInt( _this.getVal() ) || 0;
-            const buttonVal = parseInt( event.bemTarget.findMixedBlock( Button ).params.val );
-            _this.setVal( inputVal + buttonVal ); 
+          this._domEvents( 'counter' ).on( 'click', event => {
+            const inputVal = parseInt( this.getVal() ) || 0;
+            const buttonVal = parseInt( event.bemTarget.params.val );
+            this.setVal( inputVal + buttonVal ); 
           } )
         }
       }
