@@ -6,8 +6,8 @@ block( 'input' ).mod( 'has-counter', true )(
         mix: {
           block: node.block,
           elem: 'counter',
+          js: { val: '-1' },
         },
-        js: { val: '-1' },
         title: 'Уменьшить количество',
         text: '-'
       },
@@ -17,8 +17,8 @@ block( 'input' ).mod( 'has-counter', true )(
         mix: {
           block: node.block,
           elem: 'counter',
+          js: { val: '1' },
         },
-        js: { val: '1' },
         title: 'Увеличить количество',
         text: '+'
       },

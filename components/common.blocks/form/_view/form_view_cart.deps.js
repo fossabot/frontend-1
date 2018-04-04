@@ -2,7 +2,7 @@
   shouldDeps: [{
       block: 'form-field',
       mods: {
-        type: [ 'input', 'checkbox', 'radio-group', 'select', 'checkbox-group' ],
+        type: [ 'input', 'checkbox', 'radio-group', 'select', 'checkbox-group', 'hidden' ],
         required: true,
         message: ['text', 'popup'],
         inline: true,
@@ -14,7 +14,6 @@
         'has-calendar': true,
         'has-counter': true,
         width: 'available',
-        type: 'date',
       },
     },
     {

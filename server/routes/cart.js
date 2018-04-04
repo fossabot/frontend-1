@@ -5,6 +5,7 @@ const getStructure = require( '../queries/getStructure' );
 const getSetting = require( '../queries/getSetting' );
 const getCart = require( '../queries/getCart' );
 const postCart = require( '../queries/postCart' );
+const postOrder = require( '../queries/postOrder' );
 const getTour = require( '../queries/getTour' );
 
 async function asyncForEach( array, callback ) {
@@ -14,8 +15,17 @@ async function asyncForEach( array, callback ) {
 }
 
 const data = async ( context, params ) => {
-  if ( context.body ) {
+
+  if ( context.body && context.body.action === 'cart/add' ) {
     await postCart( { product: context.body.id }, context.session );
+  }
+
+  if ( context.body && context.body.action === 'order/add' ) {
+    const order = await postOrder( context.body, context.session );
+    if ( order.success ) {
+      context.session.__order = order;
+      return { redirect: '/thanks' }
+    }
   }
 
   let cart = await getCart( context.session );
@@ -45,9 +55,15 @@ const data = async ( context, params ) => {
 };
 
 const action = async ( context, params ) => {
+  const response = await data( context, params );
+
+  if ( response.redirect ) {
+    return response;
+  }
+
   return {
     page: 'cart',
-    api: await data( context, params ),
+    api: response,
     lang: params.lang,
   };
 };

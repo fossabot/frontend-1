@@ -4,8 +4,8 @@ block(page).elem(content) {
   position: relative;
   margin-bottom: auto;
   box-sizing: border-box;
-  padding-left: 56px;
-  padding-right: 56px;
+  padding-left: 16px;
+  padding-right: 16px;
 
   @media (max-width: 1400px) {
     lost-center: 1288px;
