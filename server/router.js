@@ -11,16 +11,11 @@ const router = new UniversalRouter(
         name: 'index',
         load: async () => await require( './routes/home' ),
       },
-
-      {
-        path: '/test',
-        name: 'test',
-        load: async () => await require( './routes/test' ),
-      },
       {
         // Письмо успешно отправлено, заказ оплачен и т. д.
         path: '/thanks',
         name: 'thanks',
+        load: async () => await require( './routes/thanks' ),
       },
       {
         // Покупка билета

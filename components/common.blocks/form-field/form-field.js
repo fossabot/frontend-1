@@ -10,7 +10,7 @@ provide( bemDom.declBlock( FormField, /** @lends form-field.prototype */{
 
   onSetMod : {
     'focused' : {
-      'true' : function() {
+      true : function() {
         this.__base.apply( this, arguments );
 
         this.hasMod( 'invalid' ) && this.getMessage().show();
