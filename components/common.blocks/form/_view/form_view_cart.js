@@ -1,4 +1,4 @@
-modules.define( 'form', function( provide, Form ) {
+modules.define( 'form', [ 'jquery' ], function( provide, $, Form ) {
 
   provide( Form.declMod( { modName: 'view', modVal: 'cart' }, {
     onSetMod: {
@@ -12,7 +12,7 @@ modules.define( 'form', function( provide, Form ) {
     },
 
     _onFormSuccess: function() {
-      console.log( this.getVal() );
+      this.domElem[ 0 ].submit();
     },
 
     _onFormError: function( e, data ) {
