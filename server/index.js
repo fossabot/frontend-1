@@ -127,7 +127,6 @@ app.all( '*', async ( req, res, next ) => {
       console.timeEnd( 'Render' );
       return html;
     } else {
-      console.log( route );
       return res.json( route );
     }
   } catch ( error ) {
