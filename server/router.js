@@ -59,6 +59,56 @@ const router = new UniversalRouter(
         ]
       },
       {
+        path: '/api',
+        children: [
+          {
+            path: '/tour/:service/:id',
+            children: [
+              {
+                path: '',
+                name: 'api',
+                load: async () => await require( './api' ),
+              },
+              {
+                path: '/date',
+                name: 'apiTourDate',
+                load: async () => await require( './api/date' ),
+              },
+              {
+                path: '/direction',
+                name: 'apiTourDirection',
+                load: async () => await require( './api/direction' ),
+              },
+              {
+                path: '/pier',
+                name: 'apiTourPier',
+                load: async () => await require( './api/pier' ),
+              },
+              {
+                path: '/time',
+                name: 'apiTourTime',
+                load: async () => await require( './api/time' ),
+              },
+              {
+                path: '/tickets',
+                name: 'apiTourTicket',
+                load: async () => await require( './api/ticket' ),
+              },
+              {
+                path: '/seat',
+                name: 'apiTourSeat',
+                load: async () => await require( './api/seat' ),
+              },
+              {
+                path: '/order',
+                name: 'apiTourOrder',
+                load: async () => await require( './api/order' ),
+              },
+            ]
+          }
+        ]
+      },
+      {
         // Разделы
         path: '/:category',
         children: [

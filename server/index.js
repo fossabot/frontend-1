@@ -126,6 +126,8 @@ app.all( '*', async ( req, res, next ) => {
       const html = await render( req, res, route );
       console.timeEnd( 'Render' );
       return html;
+    } else {
+      return res.json( route );
     }
   } catch ( error ) {
     next( error );

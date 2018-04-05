@@ -19,7 +19,8 @@
     "bem-components": "^6.0.1",
     "bem-core": "^4.2.0",
     "bem-forms": "github:realetive/bem-forms",
-    "moment": "^2.21.0"
+    "moment": "^2.21.0",
+    "rest": "^2.0.0"
   },
   "devDependencies": {
     "axios": "^0.17.1",
