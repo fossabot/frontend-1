@@ -2,8 +2,8 @@
 
 const Request = require( './_request' );
 
-const getTrip = async ( { id, tour, page = 1, perPage = 0, lang = 'ru' } = {} ) => {
-  const url = `/tour/${ tour }/trip/getlist`;
+const getTrip = async ( { id, tour, page = 1, perPage = 0, lang = 'ru', once = false } = {} ) => {
+  const url = `/tour/${ tour }/trip${ once ? '/once' : '' }/getlist`;
   const params = {
     id: id,
     tour: tour,

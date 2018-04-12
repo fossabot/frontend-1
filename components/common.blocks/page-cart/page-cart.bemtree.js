@@ -10,12 +10,6 @@ block( 'page-cart' ).replace()( ( node ) => {
     return num < 10 ? '0' + num : num;
   }
 
-  const currentDate = new Date();
-  const day = leadZero( currentDate.getDate() );
-  const month = leadZero( currentDate.getMonth() + 1 );
-  const year = currentDate.getFullYear();
-  const today = `${ day }.${ month }.${ year }`;
-
   return [
     {
       block: 'divider'
@@ -35,7 +29,7 @@ block( 'page-cart' ).replace()( ( node ) => {
             {
               elem: 'content',
               content: Object.keys( cart ).map( key => {
-                const tour = cart[key].tour;
+                const tour = cart[ key ].tour;
 
                 if ( !tour ) {
                   return 'Error with tour parsing';
@@ -59,7 +53,15 @@ block( 'page-cart' ).replace()( ( node ) => {
                     },
                     {
                       elem: 'date',
-                      content: today,
+                      availableDate: tour.trip.object.length && tour.trip.object.map( trip => {
+                        let date = new Date();
+                        date.setTime( trip.time * 1000 );
+                        const day = leadZero( date.getDate() );
+                        const month = leadZero( date.getMonth() + 1 );
+                        const year = date.getFullYear();
+                        
+                        return `${ day }.${ month }.${ year }`;
+                      } ),
                     },
                     {
                       elem: 'direction',
