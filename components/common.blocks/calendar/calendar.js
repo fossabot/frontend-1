@@ -29,6 +29,8 @@ modules.define( 'calendar', ['i-bem-dom', 'BEMHTML', 'jquery'], function( provid
           this._month = today;
           this._month.setDate( 1 );
 
+          this._availableDate = params.availableDate;
+
           this.setLimits( params.earlierLimit, params.laterLimit );
 
           this.setVal( this._isValidDate( params.val ) ? params.val : today );
@@ -197,11 +199,15 @@ modules.define( 'calendar', ['i-bem-dom', 'BEMHTML', 'jquery'], function( provid
 
     _isValidDate: function( date ) {
       return !( this._earlierLimit && date < this._earlierLimit ||
-        this._laterLimit && date > this._laterLimit );
+        this._laterLimit && date > this._laterLimit ||
+        date && this._availableDate.indexOf( this._formatDate( date ) ) === -1
+      );
     },
+
     _isWeekend: function( dayNumber ) {
       return dayNumber > 4;
     },
+
     _build: function() {
       var rows = [];
       rows.push( this._buildShortWeekdays() );
@@ -251,6 +257,7 @@ modules.define( 'calendar', ['i-bem-dom', 'BEMHTML', 'jquery'], function( provid
 
       return weeks;
     },
+
     _processWeek: function( dateIterator, week, weeks, lastDay, countDays ) {
       var weekDay = ( dateIterator.getDay() + lastDay ) % countDays; // Получаем 0 - пн, 1 - вт, и т.д.
 
@@ -262,6 +269,7 @@ modules.define( 'calendar', ['i-bem-dom', 'BEMHTML', 'jquery'], function( provid
       }
       return { week: week, weekDay: weekDay };
     },
+
     _buildMonth: function( month ) {
       var rows = [];
       this._calcWeeks( month ).forEach( function( week ) {
@@ -307,6 +315,7 @@ modules.define( 'calendar', ['i-bem-dom', 'BEMHTML', 'jquery'], function( provid
 
       return rows;
     },
+
     _buildShortWeekdays: function() {
       var row = [];
 

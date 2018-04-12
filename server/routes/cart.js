@@ -7,6 +7,7 @@ const getCart = require( '../queries/getCart' );
 const postCart = require( '../queries/postCart' );
 const postOrder = require( '../queries/postOrder' );
 const getTour = require( '../queries/getTour' );
+const getTrip = require( '../queries/getTrip' );
 
 async function asyncForEach( array, callback ) {
   for ( let index = 0; index < array.length; index++ ) {
@@ -32,8 +33,12 @@ const data = async ( context, params ) => {
  
   await asyncForEach( Object.keys( cart.object.cart ), async ( key ) => {
     let item = cart.object.cart[ key ];
-    const tour = await getTour( { id: item.id }, context.session );
-    item.tour = tour.object;
+    const response = await Promise.all( [
+      getTour( { id: item.id }, context.session ),
+      getTrip( { tour: item.id, once: true }, context.session )
+    ] );
+    item.tour = response[ 0 ];
+    item.tour.trip = response[ 1 ];
   } )
 
   const response = await Promise.all( [

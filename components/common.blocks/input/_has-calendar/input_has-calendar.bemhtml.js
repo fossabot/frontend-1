@@ -5,6 +5,7 @@ block( 'input' ).mod( 'has-calendar', true )(
     return applyNext( { _calendar: {
       earlierLimit: ctx.earlierLimit,
       laterLimit: ctx.laterLimit,
+      availableDate: ctx.availableDate,
       weekdays: ctx.weekdays,
       months: ctx.months,
       val: ctx.val
