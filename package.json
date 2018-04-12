@@ -56,7 +56,6 @@
     "enb-js": "^1.1.1",
     "enb-modules": "github:Realetive/enb-modules",
     "enb-postcss": "^2.0.0",
-    "errorhandler": "^1.5.0",
     "eslint": "^4.11.0",
     "eslint-config-pedant": "^1.0.0",
     "eslint-config-prettier": "^2.9.0",
