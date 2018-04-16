@@ -1,0 +1,22 @@
+block(list).mod(of tours) {
+
+  & > elem(item) {
+
+
+    & + elem(item) {
+      margin-top: 42px;
+      position: relative;
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 50%;
+        left: 25%;
+        height: 1px;
+        top: -21px;
+        background-color: #edeceb;
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+block(footer) {
+  elem(content) {
+    display: flex;
+  }
+
+  elem(award) {
+    flex: 1;
+
+    block(layout).elem(aside) {
+      margin-right: 8px; 
+    }
+  }
+
+  elem(contacts) {
+    lost-column: 1/4;
+  }
+
+  elem(footer) {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  elem(copyright) {
+    margin-right: 5px;
+  }
+
+  elem(address) {
+    margin-right: 5px;
+  }
+
+  elem(menu) {
+    box-sizing: border-box;
+  }
+
+}

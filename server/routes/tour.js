@@ -9,7 +9,7 @@ const data = async ( context, params ) => {
   const response = await Promise.all( [
     getStructure( { lang: params.lang }, context.session ),
     getSetting( { lang: params.lang }, context.session ),
-    getTour( { lang: params.lang, /*name: params.tour,*/ id: context.query.id }, context.session ),
+    getTour( { lang: params.lang, name: params.tour /*, id: context.query.id */ }, context.session ),
   ] );
   return normalize(
     {

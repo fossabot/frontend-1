@@ -1,0 +1,5 @@
+block(header).elem(menu-link) {
+  display: block;
+  padding: 5px 10px;
+  box-sizing: border-box;
+}

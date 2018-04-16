@@ -1,0 +1,52 @@
+block(tour).mod(view detail) {
+  elem(image) {
+    min-width: 100%;
+    object-fit: cover;
+    height: 600px;
+  }
+
+  elem(main) {
+    margin-top: -300px;
+    min-height: 900px;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, .8), #fff);
+  }
+
+  elem(name) {
+    font-size: 42px;
+    padding-top: 14px;
+    padding-bottom: 24px;
+    box-sizing: border-box;
+  }
+
+  elem(section) {
+    lost-center: 100%;
+    margin-bottom: 20px;
+
+    & + elem(section) {
+      margin-top: 20px;
+      border-top: 1px solid #ddd;
+    }
+  }
+
+  elem(content) {
+    lost-column: 2/3;
+  }
+
+  elem(aside) {
+    lost-column: 1/3;
+  }
+
+  elem(tickets) {
+    margin-bottom: 12px;
+  }
+
+  elem(price) {
+    font-size: 36px;
+    line-height: 1;
+    margin-bottom: 6px;
+
+    mod(type on-pier) {
+      font-size: 14px;
+    }
+  }
+}

@@ -7,7 +7,6 @@ block( 'header' ).content()( () => {
     },
     {
       elem: 'menu',
-      mix: { block: 'page', elem: 'section' },
     },
   ];
 } );

@@ -1,5 +1,5 @@
 block(page).elem(content) {
-  lost-center: 1428px;
+  lost-center: 1128px;
   width: 100%;
   position: relative;
   margin-bottom: auto;
@@ -7,6 +7,7 @@ block(page).elem(content) {
   padding-left: 16px;
   padding-right: 16px;
 
+  /*
   @media (max-width: 1400px) {
     lost-center: 1288px;
   }
@@ -14,20 +15,5 @@ block(page).elem(content) {
   @media (max-width: 1280px) {
     lost-center: 1232px;
   }
-
-  .mod(width narrow) {
-    lost-center: 982px;
-  }
-
-  .mod(width tiny) {
-    lost-center: 756px;
-  }
-
-  .mod(gap top) {
-    margin-top: 80px;
-  }
-
-  .mod(gap bottom) {
-    margin-bottom: 104px;
-  }
+  */
 }

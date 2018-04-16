@@ -1,0 +1,30 @@
+block(tour).mod(view promo) {
+  padding-top: 48px;
+  padding-bottom: 48px;
+  box-sizing: border-box;
+  min-height: 400px;
+
+  elem(content) {
+    background: rgba(255, 255, 255, 0.6);
+    width: 65%;
+    margin-left: auto;
+    padding: 10px 20px;
+    box-sizing: border-box;
+  }
+
+  elem(action) {
+    display: flex;
+  }
+
+  elem(price) {
+    font-size: 48px;
+  }
+
+  elem(cost) {
+    margin-right: 14px;
+  }
+
+  elem(buy) {
+    margin-right: 14px;
+  }
+}

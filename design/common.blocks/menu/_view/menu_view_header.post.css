@@ -1,0 +1,12 @@
+block(menu).mod(view header) {
+  display: flex;
+  justify-content: space-between;
+
+  elem(item) {
+    display: block;
+    flex: 1;
+    text-align: center;
+    color: #fff;
+    line-height: 1;
+  }
+}

@@ -1,6 +1,14 @@
 [{
-  shouldDeps: [
-    { block: 'navigation' },
-    { block: 'button', mods: { type: 'link' } }
+  mustDeps: [
+    {
+      block: 'menu',
+      mods: { view: 'header' },
+      elems: [
+        {
+          elem: 'item',
+          mods: { type: 'link' }
+        }
+      ]
+    }
   ]
 }]

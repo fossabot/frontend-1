@@ -2,7 +2,7 @@ block(menu).mod(theme nevatrip) {
   background: #eee;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-  .elem(group) {
+  elem(group) {
     border-color: rgba(0, 0, 0, 0.1);
     border-width: 1px 0;
 
@@ -11,7 +11,26 @@ block(menu).mod(theme nevatrip) {
     }
   }
 
-  .elem(item).mod(hovered) {
+  elem(item).mod(hovered) {
     background-color: #eeeef2;
+  }
+
+  mod(view header) {
+    background-color: transparent;
+
+    elem(item).mod(hovered) {
+      color: #fff;
+      background-color: #2c6590;
+    }
+  }
+
+  mod(view footer) {
+    background-color: transparent;
+
+    elem(item).mod(hovered) {
+      color: #2c6590;
+      background-color: transparent;
+    }
+
   }
 }

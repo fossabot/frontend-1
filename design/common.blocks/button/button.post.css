@@ -12,6 +12,7 @@ block(button) {
   transition      : color .2s,
                     background-color .2s;
   -webkit-tap-highlight-color : rgba(0, 0, 0, 0);
+  align-self: center;
 
   &::-moz-focus-inner {
     padding : 0;
@@ -43,10 +44,10 @@ block(button) {
     $paddingVertical,
     $paddingHorizontal in
     (   xs,     s,     m,     l,    xl,   xxl),
-    ( 14px,  14px,  15px,  16px,  16px,  18px),
-    ( 20px,  20px, 1.5em,  20px,  20px,  24px),
-    (  2px,   4px, .35em,  10px,  14px,  16px),
-    (.75em, .75em,  12px, .75em, .75em, .75em) {
+    ( 14px,  14px,  15px,  18px,  21px,  18px),
+    ( 20px,  20px, 1.5em,  20px,  32px,  24px),
+    (  2px,   4px, .35em,  10px,   9px,  16px),
+    (.75em, .75em,  12px, .75em,   1em, .75em) {
     .mod(size $size) {
       font-size: $fontSize;
       line-height: $lineHeight;
@@ -59,7 +60,6 @@ block(button) {
 
   .mod(view plain) {
     padding: 0;
-    background-color: transparent;
 
     &:before {
       content: none;

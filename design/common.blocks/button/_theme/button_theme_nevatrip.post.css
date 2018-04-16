@@ -20,4 +20,13 @@ block(button).mod(theme nevatrip) {
     color: #000;
     background-color: #ce1b32;
   }
+
+  mod(view plain) {
+    color: #25557a;
+    background-color: transparent;
+
+    .mod(hovered) {
+      text-decoration: underline;
+    }
+  }
 }

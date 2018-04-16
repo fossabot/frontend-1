@@ -1,0 +1,43 @@
+block(tour).mod(view preview) {
+  lost-center: 100%;
+
+  elem(image) {
+    lost-column: 5/12;
+    display: block;
+  }
+
+  elem(content) {
+    lost-column: 7/12;
+  }
+
+  elem(name) {
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+
+  elem(price) {
+    font-size: 36px;
+    font-weight: bold;
+    vertical-align: middle;
+    line-height: 1;
+
+    mod(type on-pier) {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1;
+      display: block;
+    }
+  }
+
+  elem(features) {
+    margin-bottom: 10px;
+  }
+
+  elem(action) {
+    display: flex;
+  }
+
+  elem(cost) {
+    margin-right: 14px;
+  }
+}

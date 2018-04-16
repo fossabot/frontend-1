@@ -10,6 +10,11 @@
       ]
     },
     { block: 'page', elem: 'section'},
-    { block: 'list' }
+    { block: 'list' },
+    'layout',
+    {
+      block: 'menu',
+      mods: { view: 'footer' },
+    }
   ]
 }]

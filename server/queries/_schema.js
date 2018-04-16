@@ -6,9 +6,11 @@ const structureFlat = new schema.Entity( 'structureFlat', {}, { idAttribute: 'al
 
 const settingsSchema = new schema.Entity( 'setting' );
 const tourSchema = new schema.Entity( 'tour' );
+const bannerSchema = new schema.Entity( 'banner', { url: tourSchema } );
 
 module.exports = {
   structureFlat: structureFlat,
   settings: settingsSchema,
   tour: tourSchema,
+  banner: bannerSchema,
 };

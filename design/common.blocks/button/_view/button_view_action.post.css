@@ -1,4 +1,5 @@
 block(button).mod(view action) {
+  border-radius: 2em;
   color: #312d2d;
   background-color: #f5d400;
   border-color: #dcbe00;

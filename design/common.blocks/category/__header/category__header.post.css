@@ -1,0 +1,7 @@
+block(category).elem(header) {
+  padding-top: 110px;
+  padding-bottom: 110px;
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: 50% 50%;
+}

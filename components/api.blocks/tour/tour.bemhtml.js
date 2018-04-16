@@ -1,7 +1,7 @@
 block( 'tour' )(
-  addJs()( ( node, ctx ) => {
+  match( node => node.mods.view === 'order' ).addJs()( ( node, { tour } ) => {
     return {
-      tour: ctx.tour
+      tour
     }
   } )
 );

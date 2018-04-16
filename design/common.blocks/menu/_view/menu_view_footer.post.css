@@ -1,0 +1,15 @@
+block(menu).mod(view footer) {
+  elem(item) {
+    display: inline-block;
+    color: #fff;
+    line-height: 1;
+    padding-left: 4px;
+    padding-right: 4px;
+    box-sizing: border-box;
+
+    mod(hovered) {
+      background-color: transparent;
+      color: blue;
+    }
+  }
+}

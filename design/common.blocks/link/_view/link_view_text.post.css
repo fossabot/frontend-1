@@ -1,0 +1,5 @@
+block(link).mod(view text) {
+  color: inherit;
+  font: inherit;
+  text-decoration: inherit;
+}

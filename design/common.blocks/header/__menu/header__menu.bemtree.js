@@ -1,58 +1,110 @@
 block( 'header' )
   .elem( 'menu' )
-  .content()( () => {
+  .content()( ( node ) => {
   return {
-    block: 'navigation',
-    mods: { view: 'header' },
-    mix: { block: 'page', elem: 'content' },
+    block: 'page',
+    elem: 'content',
     content: {
-      block: 'list',
-      mods: { type: 'unstyled' },
-      mix: { block: 'navigation', elem: 'list' },
+      block: 'menu',
+      mods: { view: 'header' },
       content: [
         {
-          heading: 'Дневные экскурсии',
-          subheading: 'по реками и каналам',
-        },
-        {
-          heading: 'Ночные прогулки',
-          subheading: 'под развод мостов',
-        },
-        {
-          heading: 'Метеор',
-          subheading: 'в Петергоф и пригороды',
-        },
-        {
-          heading: 'Аренда теплохода',
-          subheading: 'на свадьбу, корпоратив',
-        },
-      ].map( ( link ) => {
-        return {
           elem: 'item',
-          mix: { block: 'navigation', elem: 'item' },
-          content: {
-            block: 'button',
-            mods: {
-              type: 'link',
-              width: 'available',
-            },
-            mix: { block: 'navigation', elem: 'link' },
-            url: '#',
-            text: [
-              {
-                block: 'navigation',
-                elem: 'subheading',
-                content: link.heading,
-              },
-              {
-                block: 'navigation',
-                elem: 'subheading',
-                content: link.subheading,
-              },
-            ],
+          elemMods: {
+            type: 'link'
           },
-        };
-      } ),
-    },
-  };
+          mix: { block: node.block, elem: 'menu-item' },
+          content: {
+            block: 'link',
+            mix: { block: node.block, elem: 'menu-link' },
+            url: '/day',
+            content: [
+              {
+                block: node.block,
+                elem: 'menu-heading',
+                content: 'Дневные экскурсии'
+              },
+              {
+                block: node.block,
+                elem: 'menu-subheading',
+                content: 'по реками и каналам'
+              },
+            ]
+          }
+        },
+        {
+          elem: 'item',
+          elemMods: {
+            type: 'link'
+          },
+          mix: { block: node.block, elem: 'menu-item' },
+          content: {
+            block: 'link',
+            mix: { block: node.block, elem: 'menu-link' },
+            url: '/night',
+            content: [
+              {
+                block: node.block,
+                elem: 'menu-heading',
+                content: 'Ночные прогулки'
+              },
+              {
+                block: node.block,
+                elem: 'menu-subheading',
+                content: 'под развод мостов'
+              },
+            ]
+          }
+        },
+        {
+          elem: 'item',
+          elemMods: {
+            type: 'link'
+          },
+          mix: { block: node.block, elem: 'menu-item' },
+          content: {
+            block: 'link',
+            mix: { block: node.block, elem: 'menu-link' },
+            url: '/meteors',
+            content: [
+              {
+                block: node.block,
+                elem: 'menu-heading',
+                content: 'Метеор'
+              },
+              {
+                block: node.block,
+                elem: 'menu-subheading',
+                content: 'в Петергоф и пригороды'
+              },
+            ]
+          }
+        },
+        {
+          elem: 'item',
+          elemMods: {
+            type: 'link'
+          },
+          mix: { block: node.block, elem: 'menu-item' },
+          content: {
+            block: 'link',
+            mix: { block: node.block, elem: 'menu-link' },
+            url: '/arenda-teplokhoda',
+            content: [
+              {
+                block: node.block,
+                elem: 'menu-heading',
+                content: 'Аренда теплохода'
+              },
+              {
+                block: node.block,
+                elem: 'menu-subheading',
+                content: 'на свадьбу, корпоратив'
+              },
+            ]
+          }
+        },
+      ]
+    }
+  }
 } );

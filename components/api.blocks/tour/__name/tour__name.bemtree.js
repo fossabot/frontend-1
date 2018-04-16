@@ -1,10 +1,23 @@
 block( 'tour' ).elem( 'name' )(
-  match( node => node.mods.view === 'order' ).replace()( ( node, ctx ) => {
+  replace()( ( node, { content } ) => {
     return {
       block: 'heading',
       mods: { size: 'l' },
       mix: { block: node.block, elem: node.elem },
-      content: ctx.content
+      content
     }
-  } )
+  } ),
+  match( ( node, ctx ) => ctx.url ).replace()( ( node, { content, url } ) => {
+    return {
+      block: 'heading',
+      mods: { size: 'l' },
+      mix: { block: node.block, elem: node.elem },
+      content: {
+        block: 'link',
+        mods: { view: 'text' },
+        url,
+        content,
+      }
+    }
+  } ),
 )

@@ -1,4 +1,4 @@
-block( 'footer' ).content()( () => {
+block( 'footer' ).content()( node => {
   let items = [];
   // if ( node.api && node.api.result ) {
   //   items = Object.keys( node.api.result.structure.object[ 61 ].children ).map( id => {
@@ -22,64 +22,158 @@ block( 'footer' ).content()( () => {
     },
     {
       elem: 'content',
-      content: {
-        html: `
-          <div class="row">
-            <div class="col-sm-5 text-left">
-              <div class="media">
-                <div class="media-left">
-                  <img class="media-object" src="https://nevatrip.ru/assets/img/golden-light.png" width="64" alt="1-е место">
-                </div>
-                <div class="media-body">
-                  <p>Лучшая компания 2014 года всероссийской программы «Ты&nbsp;— предприниматель» в&nbsp;Санкт-Петербурге</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4 text-left">
-              <div class="media">
-                <div class="media-left">
-                  <img class="media-object" src="https://nevatrip.ru/assets/img/golden-light.png" width="64" alt="1-е место">
-                </div>
-                <div class="media-body">
-                  <p>1 место «Молодой предприниматель России 2015» в номинации «Сфера услуг»</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-3 footer__contacts text-right" style="margin-top: 0;">
-              <p itemprop="email"><a href="mailto:info@nevatrip.ru" class="footer__link" target="_blank">info@nevatrip.ru</a></p>
-              <p itemprop="telephone"><a href="tel:88129653404" class="footer__link">8 812 965-34-04</a></p>
-            </div>
-          </div>
-        `
-      }
+      content: [
+        {
+          elem: 'award',
+          mix: { block: 'layout' },
+          content: [
+            {
+              block: 'image',
+              mix: { block: 'layout', elem: 'aside' },
+              width: 64,
+              height: 64,
+              title: '1-е место',
+              url: 'https://nevatrip.ru/assets/img/golden-light.png'
+            },
+            {
+              block: 'layout',
+              elem: 'content',
+              content: {
+                html: 'Лучшая компания 2014 года всероссийской программы «Ты&nbsp;— предприниматель» в&nbsp;Санкт-Петербурге'
+              }
+            }
+          ]
+        },
+        {
+          elem: 'award',
+          mix: { block: 'layout' },
+          content: [
+            {
+              block: 'image',
+              mix: { block: 'layout', elem: 'aside' },
+              width: 64,
+              height: 64,
+              title: '1-е место',
+              url: 'https://nevatrip.ru/assets/img/golden-light.png'
+            },
+            {
+              block: 'layout',
+              elem: 'content',
+              content: {
+                html: '1 место «Молодой предприниматель России 2015» в номинации «Сфера услуг»'
+              }
+            }
+          ]
+        },
+        {
+          elem: 'contacts',
+          content: [
+            {
+              block: 'address',
+              content: [
+                {
+                  elem: 'email',
+                  content: 'info@nevatrip.ru'
+                },
+                {
+                  elem: 'phone',
+                  content: '8 812 965-34-04'
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       elem: 'footer',
-      content: {
-        elem: 'contacts',
-        content: {
-          html: `
-              <div class="container clearfix">
-                <div class="pull-right">
-                  <i class="fa fa-2x fa-inverse text-s fa-expeditedssl" title="Secure SSL"></i>
-                  <i class="fa fa-2x fa-inverse text-s fa-cc-mastercard" title="MasterCard"></i>
-                  <i class="fa fa-2x fa-inverse text-s fa-cc-visa" title="Visa"></i>
-                </div>
-                <ul class="list-inline">
-                  <li>© 2014-2017 Санкт-Петербург, ул Малая Морская 11</li>
-                  <li><a href="/#nevatrip" class="footer__link">О нас</a></li>
-                  <li><a href="/oferta" class="footer__link">Оферта</a></li>
-                  <li><a href="/sotrudnichestvo" class="footer__link">Сотрудничество</a></li>
-                  <li><a href="//vk.com/neva.trip" class="footer__link" target="_blank" rel="nofollow"><i class="fa fa-fw fa-vk"></i> Мы в ВКонтакте</a></li>
-                  <li><a href="//www.instagram.com/nevatrip.ru/" class="footer__link" target="_blank" rel="nofollow"><i class="fa fa-fw fa-instagram"></i> Instagram</a></li>
-                  <li><a href="//moskvatrip.ru" class="footer__link">Прогулки в Москве</a></li>
-                </ul>
-                <ol class="breadcrumb">
-                </ol>
-              </div>
-          `
+      content: [
+        {
+          elem: 'copyright',
+          content: '© 2014-2018'
         },
-      },
+        {
+          block: 'address',
+          mix: { block: node.block, elem: 'address' },
+          content: {
+            elem: 'address',
+            content: 'Санкт-Петербург, ул Малая Морская 11'
+          }
+        },
+        {
+          block: 'menu',
+          mods: { view: 'footer' },
+          mix: { block: node.block, elem: 'menu' },
+          content: [
+            {
+              elem: 'item',
+              elemMods: {
+                type: 'link'
+              },
+              content: {
+                block: 'link',
+                url: '/#about',
+                content: 'О нас'
+              }
+            },
+            {
+              elem: 'item',
+              elemMods: {
+                type: 'link'
+              },
+              content: {
+                block: 'link',
+                url: '/oferta',
+                content: 'Оферта'
+              }
+            },
+            {
+              elem: 'item',
+              elemMods: {
+                type: 'link'
+              },
+              content: {
+                block: 'link',
+                url: '/sotrudnichestvo',
+                content: 'Сотрудничество'
+              }
+            },
+            {
+              elem: 'item',
+              elemMods: {
+                type: 'link'
+              },
+              content: {
+                block: 'link',
+                url: '//vk.com/neva.trip',
+                content: 'Мы в ВКонтакте'
+              }
+            },
+            {
+              elem: 'item',
+              elemMods: {
+                type: 'link'
+              },
+              content: {
+                block: 'link',
+                url: '//www.instagram.com/nevatrip.ru/',
+                content: 'Instagram'
+              }
+            },
+            {
+              elem: 'item',
+              elemMods: {
+                type: 'link'
+              },
+              content: {
+                block: 'link',
+                url: '//moskvatrip.ru',
+                content: 'Прогулки в Москве'
+              }
+            },
+          ]
+        }
+      ],
     },
   ];
 } );

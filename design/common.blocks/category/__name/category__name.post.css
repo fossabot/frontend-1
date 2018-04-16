@@ -1,0 +1,8 @@
+block(category).elem(name) {
+  color: #312d2d;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 10px 20px;
+  box-sizing: border-box;
+  font-size: 40px;
+  font-weight: 300;
+}

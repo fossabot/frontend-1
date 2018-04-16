@@ -1,0 +1,5 @@
+block(category).elem(content) {
+  padding-top: 70px;
+  padding-bottom: 40px;
+  box-sizing: border-box;
+}

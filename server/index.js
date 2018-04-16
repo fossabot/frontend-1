@@ -3,7 +3,7 @@ const fs = require( 'fs' ),
   app = require( 'express' )(),
   passport = require( 'passport' ),
   expressSession = require( 'express-session' ),
-  MemcachedStore = require( 'connect-memcached' )( expressSession ),
+  // MemcachedStore = require( 'connect-memcached' )( expressSession ),
   LocalStrategy = require( 'passport-local' ).Strategy,
   PrettyError = require( 'pretty-error' ),
   router = require( './router' ),
@@ -81,10 +81,10 @@ app
       //   path: '/',
       //   expires: new Date( Date.now() + 365 * 24 * 60 * 60 * 1000 ), // 1 hour
       // },
-      store: new MemcachedStore( {
-        hosts: ['127.0.0.1:11211'],
-        secret: process.env.SESSION_SECRET,
-      } ),
+      // store: new MemcachedStore( {
+      //   hosts: ['127.0.0.1:11211'],
+      //   secret: process.env.SESSION_SECRET,
+      // } ),
     } ),
   )
   .use( passport.initialize() )

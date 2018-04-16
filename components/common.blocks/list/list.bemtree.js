@@ -41,7 +41,7 @@ block( 'list' )(
       return applyNext( {
         ctx: {
           ...ctx,
-          items: items,
+          items,
         },
       } );
 
@@ -67,7 +67,7 @@ block( 'list' )(
     return items.map( ( item ) => {
       return typeof item === 'object' && ctx.getKey
         ? { elem: 'item', mix: ctx.itemMix, content: item[ctx.getKey] }
-        : { elem: 'item', mix: ctx.itemMix, content: item };
+        : item ? { elem: 'item', mix: ctx.itemMix, content: item } : '';
     } );
   } ),
 );

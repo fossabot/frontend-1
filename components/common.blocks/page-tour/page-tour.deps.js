@@ -1,13 +1,8 @@
 [{
   shouldDeps: [
     {
-      block: 'trip',
-      mods: { view: 'promo' }
+      block: 'tour',
+      mods: { view: 'detail' }
     },
-    {
-      block: 'list',
-      mods: { of: ['trips', 'features'] }
-    },
-    { block: 'category' }
   ]
 }]
