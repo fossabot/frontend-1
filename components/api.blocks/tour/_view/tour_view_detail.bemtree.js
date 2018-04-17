@@ -24,8 +24,9 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
                   vehicle: true,
                   languages: true,
                   'on-vehicle': true,
-                  route: true
+                  // route: true
                 },
+                route: tour.tv_e_map,
                 content: tour.tv_e_points ? tour.tv_e_points.split( '\r\n' ) : []
               },
             },
@@ -67,10 +68,42 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
               elem: 'content',
               content: [
                 {
+                  tag: 'details',
+                  block: 'details',
+                  content: [
+                    {
+                      elem: 'summary',
+                      tag: 'summary',
+                      content: 'Посмотреть маршрут прогулки'
+                    },
+                    {
+                      content: {
+                        html: tour.tv_e_map
+                      }
+                    }
+                  ]
+                },
+                {
                   elem: 'description',
-                  content: {
-                    html: tour.content
-                  }
+                  content: [
+                    {
+                      block: 'heading',
+                      mix: { block: node.block, elem: 'heading' },
+                      mods: { size: 's' },
+                      content: 'Об экскурсии'
+                    },
+                    {
+                      content: {
+                        html: tour.content
+                      }
+                    },
+                    {
+                      elem: 'route',
+                      content: {
+                        html: tour.tv_e_map
+                      }
+                    }
+                  ]
                 }
               ]
             },
@@ -79,17 +112,39 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
               content: [
                 {
                   elem: 'gallery',
-                  content: [1,2,3,4,5,6].map( () => `http://babeholder.pixoil.com/img/160/1:1/1/?${ node.generateId() }` )
+                  content: [ 1, 2, 3, 4, 5, 6].map( () => `http://babeholder.pixoil.com/img/` )
                 },
                 {
-                  elem: 'sight'
+                  elem: 'sight',
+                  content: [
+                    'Зимний Дворец (Эрмитаж)',
+                    'Стрелка В.О.',
+                    'Петропавловская крепость',
+                    'Летний сад',
+                    'Летний дворец Петра I',
+                    'Чижик-Пыжик',
+                    'Мариинский театр',
+                    'Инженерный замок',
+                    'Цирк',
+                    'Шереметьевский дворец',
+                    'Аничков Мост',
+                    'Юсуповский дворец',
+                    'Музей-усадьба Державина',
+                    'Собор Св. Николая',
+                    'Исаакиевский собор',
+                    'Строгановский дворец',
+                    'Мраморный дворец',
+                  ]
                 },
                 {
                   elem: 'cost',
                   content: [
                     {
-                      elem: 'tip',
-                      content: 'Незабываемые виды разводных мостов всего за'
+                      block: 'heading',
+                      mix: { block: node.block, elem: 'heading' },
+                      mods: { size: 's' },
+                      // content: tour.tip
+                      content: 'Незабываемые виды разводных мостов всего за:'
                     },
                     {
                       elem: 'price',
@@ -105,6 +160,15 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
                       elem: 'buy'
                     },
                   ]
+                },
+                {
+                  block: 'heading',
+                  mix: { block: node.block, elem: 'heading' },
+                  mods: { size: 'xs' },
+                  content: 'Другие наши экскурсии:'
+                },
+                {
+                  elem: 'similar',
                 }
               ]
             },

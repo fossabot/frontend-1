@@ -39,7 +39,8 @@ block( 'tour' ).mod( 'view', 'preview' )(
                 ]
               } : '',
               {
-                elem: 'show-more'
+                elem: 'show-more',
+                url: tour.uri,
               }
             ]
           }

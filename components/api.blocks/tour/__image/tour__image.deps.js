@@ -5,6 +5,7 @@
       mods: {
         rounded: true
       },
-    }
+    },
+    'link'
   ]
 }]

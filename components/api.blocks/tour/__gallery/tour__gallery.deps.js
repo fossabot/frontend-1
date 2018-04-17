@@ -14,6 +14,12 @@
     {
       block: 'image',
       mods: { width: 'available' },
+    },
+    {
+      block: 'link',
+      mods: {
+        pseudo : true
+      },
     }
   ]
 }]

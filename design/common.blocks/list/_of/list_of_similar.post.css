@@ -1,0 +1,5 @@
+block(list).mod(of similar) {
+  elem(item) + elem(item) {
+    margin-top: 20px;
+  }
+}

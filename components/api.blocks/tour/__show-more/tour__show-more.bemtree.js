@@ -1,4 +1,5 @@
-block( 'tour' ).elem( 'show-more' ).replace()( node => {
+block( 'tour' ).elem( 'show-more' ).replace()( ( node, ctx ) => {
+  
   return {
     block: 'button',
     mods: {
@@ -7,7 +8,7 @@ block( 'tour' ).elem( 'show-more' ).replace()( node => {
       size: 'xl'
     },
     mix: { block: node.block, elem: node.elem },
-    url: '#',
+    url: ctx.url,
     text: node.mods.view === 'promo' ? 'Подробнее об экскурсии →' : 'Подробнее →'
   }
 } );

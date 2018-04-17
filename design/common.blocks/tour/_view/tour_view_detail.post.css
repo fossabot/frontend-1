@@ -2,13 +2,12 @@ block(tour).mod(view detail) {
   elem(image) {
     min-width: 100%;
     object-fit: cover;
-    height: 600px;
+    height: 400px;
+    margin-bottom: -230px;
   }
 
   elem(main) {
-    margin-top: -300px;
-    min-height: 900px;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, .8), #fff);
+    background-color: #fff;
   }
 
   elem(name) {
@@ -36,6 +35,22 @@ block(tour).mod(view detail) {
     lost-column: 1/3;
   }
 
+  elem(features) {
+    block(list).elem(item):before {
+      font-size: .7em;
+      top: .6em;
+      background-color: #f5d400;
+      background-image: none;
+    }
+  }
+
+  elem(heading) {
+    font-size: 23px;
+    margin-top: 10.5px;
+    margin-bottom: 10.5px;
+    font-weight: 500;
+  }
+
   elem(tickets) {
     margin-bottom: 12px;
   }
@@ -48,5 +63,13 @@ block(tour).mod(view detail) {
     mod(type on-pier) {
       font-size: 14px;
     }
+  }
+
+  elem(sight) {
+    margin-bottom: 40px;
+  }
+
+  elem(cost) {
+    margin-bottom: 40px;
   }
 }

@@ -16,7 +16,7 @@ block( 'tour' ).elem( 'image' )(
     }
   } ),
 
-  replace()( ( node, { content } ) => {
+  match( ( node, ctx ) => !ctx.url ).replace()( ( node, { content } ) => {
     return {
       block: 'image',
       mods: {

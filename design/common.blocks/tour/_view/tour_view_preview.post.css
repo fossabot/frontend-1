@@ -13,11 +13,17 @@ block(tour).mod(view preview) {
   elem(name) {
     font-size: 30px;
     margin-bottom: 25px;
+
+    &:hover,
+    &:focus {
+      color: #25557a;
+      text-decoration: underline;
+    }
   }
 
   elem(price) {
     font-size: 36px;
-    font-weight: bold;
+    font-weight: 300;
     vertical-align: middle;
     line-height: 1;
 

@@ -1,7 +1,7 @@
 block( 'tour' ).elem( 'features' )(
   match( ( node, ctx ) => !ctx.content ).def()( '' ),
 
-  match( ( node, ctx ) => ctx.content ).replace()( ( node, { content } ) => {
+  match( ( node, ctx ) => ctx.content ).replace()( ( node, { content, route } ) => {
 
     if ( node.elemMods.languages ) {
       content.push( [
@@ -44,9 +44,20 @@ block( 'tour' ).elem( 'features' )(
 
     if ( node.elemMods.route ) {
       content.push( {
-        block: 'link',
-        url: '#route',
-        content: 'Посмотреть маршрут прогулки.'
+        tag: 'details',
+        block: 'details',
+        content: [
+          {
+            elem: 'summary',
+            tag: 'summary',
+            content: 'Посмотреть маршрут прогулки'
+          },
+          {
+            content: {
+              html: route
+            }
+          }
+        ]
       } );
     }
 

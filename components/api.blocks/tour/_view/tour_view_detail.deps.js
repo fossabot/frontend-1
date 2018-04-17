@@ -14,8 +14,10 @@
           elem: 'price',
           mods: { type: 'on-pier' },
         },
+        'sight',
+        'similar',
         'buy',
-      ]
+      ],
     }
   ]
 }]

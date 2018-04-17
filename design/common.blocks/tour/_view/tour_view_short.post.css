@@ -1,0 +1,18 @@
+block(tour).mod(view short) {
+  elem(name) {
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  elem(image) {
+    display: block;
+    height: auto;
+    margin-bottom: 0;
+  }
+}

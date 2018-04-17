@@ -16,6 +16,7 @@ block( 'tour' ).mod( 'view', 'promo' )(
             },
             {
               elem: 'features',
+              route: '',
               content: tour.tv_e_points ? tour.tv_e_points.split( '\r\n' ) : []
             },
             {
@@ -41,7 +42,8 @@ block( 'tour' ).mod( 'view', 'promo' )(
                   elem: 'buy'
                 },
                 {
-                  elem: 'show-more'
+                  elem: 'show-more',
+                  url: tour.uri
                 },
               ]
             }

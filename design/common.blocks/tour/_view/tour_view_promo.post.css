@@ -12,12 +12,32 @@ block(tour).mod(view promo) {
     box-sizing: border-box;
   }
 
+  elem(name) {
+    font-size: 35px;
+    margin-top: 21px;
+    margin-bottom: 25px;
+
+    &:hover,
+    &:focus {
+      color: #25557a;
+      text-decoration: underline;
+    }
+  }
+
+  elem(features) {
+    block(list).elem(item):before {
+      background-color: #f5d400;
+      background-image: svg-load('../../icon/_symbol/icon_symbol_chevron-down.svg', 'fill=#000');
+    }
+  }
+
   elem(action) {
     display: flex;
   }
 
   elem(price) {
     font-size: 48px;
+    font-weight: 300;
   }
 
   elem(cost) {
@@ -27,4 +47,5 @@ block(tour).mod(view promo) {
   elem(buy) {
     margin-right: 14px;
   }
+
 }
