@@ -1,4 +1,4 @@
-const action = ( context ) => {
+const action = () => {
   return {
     page: 'about',
   };
