@@ -1,4 +1,4 @@
-block( 'page-partnership' ).replace()( ( node ) => {
+block( 'page-partnership' ).replace()( () => {
   return [
     {
       block: 'page',

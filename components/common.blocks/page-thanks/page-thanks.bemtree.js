@@ -1,4 +1,4 @@
-block( 'page-thanks' ).replace()( ( node ) => {
+block( 'page-thanks' ).replace()( () => {
   return [
     'Thanks'
   ];

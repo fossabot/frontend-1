@@ -1,4 +1,4 @@
-block( 'page-oferta' ).replace()( ( node ) => {
+block( 'page-oferta' ).replace()( () => {
   return [
     {
       block: 'page',
