@@ -26,7 +26,7 @@ const data = async ( context, params ) => {
     },
     {
       structureFlat: { object: [ schema.structureFlat ] },
-      // setting: { results: [ schema.settings ] },
+      setting: { results: [ schema.settings ] },
       tour: { results: [ schema.tour ] },
       banner: { object: [ schema.banner ] },
     },
@@ -34,10 +34,17 @@ const data = async ( context, params ) => {
 };
 
 const action = async ( context, params ) => {
+  const api = await data( context, params );
+
   return {
     page: 'index',
-    api: await data( context, params ),
+    api,
     lang: params.lang,
+    meta: {
+      og: {
+        image: '/' + api.entities.tour[ api.entities.banner[ 1 ].url ].tv_e_image_720
+      }
+    }
   };
 };
 

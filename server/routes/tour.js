@@ -27,10 +27,20 @@ const data = async ( context, params ) => {
 };
 
 const action = async ( context, params ) => {
+  const api = await data( context, params );
+  const tour = api.entities.tour[ api.result.tour.object ];
+
   return {
     page: 'tour',
-    api: await data( context, params ),
+    api,
     lang: params.lang,
+    title: tour.longtitle || tour.pagetitle,
+    meta: {
+      description: tour.description,
+      og: {
+        image: `//nevatrip.dev.compaero.ru/${ tour.tv_e_image_320 }`,
+      }
+    }
   };
 };
 
