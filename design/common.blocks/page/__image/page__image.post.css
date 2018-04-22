@@ -1,0 +1,9 @@
+block(page).elem(image) {
+  padding-top: 110px;
+  padding-bottom: 110px;
+  box-sizing: border-box;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  margin-bottom: 50px;
+}
