@@ -3,9 +3,13 @@ block(menu).mod(view footer) {
     display: inline-block;
     color: #fff;
     line-height: 1;
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-left: 0;
+    padding-right: 0;
     box-sizing: border-box;
+
+    & + elem(item) {
+      margin-left: 20px;
+    }
 
     mod(hovered) {
       background-color: transparent;

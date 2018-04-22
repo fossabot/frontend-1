@@ -3,7 +3,12 @@
     {
       elems: [
         'image',
-        'name'
+        'name',
+        {
+          elem: 'price',
+          mods: { type: 'on-pier' }
+        },
+        'show-more'
       ]
     }
   ]

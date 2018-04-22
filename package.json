@@ -20,6 +20,7 @@
     "bem-core": "^4.2.0",
     "bem-forms": "github:realetive/bem-forms",
     "moment": "^2.21.0",
+    "photoswipe": "^4.1.2",
     "rest": "^2.0.0"
   },
   "devDependencies": {

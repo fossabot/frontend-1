@@ -4,7 +4,7 @@ block(list).mod(of tours) {
 
 
     & + elem(item) {
-      margin-top: 42px;
+      margin-top: 84px;
       position: relative;
 
       &:before {
@@ -14,7 +14,7 @@ block(list).mod(of tours) {
         width: 50%;
         left: 25%;
         height: 1px;
-        top: -21px;
+        top: -42px;
         background-color: #edeceb;
       }
     }

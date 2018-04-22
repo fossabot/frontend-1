@@ -20,6 +20,7 @@
       mods: {
         pseudo : true
       },
-    }
+    },
+    'gallery'
   ]
 }]

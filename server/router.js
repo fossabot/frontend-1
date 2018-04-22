@@ -37,11 +37,19 @@ const router = new UniversalRouter(
         // О проекте
         path: '/about',
         name: 'about',
+        load: async () => await require( './routes/about' ),
+      },
+      {
+        // Оферта
+        path: '/oferta',
+        name: 'oferta',
+        load: async () => await require( './routes/oferta' ),
       },
       {
         // Партнёрство
-        path: '/partnership',
+        path: '/sotrudnichestvo',
         name: 'partnership',
+        load: async () => await require( './routes/partnership' ),
       },
       {
         path: '/calendar',

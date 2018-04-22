@@ -1,0 +1,14 @@
+block(paragraph) {
+  @each $size,
+    $fontSize,
+    $lineHeight in
+    (   xs,     s,     m,     l,    xl,   xxl),
+    ( 14px,  14px,  15px,  18px,  21px,  18px),
+    ( 20px,  20px, 1.5em,  20px,  32px,  24px) {
+    .mod(size $size) {
+      font-size: $fontSize;
+      line-height: $lineHeight;
+    }
+  }
+
+}

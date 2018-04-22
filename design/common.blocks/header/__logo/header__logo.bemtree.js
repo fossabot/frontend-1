@@ -2,14 +2,9 @@ block( 'header' )
   .elem( 'logo' )
   .content()( () => {
   return {
-    block: 'link',
-    mods: { view: 'text' },
-    to: 'index',
+    block: 'logo',
     content: {
-      block: 'logo',
-      content: {
-        elem: 'image',
-      },
+      elem: 'image',
     },
   };
 } );

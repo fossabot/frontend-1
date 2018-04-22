@@ -1,6 +1,6 @@
 module.exports = {
   site: {
-    name: 'Заголовок',
+    name: 'NevaTrip',
   },
   meta: {
     description: 'Описание',

@@ -3,6 +3,9 @@ block(tour).mod(view promo) {
   padding-bottom: 48px;
   box-sizing: border-box;
   min-height: 400px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 
   elem(content) {
     background: rgba(255, 255, 255, 0.6);
@@ -33,11 +36,18 @@ block(tour).mod(view promo) {
 
   elem(action) {
     display: flex;
+    align-items: flex-start;
   }
 
   elem(price) {
     font-size: 48px;
-    font-weight: 300;
+    line-height: 1;
+    display: block;
+
+    mod(type on-pier) {
+      font-weight: 300;
+      font-size: 14px;
+    }
   }
 
   elem(cost) {

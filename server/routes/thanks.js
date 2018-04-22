@@ -1,5 +1,4 @@
 const action = ( context ) => {
-  console.log( context.session );
   return {
     page: 'thanks',
     api: {

@@ -1,4 +1,9 @@
 block( 'tour' ).elem( 'price' ).elemMod( 'type', 'on-pier' )(
   match( ( node, ctx ) => !ctx.content ).def()( '' ),
-  match( ( node, ctx ) => typeof ctx.content === 'number' ).content()( ( node, ctx ) => `${ ctx.content } ₽ на причале` ),
+  content()( ( node, ctx ) => {
+    return {
+      html: ctx.content
+    }
+  } ),
+  match( ( node, ctx ) => /^\d+$/.test( ctx.content ) ).content()( ( node, ctx ) => `${ ctx.content } ₽ на причале` ),
 )

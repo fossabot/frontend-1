@@ -1,39 +1,84 @@
 block( 'page-index' ).replace()( ( node ) => {
-  console.log( node.api.entities.banner[ 1 ] );
   return [
     {
       block: 'tour',
       mods: { view: 'promo' },
       tour: node.api.entities.tour[ node.api.entities.banner[ 1 ].url ]
     },
-    // {
-    //   block: 'list',
-    //   mods: { of: 'icons' },
-    //   content: {
-    //     html: `
-    //       <div class="container">
-    //         <div class="row lead text-center">
-    //           <div class="col-sm-6 col-md-3">
-    //             <p class="text-center text-primary"><i class="fa fa-money fa-2x"></i></p>
-    //             <p>Самые выгодные цены</p>
-    //           </div>
-    //           <div class="col-sm-6 col-md-3">
-    //             <p class="text-center text-primary"><i class="fa fa-credit-card fa-2x"></i></p>
-    //             <p>Покупка в 2 клика</p>
-    //           </div>
-    //           <div class="col-sm-6 col-md-3">
-    //             <p class="text-center text-primary"><i class="fa fa-ticket fa-2x"></i></p>
-    //             <p>Электронный билет с открытым временем</p>
-    //           </div>
-    //           <div class="col-sm-6 col-md-3">
-    //             <p class="text-center text-primary"><i class="fa fa-star fa-2x"></i></p>
-    //             <p>Лучшие маршруты от теплоходных компаний</p>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     `
-    //   }
-    // },
+    {
+      block: 'list',
+      mods: {
+        of: 'icons',
+        type: 'unstyled',
+      },
+      mix: { block: 'page', elem: 'content' },
+      items: [
+        [
+          {
+            block: 'image',
+            mix: { block: 'list', elem: 'icon' },
+            url: 'http://via.placeholder.com/40x40'
+          },
+          {
+            block: 'paragraph',
+            mods: {
+              align: 'center',
+              size: 'l',
+            },
+            mix: { block: 'list', elem: 'description' },
+            content: 'Самые выгодные цены'
+          }
+        ],
+        [
+          {
+            block: 'image',
+            mix: { block: 'list', elem: 'icon' },
+            url: 'http://via.placeholder.com/40x40'
+          },
+          {
+            block: 'paragraph',
+            mods: {
+              align: 'center',
+              size: 'l',
+            },
+            mix: { block: 'list', elem: 'description' },
+            content: 'Покупка в 2 клика'
+          }
+        ],
+        [
+          {
+            block: 'image',
+            mix: { block: 'list', elem: 'icon' },
+            url: 'http://via.placeholder.com/40x40'
+          },
+          {
+            block: 'paragraph',
+            mods: {
+              align: 'center',
+              size: 'l',
+            },
+            mix: { block: 'list', elem: 'description' },
+            content: 'Электронный билет с открытым временем'
+          }
+        ],
+        [
+          {
+            block: 'image',
+            mix: { block: 'list', elem: 'icon' },
+            url: 'http://via.placeholder.com/40x40'
+          },
+          {
+            block: 'paragraph',
+            mods: {
+              align: 'center',
+              size: 'l',
+            },
+            mix: { block: 'list', elem: 'description' },
+            content: 'Лучшие маршруты от теплоходных компаний'
+          }
+        ],
+      ]
+    },
     [ 'day', 'night', 'meteors' ].map( category => {
       const categoryObject = node.api.entities.structureFlat[ category ];
       const categoryId = categoryObject.id;

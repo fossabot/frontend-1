@@ -1,5 +1,4 @@
-block( 'page-thanks' ).replace()( ( node ) => {
-  console.log( node.api.order );
+block( 'page-thanks' ).replace()( () => {
   return [
     'Thanks'
   ];

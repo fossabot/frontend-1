@@ -1,12 +1,12 @@
 const Cldr = require( 'cldrjs' );
 
 block( 'root' ).replace()( ( node, ctx ) => {
-  const api = ( node.api = ctx.api ),
-    config = ( node.config = ctx.config ),
-    data = ( node.data = ctx.data ),
-    meta = data.meta || {},
-    og = meta.og || {},
-    bundle = data.bundle || 'nevatrip-desktop';
+  const api = ( node.api = ctx.api );
+  const config = ( node.config = ctx.config );
+  const data = ( node.data = ctx.data );
+  const meta = data.meta || {};
+  const og = meta.og || {};
+  const bundle = data.bundle || 'nevatrip-desktop';
 
   if ( ctx.context ) {
     return ctx.context;
@@ -52,10 +52,10 @@ block( 'root' ).replace()( ( node, ctx ) => {
         attrs: { name: 'apple-mobile-web-app-title', content: node.i18n( 'site', 'name' ) },
       },
       { elem: 'meta', attrs: { name: 'application-name', content: node.i18n( 'site', 'name' ) } },
-      { elem: 'meta', attrs: { name: 'description', content: node.i18n( 'meta', 'description' ) } },
+      { elem: 'meta', attrs: { name: 'description', content: meta.description || node.i18n( 'meta', 'description' ) } },
       { elem: 'meta', attrs: { property: 'og:title', content: og.title || data.title } },
-      { elem: 'meta', attrs: { property: 'og:url', content: og.url } },
-      { elem: 'meta', attrs: { property: 'og:image', content: og.image } },
+      { elem: 'meta', attrs: { property: 'og:url', content: config.HOST + data.url.pathname } },
+      { elem: 'meta', attrs: { property: 'og:image', content: config.HOST + og.image } },
       { elem: 'meta', attrs: { property: 'og:site_name', content: node.i18n( 'site', 'name' ) } },
       {
         elem: 'meta',
