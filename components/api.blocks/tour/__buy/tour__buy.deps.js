@@ -1,9 +1,12 @@
 [{
   shouldDeps: [
     {
+      block: 'form'
+    },
+    {
       block: 'button',
       mods: {
-        type: 'link',
+        type: 'submit',
         view: ['action'],
         size: 'l'
       },

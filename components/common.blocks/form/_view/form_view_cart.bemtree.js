@@ -199,7 +199,7 @@ block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
                 'Я согласен(на) с ',
                 {
                   block: 'link',
-                  url: '/offerta',
+                  url: '/oferta',
                   target: '_blank',
                   title: 'Открыть пользовательское соглашение в новой вкладке',
                   content: 'пользовательским соглашением'

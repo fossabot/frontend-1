@@ -182,7 +182,8 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
                       content: 'Не реализуется на причале',
                     },
                     {
-                      elem: 'buy'
+                      elem: 'buy',
+                      content: tour.id,
                     },
                   ]
                 },

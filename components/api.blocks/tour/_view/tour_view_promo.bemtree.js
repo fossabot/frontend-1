@@ -43,7 +43,8 @@ block( 'tour' ).mod( 'view', 'promo' )(
                   ]
                 },
                 {
-                  elem: 'buy'
+                  elem: 'buy',
+                  content: tour.id,
                 },
                 {
                   elem: 'show-more',
