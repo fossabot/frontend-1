@@ -1,9 +1,15 @@
 block(tour).mod(view short) {
+  padding: 15px;
+  box-shadow: 0 0px 3px 0 #aaa;
+  border-radius: 10px;
+
   elem(name) {
     font-size: 18px;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    margin-bottom: 20px;
+    border-bottom: none;
 
     &:hover {
       text-decoration: underline;
@@ -13,6 +19,16 @@ block(tour).mod(view short) {
   elem(image) {
     display: block;
     height: auto;
+    margin-bottom: 0;
+  }
+
+  elem(action) {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  elem(cost) {
     margin-bottom: 0;
   }
 }

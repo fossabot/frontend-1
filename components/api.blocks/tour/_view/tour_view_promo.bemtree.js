@@ -1,4 +1,10 @@
 block( 'tour' ).mod( 'view', 'promo' )(
+  def()( ( node, ctx ) => {
+    ctx.attrs = {
+      style: `background-image: url(//nevatrip.dev.compaero.ru/${ ctx.tour.tv_e_image_1200 });`
+    };
+    return applyNext();
+  } ),
   match( ( node, ctx ) => !ctx.tour ).def()( '' ),
   content()( ( node, ctx ) => {
     const tour = ctx.tour;
@@ -22,22 +28,20 @@ block( 'tour' ).mod( 'view', 'promo' )(
             {
               elem: 'action',
               content: [
-                tour.price || tour.old_price
-                ? {
-                    elem: 'cost',
-                    content: [
-                      {
-                        elem: 'price',
-                        content: tour.price
-                      },
-                      {
-                        elem: 'price',
-                        elemMods: { type: 'on-pier' },
-                        content: tour.old_price
-                      }
-                    ]
-                  }
-                : '',
+                {
+                  elem: 'cost',
+                  content: [
+                    {
+                      elem: 'price',
+                      content: tour.tv_e_price
+                    },
+                    {
+                      elem: 'price',
+                      elemMods: { type: 'on-pier' },
+                      content: tour.tv_e_price_on_pier
+                    }
+                  ]
+                },
                 {
                   elem: 'buy'
                 },

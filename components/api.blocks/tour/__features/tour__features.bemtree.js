@@ -1,31 +1,25 @@
 block( 'tour' ).elem( 'features' )(
-  match( ( node, ctx ) => !ctx.content ).def()( '' ),
+  replace()( ( node, { content = [], languages, pierStart, duration, onVehicle } ) => {
 
-  match( ( node, ctx ) => ctx.content ).replace()( ( node, { content, route } ) => {
-
-    if ( node.elemMods.languages ) {
+    if ( node.elemMods.duration ) {
       content.push( [
         {
           block: 'text',
-          mods: {
-            weight: 'bold'
-          },
-          content: 'Язык экскурсии'
+          mods: { weight: 'bold' },
+          content: 'Длительность'
         },
-        ': 🇨🇷 🇾🇪 🇱🇾'
+        `: ${ duration }`,
       ] );
     }
 
-    if ( node.elemMods['on-vehicle'] ) {
+    if ( node.elemMods.pier ) {
       content.push( [
         {
           block: 'text',
-          mods: {
-            weight: 'bold'
-          },
-          content: 'На борту'
+          mods: { weight: 'bold' },
+          content: 'Причал отправления'
         },
-        ': туалет, сопроводительная экскурсия.'
+        `: ${ pierStart.longtitle || pierStart.pagetitle }`,
       ] );
     }
 
@@ -33,32 +27,79 @@ block( 'tour' ).elem( 'features' )(
       content.push( [
         {
           block: 'text',
-          mods: {
-            weight: 'bold'
-          },
+          mods: { weight: 'bold' },
           content: 'Теплоход'
         },
         ': комфортабельный отапливаемый двухпалубный теплоход с закрытой и открытой палубой класса «Москва».'
       ] );
     }
 
-    if ( node.elemMods.route ) {
-      content.push( {
-        tag: 'details',
-        block: 'details',
-        content: [
-          {
-            elem: 'summary',
-            tag: 'summary',
-            content: 'Посмотреть маршрут прогулки'
-          },
-          {
-            content: {
-              html: route
-            }
+    if ( node.elemMods.languages ) {
+      content.push( [
+        {
+          block: 'text',
+          mods: { weight: 'bold' },
+          content: 'Язык экскурсии'
+        },
+        ': ',
+        languages.split( '\n' ).map( language => {
+          switch ( language ) {
+            case 'ru':
+              return '🇷🇺 русский';
+            case 'es':
+              return '🇪🇸 испанский';
+            case 'ir':
+              return '🇮🇷 иранский';
+            case 'gb':
+              return '🇺🇸 английский';
+            case 'it':
+              return '🇮🇹 итальянский';
+            case 'ch':
+              return '🇨🇳 китайский';
+            case 'de':
+              return '🇩🇪 немецкий';
+            case 'fi':
+              return '🇫🇮 финский';
+            case 'fr':
+              return '🇫🇷 французский';
+            case 'se':
+              return '🇸🇪 шведский';
+            case 'jp':
+              return '🇯🇵 японский';
+            default:
+              break;
           }
-        ]
-      } );
+          return false;
+        } ).join( ', ' )
+      ] );
+    }
+
+    if ( node.elemMods['on-vehicle'] ) {
+      content.push( [
+        {
+          block: 'text',
+          mods: { weight: 'bold' },
+          content: 'На борту'
+        },
+        ': ',
+        onVehicle.split( '\n' ).map( feature => {
+          switch ( feature ) {
+            case 'male':
+              return '🚾 туалет';
+            case 'comment':
+              return '🎤 экскурсия';
+            case 'glass':
+              return '🍸 бар';
+            case 'cutlery':
+              return '🍳 еда';
+            case 'music':
+              return '🎵 музыка';
+            default:
+              break;
+          }
+          return false;
+        } ).join( ', ' )
+      ] );
     }
 
     return {
@@ -72,3 +113,10 @@ block( 'tour' ).elem( 'features' )(
     }
   } ),
 )
+
+
+
+
+
+
+

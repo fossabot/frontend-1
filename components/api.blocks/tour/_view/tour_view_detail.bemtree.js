@@ -4,7 +4,7 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
   return [
     {
       elem: 'image',
-      content: `http://babeholder.pixoil.com/img/1920/600`
+      content: `//nevatrip.dev.compaero.ru/${ tour.tv_e_image_1200 }`
     },
     {
       elem: 'main',
@@ -21,13 +21,17 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
               content: {
                 elem: 'features',
                 elemMods: {
+                  pier: true,
                   vehicle: true,
                   languages: true,
                   'on-vehicle': true,
-                  // route: true
+                  duration: true,
                 },
-                route: tour.tv_e_map,
-                content: tour.tv_e_points ? tour.tv_e_points.split( '\r\n' ) : []
+                languages: tour.tv_e_excursion,
+                pierStart: tour.tv_e_from,
+                pierFinish: tour.tv_e_to,
+                duration: tour.tv_e_duration,
+                onVehicle: tour.tv_e_on_boat,
               },
             },
             {
@@ -35,23 +39,37 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
               content: {
                 elem: 'cost',
                 content: [
+                  // {
+                  //   elem: 'preprice',
+                  //   content: tour.tv_e_price_before
+                  // },
                   {
                     elem: 'tickets',
                     content: [
-                      'Скидки: 20% при бронировании онлайн!',
+                      {
+                        block: 'text',
+                        mods: { weight: 'bold' },
+                        content: 'Скидки: ',
+                      },
+                      tour.tv_e_price_before,
                       ' ',
-                      'Есть льготный (690 ₽) и детский (450 ₽) билет. До 3 лет — бесплатно, для групп — индивидуально.'
+                      'Есть льготный (690 ₽) и детский (450 ₽) билет.',
+                      ' ',
+                      tour.tv_e_price_after
                     ]
                   },
+                  // {
+                  //   elem: 'postprice',
+                  //   content: tour.tv_e_price_after
+                  // },
                   {
                     elem: 'price',
-                    content: tour.price
+                    content: tour.tv_e_price
                   },
                   {
                     elem: 'price',
                     elemMods: { type: 'on-pier' },
-                    // content: tour.old_price,
-                    content: 'Не реализуется на причале',
+                    content: tour.tv_e_price_on_pier
                   },
                   {
                     elem: 'buy'
@@ -93,9 +111,17 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
                       content: 'Об экскурсии'
                     },
                     {
+                      elem: 'tip',
+                      content: tour.tv_e_advice_before
+                    },
+                    {
                       content: {
                         html: tour.content
                       }
+                    },
+                    {
+                      elem: 'tip',
+                      content: tour.tv_e_advice_after
                     },
                     {
                       elem: 'route',
@@ -112,7 +138,7 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
               content: [
                 {
                   elem: 'gallery',
-                  content: [ 1, 2, 3, 4, 5, 6].map( () => `http://babeholder.pixoil.com/img/` )
+                  content: tour.gallery
                 },
                 {
                   elem: 'sight',
@@ -143,8 +169,7 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
                       block: 'heading',
                       mix: { block: node.block, elem: 'heading' },
                       mods: { size: 's' },
-                      // content: tour.tip
-                      content: 'Незабываемые виды разводных мостов всего за:'
+                      content: tour.tv_e_text_before_final_price,
                     },
                     {
                       elem: 'price',
@@ -165,7 +190,7 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
                   block: 'heading',
                   mix: { block: node.block, elem: 'heading' },
                   mods: { size: 'xs' },
-                  content: 'Другие наши экскурсии:'
+                  content: 'Другие наши экскурсии:',
                 },
                 {
                   elem: 'similar',

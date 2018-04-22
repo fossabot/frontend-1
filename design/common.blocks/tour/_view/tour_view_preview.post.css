@@ -23,7 +23,7 @@ block(tour).mod(view preview) {
 
   elem(price) {
     font-size: 36px;
-    font-weight: 300;
+    font-weight: 500;
     vertical-align: middle;
     line-height: 1;
 

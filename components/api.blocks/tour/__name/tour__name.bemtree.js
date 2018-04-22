@@ -7,7 +7,7 @@ block( 'tour' ).elem( 'name' )(
       content
     }
   } ),
-  match( ( node, ctx ) => ctx.url ).replace()( ( node, { content, url } ) => {
+  match( ( node, { url } ) => url ).replace()( ( node, { content, url } ) => {
     return {
       block: 'heading',
       mods: { size: 'l' },

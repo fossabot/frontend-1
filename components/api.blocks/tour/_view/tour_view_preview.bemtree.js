@@ -7,7 +7,7 @@ block( 'tour' ).mod( 'view', 'preview' )(
       {
         elem: 'image',
         url: tour.uri,
-        content: tour.image ? `https://nevatrip.dev.compaero.ru/${ tour.image }` : 'http://babeholder.pixoil.com/img/373/16:9/?' + node.generateId(),
+        content: tour.tv_e_image_320 ? `//nevatrip.dev.compaero.ru/${ tour.tv_e_image_320 }` : 'http://hunkholder.pixoil.com/img/373/16:9/?' + node.generateId(),
       },
       {
         elem: 'content',
@@ -15,7 +15,7 @@ block( 'tour' ).mod( 'view', 'preview' )(
           {
             elem: 'name',
             url: tour.uri,
-            content: tour.longtitle || tour.pagetitle
+            content: tour.longtitle || tour.pagetitle,
           },
           {
             elem: 'features',
@@ -24,20 +24,20 @@ block( 'tour' ).mod( 'view', 'preview' )(
           {
             elem: 'action',
             content: [
-              tour.price || tour.old_price ? {
+              {
                 elem: 'cost',
                 content: [
                   {
                     elem: 'price',
-                    content: tour.price
+                    content: tour.tv_e_price,
                   },
                   {
                     elem: 'price',
                     elemMods: { type: 'on-pier' },
-                    content: tour.old_price
+                    content: tour.tv_e_price_on_pier,
                   }
                 ]
-              } : '',
+              },
               {
                 elem: 'show-more',
                 url: tour.uri,
