@@ -1,6 +1,6 @@
 [{
   shouldDeps: [
     { block: 'link' },
-    { block: 'logo', elem: 'image' }
+    { block: 'logo', elems: ['image'] }
   ]
 }]
