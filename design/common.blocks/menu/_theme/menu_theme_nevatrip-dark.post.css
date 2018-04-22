@@ -1,0 +1,20 @@
+block(menu).mod(theme nevatrip-dark) {
+
+  mod(view footer) {
+    background-color: transparent;
+
+    elem(item).mod(hovered) {
+      color: #2c6590;
+      background-color: transparent;
+    }
+  }
+
+  mod(view compilation) {
+    background-color: transparent;
+
+    elem(item).mod(hovered) {
+      color: #2c6590;
+      background-color: transparent;
+    }
+  }  
+}

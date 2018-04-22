@@ -1,0 +1,9 @@
+block(menu).mod(view compilation) {
+  background-color: none;
+  column-count: 3;
+
+  &:before,
+  &:after {
+    content: none;
+  }
+}
