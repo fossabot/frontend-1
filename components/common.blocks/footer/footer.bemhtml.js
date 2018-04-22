@@ -1,1 +1,4 @@
-block( 'footer' )( tag()( 'footer' ) );
+block( 'footer' )( {
+  tag: 'footer',
+  addMix: { block: 'page', elem: 'section' }
+} );

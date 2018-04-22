@@ -1,37 +1,67 @@
 block(footer) {
-  elem(content) {
+
+  elem(header) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 17px 0 -16px #000;
+    margin-bottom: 20px;
+  }
+
+  elem(footer-inner) {
     display: flex;
+    align-items: baseline;
   }
 
   elem(award) {
-    flex: 1;
+    lost-column: 3/8 3 20px;
+    display: flex;
+  }
 
-    block(layout).elem(aside) {
-      margin-right: 8px; 
-    }
+  elem(award-icon) {
+    width: 64px;
+    height: auto;
+    align-self: center;
+    margin-right: 8px;
+  }
+
+  elem(award-description) {
+    flex: 1;
   }
 
   elem(contacts) {
-    lost-column: 1/4;
-  }
-
-  elem(footer) {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    lost-column: 1/4 3 20px;
+    text-align: right;
   }
 
   elem(copyright) {
     margin-right: 5px;
+    font-size: .8em;
+    color: #ddd;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    box-sizing: border-box;
   }
 
   elem(address) {
     margin-right: 5px;
+    font-size: .8em;
+    color: #ddd;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    box-sizing: border-box;
   }
 
   elem(menu) {
     box-sizing: border-box;
+    margin-right: auto;
   }
 
+  elem(heading).elem(heading) {
+    margin-bottom: 20px;
+  }
+
+  elem(compilation) {
+    margin-bottom: 40px;
+  }
 }
