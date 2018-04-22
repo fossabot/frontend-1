@@ -12,7 +12,8 @@ block(button) {
   transition      : color .2s,
                     background-color .2s;
   -webkit-tap-highlight-color : rgba(0, 0, 0, 0);
-  align-self: center;
+  /*align-self      : auto;*/
+
 
   &::-moz-focus-inner {
     padding : 0;
@@ -31,6 +32,7 @@ block(button) {
     margin         : 0;
     border         : 0;
     overflow       : hidden; /* Для текста, который всё же выходит за края */
+    white-space    : nowrap;
   }
 
   block(icon) + block(button).elem(text) {

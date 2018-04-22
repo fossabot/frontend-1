@@ -1,0 +1,20 @@
+block(list).mod(of icons) {
+  padding-top: 50px;
+  padding-bottom: 60px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  
+  elem(item) {
+    lost-column: 1/4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+  }
+
+  elem(icon) {
+    margin-bottom: 20px;
+  }
+}
