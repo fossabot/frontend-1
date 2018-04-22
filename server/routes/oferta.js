@@ -1,9 +1,6 @@
 const action = ( context ) => {
   return {
-    page: 'thanks',
-    api: {
-      order: context.session.__order,
-    }
+    page: 'oferta',
   };
 };
 
