@@ -100,12 +100,12 @@
     "ym": "^0.1.2"
   },
   "scripts": {
-    "start": "memcached || true & node -r dotenv/config server",
+    "start": "node -r dotenv/config server",
     "postinstall": "npm run drop-cache && npm run make",
     "drop-cache": "rm -rf .enb/tmp",
     "make": "node -r dotenv/config node_modules/enb/bin/enb make",
     "dev": "npm run drop-cache && npm run make && nodemon",
-    "prod": "npm run drop-cache && npm run make",
+    "prod": "npm run drop-cache && npm run make && npm start",
     "lint": "eslint --fix . && bemhint .",
     "stylelint": "stylelint static/assets/css/**/*.css",
     "test": "npm run lint",
