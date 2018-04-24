@@ -1,4 +1,3 @@
-.input_has-calendar .input__clear
-{
+block(input).mod(has-calendar) elem(clear) {
     display: none;
 }

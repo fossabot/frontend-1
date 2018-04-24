@@ -4,10 +4,11 @@ const Request = require( './_request' );
 
 const url = '/cart';
 
-const postCart = async ( { product, count = 1 } = {}, session ) => {
+const postCart = async ( { product, options = {}, count = 1 } = {}, session ) => {
   const params = {
-    product: product,
-    count: count,
+    product,
+    options,
+    count,
   }
   const tour = new Request( url, params, session );
   return await tour.request( 'post' );

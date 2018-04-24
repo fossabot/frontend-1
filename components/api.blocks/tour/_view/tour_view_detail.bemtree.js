@@ -72,7 +72,8 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
                     content: tour.tv_e_price_on_pier
                   },
                   {
-                    elem: 'buy'
+                    elem: 'buy',
+                    content: tour.id,
                   },
                 ]
               }

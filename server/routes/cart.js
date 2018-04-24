@@ -18,7 +18,7 @@ async function asyncForEach( array, callback ) {
 const data = async ( context, params ) => {
 
   if ( context.body && context.body.action === 'cart/add' ) {
-    await postCart( { product: context.body.id }, context.session );
+    await postCart( { product: context.body.id, options: context.body.options }, context.session );
   }
 
   if ( context.body && context.body.action === 'order/add' ) {

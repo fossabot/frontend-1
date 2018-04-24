@@ -1,5 +1,14 @@
 block( 'tour' ).elem( 'date' )(
-  match( node => node.mods.view === 'order' ).replace()( ( node, ctx ) => {
+  match( node => node.mods.view === 'cart' ).replace()( node => {
+    function leadZero( num ) {
+      return num < 10 ? '0' + num : num;
+    }
+
+    let date = new Date();
+    // date.setTime( trip.time * 1000 );
+    const day = leadZero( date.getDate() );
+    const month = leadZero( date.getMonth() + 1 );
+    const year = date.getFullYear();
 
     return {
       block: 'fieldset',
@@ -27,13 +36,14 @@ block( 'tour' ).elem( 'date' )(
             mods: {
               'has-calendar': true,
               width: 'available',
+              disabled: true,
             },
             weekdays: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'],
             months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-            earlierLimit: '02.04.2018',
+            earlierLimit: `${ day }.${ month }.${ year }`,
             laterLimit: '22.05.2018',
-            availableDate: ctx.availableDate,
-            val: ctx.content
+            // availableDate: ctx.availableDate,
+            // val: ctx.content
           }
         ]
       },

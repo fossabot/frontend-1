@@ -1,16 +1,15 @@
 ({
-    shouldDeps: [
-        {
-            elems: 'calendar'
-        },
-        {
-            block: 'popup',
-            mods: {
-                theme: 'islands',
-                target: 'anchor'
-            }
-        },
-        'ua',
-        'calendar'
-    ]
+  shouldDeps: [
+    {
+      elems: 'calendar'
+    },
+    {
+      block: 'popup',
+      mods: {
+        target: 'anchor'
+      }
+    },
+    'ua',
+    'calendar'
+  ]
 });

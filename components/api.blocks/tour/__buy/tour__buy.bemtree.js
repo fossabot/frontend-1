@@ -21,6 +21,14 @@ block( 'tour' ).elem( 'buy' ).replace()( ( node, ctx ) => {
         }
       },
       {
+        tag: 'input',
+        attrs: {
+          name: 'options[ticket][adult]',
+          type: 'hidden',
+          value: 1,
+        }
+      },
+      {
         block: 'button',
         mods: {
           type: 'submit',

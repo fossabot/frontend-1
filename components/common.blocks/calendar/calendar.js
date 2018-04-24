@@ -200,7 +200,7 @@ modules.define( 'calendar', ['i-bem-dom', 'BEMHTML', 'jquery'], function( provid
     _isValidDate: function( date ) {
       return !( this._earlierLimit && date < this._earlierLimit ||
         this._laterLimit && date > this._laterLimit ||
-        date && this._availableDate.indexOf( this._formatDate( date ) ) === -1
+        date && this._availableDate && this._availableDate.indexOf( this._formatDate( date ) ) === -1
       );
     },
 

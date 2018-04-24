@@ -1,4 +1,5 @@
 block( 'form' ).mod( 'view', 'cart' ).content()( ( node ) => {
+
   return [
     {
       elem: 'content',

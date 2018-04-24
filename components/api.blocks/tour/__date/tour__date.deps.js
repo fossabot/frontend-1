@@ -13,6 +13,7 @@
       mods: {
         'has-calendar': true,
         width: 'available',
+        disabled: true,
       },
     },
     'label',
