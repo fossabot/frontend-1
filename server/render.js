@@ -30,16 +30,17 @@ const render = ( req, res, data = {}, context ) => {
     return res.send( cached.html );
   }
 
+  const api = { ...data.api };
+  delete data.api;
+
   const bemtreeCtx = {
     block: 'root',
     context: context,
-    api: data.api,
+    api,
     config: config.parsed,
     data: {
+      ...data,
       lang: currentLang,
-      title: data.title,
-      view: data.view || 'page-' + data.page,
-      meta: data.meta,
       params: req.params,
       url: req._parsedUrl,
       csrf: req.csrfToken(),

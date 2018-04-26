@@ -1,6 +1,6 @@
 block( 'page' )(
-  match( ( node ) => node.data && node.data.view ).content()( ( node ) => {
-    return { block: node.data.view };
+  match( ( node ) => node.data && node.data.view || node.data.page ).content()( ( node ) => {
+    return { block: node.data.view || `page-${ node.data.page }` };
   } ),
   prependContent()( () => {
     return { elem: 'header' };
