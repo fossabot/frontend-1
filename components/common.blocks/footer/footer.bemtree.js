@@ -1,9 +1,10 @@
 block( 'footer' ).content()( node => {
   let items = [];
-  if ( node.api && node.api.result && node.api.result.structureTree && node.api.result.structureTree.object ) {
-    const compilation = node.api.result.structureTree.object[ 61 ].children;
+  if ( node.api && node.api.entities && node.api.entities.resource && node.api.entities.resource.lists ) {
+    const compilation = node.api.entities.resource.lists.children;
     items = Object.keys( compilation ).map( id => {
       const resource = compilation[ id ];
+
       return {
         elem: 'item',
         elemMods: { type: 'link' },
@@ -38,10 +39,7 @@ block( 'footer' ).content()( node => {
           mods: { view: 'compilation' },
           mix: { block: 'footer', elem: 'compilation' },
           content: [
-            ...items,
-            ...items,
-            ...items,
-            ...items,
+            ...items
           ]
         }
       ]

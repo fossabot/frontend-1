@@ -1,9 +1,9 @@
-block( 'page-index' ).replace()( ( node ) => {
+block( 'page-index' ).replace()( ( { api: { entities } } ) => {
   return [
     {
       block: 'tour',
       mods: { view: 'promo' },
-      tour: node.api.entities.tour[ node.api.entities.banner[ 1 ].url ]
+      tour: entities.tour[ entities.banner[ 1 ].url ]
     },
     {
       block: 'list',
@@ -79,26 +79,23 @@ block( 'page-index' ).replace()( ( node ) => {
         ],
       ]
     },
-    [ 'day', 'night', 'meteors' ].map( category => {
-      const categoryObject = node.api.entities.structureFlat[ category ];
-      const categoryId = categoryObject.id;
-      const categoryTitle = categoryObject.pagetitle;
-      const categoryChildren = node.api.result.structureTree.object[ categoryId ].children;
-      const tours = Object.keys( categoryChildren );
+    [ 'day', 'night', 'meteors' ].map( categoryName => {
+      const category = entities.resource[ categoryName ];
+      const tours = Object.keys( category.children );
 
       return {
         block: 'category',
-        category: categoryObject,
+        category: category,
         content: [
           {
             elem: 'header',
             attrs: {
-              style: `background-image: url('https://nevatrip.ru/assets/img/e/${ categoryObject.alias }/bg.jpg')`
+              style: `background-image: url('https://nevatrip.ru/assets/img/e/${ category.alias }/bg.jpg')`
             },
             content: {
               elem: 'name',
-              content: categoryTitle,
-              url: categoryObject.alias,
+              content: category.longtitle || category.pagetitle,
+              url: category.alias,
             },
           },
           {
@@ -110,7 +107,7 @@ block( 'page-index' ).replace()( ( node ) => {
                 type: 'unstyled',
               },
               items: tours.map( tourId => {
-                const tour = node.api.entities.tour[ tourId ] || {};
+                const tour = entities.tour[ category.children[ tourId ].alias ] || {};
 
                 return {
                   block: 'tour',
@@ -121,7 +118,6 @@ block( 'page-index' ).replace()( ( node ) => {
             },
           },
         ],
-
       }
     } )
   ];

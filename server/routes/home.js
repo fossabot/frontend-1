@@ -25,8 +25,9 @@ const data = async ( context, params ) => {
       banner: response[4],
     },
     {
-      structureFlat: { object: [ schema.structureFlat ] },
-      setting: { results: [ schema.settings ] },
+      structureFlat: { object: [ schema.resource ] },
+      structureTree: { object: schema.structure },
+      setting: { results: [ schema.setting ] },
       tour: { results: [ schema.tour ] },
       banner: { object: [ schema.banner ] },
     },

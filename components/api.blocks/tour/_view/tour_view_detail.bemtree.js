@@ -139,7 +139,7 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
               content: [
                 {
                   elem: 'gallery',
-                  content: tour.gallery
+                  content: tour.gallery.map( id => node.api.entities.gallery[ id ] )
                 },
                 {
                   elem: 'sight',

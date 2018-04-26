@@ -2,15 +2,24 @@
 
 const { schema } = require( 'normalizr' );
 
-const structureFlat = new schema.Entity( 'structureFlat', {}, { idAttribute: 'alias' } );
+const resource = new schema.Entity( 'resource', {}, { idAttribute: 'alias' } );
+const structure = new schema.Values( resource );
+// resource.define( { resources } );
+// const structure = new schema.Entity( 'structure', {}, { idAttribute: 'alias' } );
 
-const settingsSchema = new schema.Entity( 'setting' );
-const tourSchema = new schema.Entity( 'tour' );
-const bannerSchema = new schema.Entity( 'banner', { url: tourSchema } );
+const setting = new schema.Entity( 'setting', {}, { idAttribute: 'key' } );
+const pier = new schema.Entity( 'pier', {}, { idAttribute: 'alias' } );
+const gallery = new schema.Entity( 'gallery', {}, { idAttribute: 'id' } );
+const tour = new schema.Entity( 'tour', {
+  tv_e_from: pier,
+  gallery: [ gallery ],
+}, { idAttribute: 'alias' } );
+const banner = new schema.Entity( 'banner', { url: tour } );
 
 module.exports = {
-  structureFlat: structureFlat,
-  settings: settingsSchema,
-  tour: tourSchema,
-  banner: bannerSchema,
+  resource,
+  structure,
+  setting,
+  tour,
+  banner,
 };
