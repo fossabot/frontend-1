@@ -61,7 +61,7 @@ block( 'list' )(
     },
   ),
   match( ( node, ctx ) => ctx.items && !ctx.content ).content()( ( node, ctx ) => {
-    const limit = ctx.limit || 10;
+    const limit = ctx.limit === 0 ? ctx.items.length : ctx.limit;
     const offset = ctx.offset || 0;
     const items = ctx.items.slice( offset, offset + limit );
     return items.map( ( item ) => {
