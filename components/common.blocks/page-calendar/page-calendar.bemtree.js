@@ -235,9 +235,9 @@ block( 'page' )(
                   <div data-container-for="description" class="k-edit-field">
                     <textarea name="description" class="k-textbox" data-bind="value:description" rows="3"></textarea>
                   </div>
-                  <div class="k-edit-label"><label for="printType">Печать билета</label></div>
-                  <div data-container-for="printType" class="k-edit-field">
-                    <select id="printType" data-bind="value:printType" data-source="{transport: {read: printType}}" data-role="dropdownlist" data-value-field="value" data-text-field="text"></select>
+                  <div class="k-edit-label"><label for="ticketPrint">Печать билета</label></div>
+                  <div data-container-for="ticketPrint" class="k-edit-field">
+                    <select id="ticketPrint" data-bind="value:ticketPrint" data-source="{transport: {read: ticketPrint}}" data-role="dropdownlist" data-value-field="value" data-text-field="text"></select>
                   </div>
                   <div class="k-edit-label"><label for="count">Количество билетов</label></div>
                   <div data-container-for="count" class="k-edit-field">
@@ -273,7 +273,7 @@ block( 'page' )(
                 ] )
               }
 
-              const printType = request => {
+              const ticketPrint = request => {
                 request.success( [
                   { text: "Не распечатывать, предьявить номер в кассе", value: 0 },
                   { text: "Не распечатывать, предьявить номер на теплоходе", value: 1 },
@@ -303,9 +303,11 @@ block( 'page' )(
               // Получаем список услуг транспортного средства
               const getVehicleFeature = request => {
                 request.success( [
-                  { text: "Бар", value: 1 },
-                  { text: "Туалет", value: 2 },
-                  { text: "Низкоорбитальная бластерная пушка", value: 3 }
+                  { text: "туалет"    , value: 'male'    },
+                  { text: "бар"       , value: 'glass'   },
+                  { text: "еда"       , value: 'cutlery' },
+                  { text: "экскурсия" , value: 'comment' },
+                  { text: "музыка"    , value: 'music'   },
                 ] )
               }
 
@@ -324,20 +326,22 @@ block( 'page' )(
                 name: '${ tour.longtitle }',
                 description: '${ tour.description.replace( /\r\n/g, " " ) }',
                 ticketType: 1,
-                pierStartId: '${ tour.tv_e_from.id }',
-                // pierFinishId: 1,
+                pierStartId: ${ node.api.entities.pier[ tour.tv_e_from ].id },
+                pierFinishId: ${ tour.tv_e_to },
                 mapUrl: '${ tour.tv_e_map }',
-                tripDirection: 'Москва — Петушки',
+                tripDirection: '--WIP--',
                 vehicleId: 1,
-                vehicleFeaturesArray: [ 2 ],
-                sightArray: '${ tour.tv_e_showplaces.split( ',' ) }',
+                vehicleFeaturesArray: ['${ tour.tv_e_on_boat.split( /\n/g ).join( '\',\'' ) }'],
+                sightArray: [${ tour.tv_e_showplaces.split( ',' ) }],
                 langArray: [ 2 ],
-                tipBuy: 'Купите этот билет',
-                tipTicket: 'Распечатайте этот билет',
+                tipBuy: '--WIP--',
+                tipTicket: '${ tour.tv_e_advice_mail }',
                 buyTime: null,
                 tagArray: [ 2, 3 ],
-                ticketPrint: true,
+                ticketPrint: 1,
                 count: 100,
+                tickets: ${ tour.tv_e_tickets },
+                provider: ${ tour['vendor.id'] },
               }
 
               $(function() {
@@ -484,8 +488,10 @@ block( 'page' )(
                               MIGX_id: { editable: false, nullable: true },
                               name: { defaultValue: "Взрослый", validation: { required: true } },
                               description: { defaultValue: "" },
-                              price: { type: "number", validation: { required: true, min: 0 } },
-                              count: { editable: false, type: "number", validation: { min: 0 } },
+                              price: { validation: { required: true } },
+                              count: { editable: true, type: "number", validation: { min: 0 } },
+                              buyed: { editable: false, type: "number", defaultValue: 0 },
+                              required: { editable: true },
                             }
                           }
                         }
@@ -493,10 +499,13 @@ block( 'page' )(
                       pageable: false,
                       toolbar: ["create"],
                       columns: [
-                        { field:"name",title:"Билет" },
-                        { field: "price", title:"Стоимость", format: "{0:c}" },
-                        { field: "count", title:"Продано" },
-                        { command: "destroy", title: " " }
+                        { field: "name",title: "Билет" },
+                        { field: "price", title: "Стоимость", format: "{0:c}" },
+                        { field: "count", title: "Кол-во пассажиров" },
+                        { field: "required", title: "Основной" },
+                        { field: "description", title: "Описание" },
+                        { field: "buyed", title: "Продано" },
+                        { command: "destroy", title: " ", width: 120 }
                       ],
                       editable: true
                     });
@@ -519,7 +528,6 @@ block( 'page' )(
                         }
                       }),
                       pageable: false,
-                      // height: 550,
                       toolbar: ["create"],
                       columns: [
                         { field:"productName",title:"Товар" },
@@ -570,36 +578,38 @@ block( 'page' )(
                     schema: {
                       data: "object",
                       model: {
+                        id: "taskId",
                         fields: {
-                          taskId               : { from: "id"                      , type: "number" },
-                          tourId               : { from: "parent"                  , type: "number", defaultValue: tour.id },
-                          title                : { from: "pagetitle"               , defaultValue: tour.name, validation: { required: true } },
-                          start                : { from: "tv_tripDateTimeStart"    , type: "date" },
-                          end                  : { from: "tv_tripDateTimeEnd"      , type: "date" },
-                          isAllDay             : { type: "boolean"                 , from: "tv_isAllDay" },
-                          recurrenceId         : { from: "tv_recurrenceID"          },
-                          recurrenceRule       : { from: "tv_recurrenceRule"        },
-                          recurrenceException  : { from: "tv_recurrenceException"   },
-                          startTimezone        : { from: "tv_startTimezone"         },
-                          endTimezone          : { from: "tv_endTimezone"           },
-                          description          : { from: "description"             , defaultValue: tour.description },
-                          pierStartId          : { from: "tv_pierStartId"          , defaultValue: tour.pierStartId },
-                          pierFinishId         : { from: "tv_pierFinishId"         , defaultValue: tour.pierFinishId },
-                          ticketType           : { from: "tv_ticketType"           , defaultValue: tour.ticketType },
-                          mapUrl               : { from: "tv_mapURL"               , defaultValue: tour.mapUrl },
-                          tripDirection        : { from: "tv_tripDirection"        , defaultValue: tour.tripDirection },
-                          vehicleId            : { from: "tv_vehicleId"            , defaultValue: tour.vehicleId },
-                          vehicleFeaturesArray : { from: "tv_vehicleFeaturesArray" , defaultValue: tour.vehicleFeaturesArray },
-                          sightArray           : { from: "tv_sightArray"           , defaultValue: tour.sightArray },
-                          langArray            : { from: "tv_langArray"            , defaultValue: tour.langArray },
-                          tipBuy               : { from: "tv_tipBuy"               , defaultValue: tour.tipBuy },
-                          tipTicket            : { from: "tv_tipTicket"            , defaultValue: tour.tipTicket },
-                          buyTime              : { from: "tv_buyTime"              , defaultValue: tour.buyTime },
-                          tagArray             : { from: "tv_tags"                 , defaultValue: tour.tagArray },
-                          ticketPrint          : { from: "tv_ticketPrint"          , defaultValue: tour.ticketPrint },
-                          count                : { from: "tv_ticketCount"          , defaultValue: tour.count },
-                          tickets              : { from: "tv_e_tickets"             },
-                          additional           : { from: "tv_additional"            },
+                          taskId               : { from: "id"                      , type: "number"  ,                                                                          },
+                          tourId               : { from: "parent"                  , type: "number"  , defaultValue: tour.id                   ,                                },
+                          title                : { from: "pagetitle"               ,                   defaultValue: tour.name                 , validation: { required: true } },
+                          start                : { from: "tv_tripDateTimeStart"    , type: "date"    ,                                                                          },
+                          end                  : { from: "tv_tripDateTimeEnd"      , type: "date"    ,                                                                          },
+                          isAllDay             : { from: "tv_isAllDay"             , type: "boolean" ,                                                                          },
+                          recurrenceId         : { from: "tv_recurrenceID"         ,                                                                                            },
+                          recurrenceRule       : { from: "tv_recurrenceRule"       ,                                                                                            },
+                          recurrenceException  : { from: "tv_recurrenceException"  ,                                                                                            },
+                          startTimezone        : { from: "tv_startTimezone"        ,                                                                                            },
+                          endTimezone          : { from: "tv_endTimezone"          ,                                                                                            },
+                          description          : { from: "description"             ,                   defaultValue: tour.description          ,                                },
+                          pierStartId          : { from: "tv_pierStartId"          , type: "number"  , defaultValue: tour.pierStartId          ,                                },
+                          pierFinishId         : { from: "tv_pierFinishId"         , type: "number"  , defaultValue: tour.pierFinishId         ,                                },
+                          ticketType           : { from: "tv_ticketType"           ,                   defaultValue: tour.ticketType           ,                                },
+                          mapUrl               : { from: "tv_mapURL"               ,                   defaultValue: tour.mapUrl               ,                                },
+                          tripDirection        : { from: "tv_tripDirection"        ,                   defaultValue: tour.tripDirection        ,                                },
+                          vehicleId            : { from: "tv_vehicleId"            ,                   defaultValue: tour.vehicleId            ,                                },
+                          vehicleFeaturesArray : { from: "tv_vehicleFeaturesArray" ,                   defaultValue: tour.vehicleFeaturesArray ,                                },
+                          sightArray           : { from: "tv_sightArray"           ,                   defaultValue: tour.sightArray           ,                                },
+                          langArray            : { from: "tv_langArray"            ,                   defaultValue: tour.langArray            ,                                },
+                          tipBuy               : { from: "tv_tipBuy"               ,                   defaultValue: tour.tipBuy               ,                                },
+                          tipTicket            : { from: "tv_tipTicket"            ,                   defaultValue: tour.tipTicket            ,                                },
+                          buyTime              : { from: "tv_buyTime"              ,                   defaultValue: tour.buyTime              ,                                },
+                          tagArray             : { from: "tv_tags"                 ,                   defaultValue: tour.tagArray             ,                                },
+                          ticketPrint          : { from: "tv_ticketPrint"          ,                   defaultValue: tour.ticketPrint          ,                                },
+                          count                : { from: "tv_ticketCount"          ,                   defaultValue: tour.count                ,                                },
+                          provider             : { from: "vendor.id"               , type: "number"  , defaultValue: tour.provider             ,                                },
+                          tickets              : { from: "tv_e_tickets"            ,                   defaultValue: tour.tickets              ,                                },
+                          additional           : { from: "tv_additional"           ,                                                                                            },
                         }
                       }
                     },
