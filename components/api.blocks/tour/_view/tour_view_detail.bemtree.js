@@ -2,6 +2,7 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
   const tour = ctx.tour;
   const {
     sight,
+    gallery,
   } = node.api.entities;
 
   return [
@@ -142,7 +143,7 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
               content: [
                 {
                   elem: 'gallery',
-                  content: tour.gallery.map( id => node.api.entities.gallery[ id ] )
+                  content: tour.gallery.map( id => gallery[ id ] )
                 },
                 {
                   elem: 'sight',
