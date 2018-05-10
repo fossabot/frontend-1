@@ -24,13 +24,16 @@ module.exports = {
    "bem-tools": {
       plugins: {
         create: {
-          techs: [ "post.css", "js", "bemtree.js", "bemhtml.js", "deps.js", "md" ],
+          techs: [ "post.css", "js", "bemtree.js", "bemhtml.js", "deps.js", "md", "bemdecl.js" ],
           templateFolder: ".bem/templates",
           levels: {
             "components/common.blocks": {
               default: true,
               techs: [ "js", "bemtree.js", "bemhtml.js", "deps.js", "md" ]
             },
+            "bundles": {
+              tech: [ "bemdecl.js" ]
+            }
             "components/desktop.blocks": {},
             "components/touch.blocks": {},
             "design/common.blocks": {
