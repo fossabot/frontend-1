@@ -60,14 +60,14 @@ block( 'list' )(
       }
     },
   ),
-  match( ( node, ctx ) => ctx.items && !ctx.content ).content()( ( node, ctx ) => {
-    const limit = ctx.limit === 0 ? ctx.items.length : ctx.limit;
-    const offset = ctx.offset || 0;
-    const items = ctx.items.slice( offset, offset + limit );
+  match( ( node, ctx ) => ctx.items && !ctx.content ).content()( ( node, { limit = 0, offset = 0, items, getKey, itemMix } ) => {
+    limit = limit || items.length;
+    items = items.slice( offset, offset + limit );
+
     return items.map( ( item ) => {
-      return typeof item === 'object' && ctx.getKey
-        ? { elem: 'item', mix: ctx.itemMix, content: item[ctx.getKey] }
-        : item ? { elem: 'item', mix: ctx.itemMix, content: item } : '';
+      return typeof item === 'object' && getKey
+        ? { elem: 'item', mix: itemMix, content: item[ getKey ] }
+        : item ? { elem: 'item', mix: itemMix, content: item } : '';
     } );
   } ),
 );
