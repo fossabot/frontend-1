@@ -1,5 +1,7 @@
 block( 'page' )(
   def()( ( node ) => {
+    const tour = node.api.result.tour.object;
+
     return {
       ...applyNext(),
       styles: [
@@ -22,6 +24,17 @@ block( 'page' )(
         {
           elem: 'css',
           content: `
+            .page {
+              margin: 0;
+            }
+
+            .k-scheduler-edit-form textarea.k-textbox {
+              min-height: 2em;
+              resize: vertical;
+              padding: 5px;
+              box-sizing: border-box;
+            }
+
             .trip-template {
               padding: 5px;
             }
@@ -47,6 +60,31 @@ block( 'page' )(
             .k-timepicker,
             .k-toolbar .k-split-button {
               width: 100%;
+            }
+
+            .k-scheduler-edit-form .k-edit-form-container,
+            .k-scheduler-timezones .k-edit-form-container {
+              width: 100%;
+              margin: 0 auto;
+            }
+
+            .container-modal {
+              display: flex;
+              flex-direction: column;
+              width: 100%
+            }
+
+            .container-fields {
+              flex: 1;
+              column-count: 2;
+            }
+
+            .container-tables {
+              width: 100%;
+              margin-top: 10px;
+              padding-left: 8px;
+              padding-right: 8px;
+              box-sizing: border-box;
             }
           `
         }
@@ -94,121 +132,121 @@ block( 'page' )(
           },
           content: {
             html: `
-              <div class="container">
-                <div class="k-edit-label"><label for="title">Название рейса</label></div>
-                <div data-container-for="title" class="k-edit-field">
-                  <textarea name="title" class="k-textbox" data-bind="value:title" required="required"></textarea>
+              <div class="container-modal">
+                <div class="container-fields">
+                  <div class="k-edit-label"><label for="title">Название рейса</label></div>
+                  <div data-container-for="title" class="k-edit-field">
+                    <textarea name="title" class="k-textbox" data-bind="value:title" required="required" rows="2"></textarea>
+                  </div>
+                  <div class="k-edit-label"></div>
+                  <div data-container-for="isAllDay" class="k-edit-field">
+                    <input type="checkbox" name="isAllDay" id="isAllDay" data-type="boolean" data-bind="checked:isAllDay">
+                    <label for="isAllDay">Время отправления из API</label>
+                  </div>
+                  <div class="k-edit-label"><label for="start">Начало</label></div>
+                  <div data-container-for="start" class="k-edit-field">
+                    <input type="text"
+                      data-role="datetimepicker"
+                      data-interval="15"
+                      data-type="date"
+                      data-bind="value:start,invisible:isAllDay"
+                      name="start"/>
+                    <input type="text" data-type="date" data-role="datepicker" data-bind="value:start,visible:isAllDay" name="start" />
+                    <span data-bind="text: startTimezone"></span>
+                    <span data-for="start" class="k-invalid-msg" style="display: none;"></span>
+                  </div>
+                  <div class="k-edit-label"><label for="end">Конец</label></div>
+                  <div data-container-for="end" class="k-edit-field">
+                    <input type="text" data-type="date" data-role="datetimepicker" data-bind="value:end,invisible:isAllDay" name="end" data-datecompare-msg="End date should be greater than or equal to the start date" />
+                    <input type="text" data-type="date" data-role="datepicker" data-bind="value:end,visible:isAllDay" name="end" data-datecompare-msg="End date should be greater than or equal to the start date" />
+                    <span data-bind="text: endTimezone"></span>
+                    <span data-bind="text: startTimezone, invisible: endTimezone"></span>
+                    <span data-for="end" class="k-invalid-msg" style="display: none;"></span>
+                  </div>
+                  <div class="k-edit-label"><label for="buyTime">Прекратить продажу в</label></div>
+                  <div data-container-for="buyTime" class="k-edit-field">
+                    <input type="text"
+                      data-role="timepicker"
+                      data-interval="15"
+                      data-bind="value:buyTime"
+                      name="buyTime"/>
+                  </div>
+                  <div class="k-edit-label"><label for="buyDay">Прекратить продажу</label></div>
+                  <div data-container-for="buyDay" class="k-edit-field">
+                    <select id="buyDay" data-bind="value:buyDay" data-source="{transport: {read: buyDay}}" data-role="dropdownlist" data-value-field="value" data-text-field="text"></select>
+                  </div>
+                  <div class="k-edit-label"><label for="recurrenceRule">Повторять</label></div>
+                  <div data-container-for="recurrenceRule" class="k-edit-field">
+                    <div data-bind="value:recurrenceRule" name="recurrenceRule" data-role="recurrenceeditor"></div>
+                  </div>
+                  <div class="k-edit-label"><label for="ticketType">Тип времени</label></div>
+                  <div data-container-for="ticketType" class="k-edit-field">
+                    <select id="ticketType" data-bind="value:ticketType" data-source="{transport: {read: getTicketType}}" data-role="multiselect" multiple="multiple" data-value-field="value" data-text-field="text"></select>
+                  </div>
+                  <div class="k-edit-label"><label for="pierStartId">Причал отправления</label></div>
+                  <div data-container-for="pierStartId" class="k-edit-field">
+                    <select id="pierStartId" data-bind="value:pierStartId" data-role="dropdownlist"></select>
+                  </div>
+                  <div class="k-edit-label"><label for="pierFinishId">Причал прибытия</label></div>
+                  <div data-container-for="pierFinishId" class="k-edit-field">
+                    <select id="pierFinishId" data-bind="value:pierFinishId" data-role="dropdownlist"></select>
+                  </div>
+                  <div class="k-edit-label"><label for="mapUrl">Карта маршрута</label></div>
+                  <div data-container-for="mapUrl" class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="mapUrl" data-bind="value:mapUrl">
+                  </div>
+                  <div class="k-edit-label"><label for="tripDirection">Направление</label></div>
+                  <div data-container-for="tripDirection" class="k-edit-field">
+                    <input type="text" class="k-input k-textbox" name="tripDirection" data-bind="value:tripDirection">
+                  </div>
+                  <div class="k-edit-label"><label for="vehicleId">Транспортное средство</label></div>
+                  <div data-container-for="vehicleId" class="k-edit-field">
+                    <select id="vehicleId" data-bind="value:vehicleId" data-role="dropdownlist"></select>
+                  </div>
+                  <div class="k-edit-label"><label for="vehicleFeaturesArray">На борту</label></div>
+                  <div data-container-for="vehicleFeaturesArray" class="k-edit-field">
+                    <select id="vehicleFeaturesArray" data-bind="value:vehicleFeaturesArray" data-source="{transport: {read: getVehicleFeature}}" data-role="multiselect" multiple="multiple" data-value-field="value" data-text-field="text"></select>
+                  </div>
+                  <div class="k-edit-label"><label for="sightArray">Достопримечательности</label></div>
+                  <div data-container-for="sightArray" class="k-edit-field">
+                    <select id="sightArray" data-bind="value:sightArray" multiple="multiple"></select>
+                  </div>
+                  <div class="k-edit-label"><label for="langArray">Язык экскурсии</label></div>
+                  <div data-container-for="langArray" class="k-edit-field">
+                    <select id="langArray" data-bind="value:langArray" data-source="{transport: {read: getLang}}" data-role="multiselect" multiple="multiple" data-value-field="value" data-text-field="text"></select>
+                  </div>
+                  <div class="k-edit-label"><label for="tipBuy">Совет при покупке</label></div>
+                  <div data-container-for="tipBuy" class="k-edit-field">
+                    <textarea name="tipBuy" class="k-textbox" data-bind="value:tipBuy" required="required"></textarea>
+                  </div>
+                  <div class="k-edit-label"><label for="tipTicket">Совет в билете</label></div>
+                  <div data-container-for="tipTicket" class="k-edit-field">
+                    <textarea name="tipTicket" class="k-textbox" data-bind="value:tipTicket" required="required"></textarea>
+                  </div>
+                  <div class="k-edit-label"><label for="tagArray">Теги</label></div>
+                  <div data-container-for="tagArray" class="k-edit-field">
+                    <select id="tagArray" data-bind="value:tagArray" data-source="{transport: {read: getTag}}" data-role="multiselect" multiple="multiple" data-value-field="value" data-text-field="text"></select>
+                  </div>
+                  <div class="k-edit-label"><label for="description">Описание</label></div>
+                  <div data-container-for="description" class="k-edit-field">
+                    <textarea name="description" class="k-textbox" data-bind="value:description" rows="3"></textarea>
+                  </div>
+                  <div class="k-edit-label"><label for="count">Количество билетов</label></div>
+                  <div data-container-for="count" class="k-edit-field">
+                    <input name="count" class="k-textbox" data-bind="value:count">
+                  </div>
+                  <div class="k-edit-label"></div>
+                  <div data-container-for="ticketPrint" class="k-edit-field">
+                    <input type="checkbox" name="ticketPrint" id="ticketPrint" data-type="boolean" data-bind="checked:ticketPrint">
+                    <label for="ticketPrint">Билет нужно распечатать</label>
+                  </div>
                 </div>
-                <div class="k-edit-label"><label for="isAllDay">Весь день</label></div>
-                <div data-container-for="isAllDay" class="k-edit-field">
-                  <input type="checkbox" name="isAllDay" data-type="boolean" data-bind="checked:isAllDay">
+                <div class="container-tables">
+                  <div id="grid-ticket"></div>
+                  <hr>
+                  <h3>Доп. услуги</h3>
+                  <div id="grid-additional"></div>
                 </div>
-                <div class="k-edit-label"><label for="start">Начало</label></div>
-                <div data-container-for="start" class="k-edit-field">
-                  <input type="text"
-                    data-role="datetimepicker"
-                    data-interval="15"
-                    data-type="date"
-                    data-bind="value:start,invisible:isAllDay"
-                    name="start"/>
-                  <input type="text" data-type="date" data-role="datepicker" data-bind="value:start,visible:isAllDay" name="start" />
-                  <span data-bind="text: startTimezone"></span>
-                  <span data-for="start" class="k-invalid-msg" style="display: none;"></span>
-                </div>
-                <div class="k-edit-label"><label for="end">Конец</label></div>
-                <div data-container-for="end" class="k-edit-field">
-                  <input type="text" data-type="date" data-role="datetimepicker" data-bind="value:end,invisible:isAllDay" name="end" data-datecompare-msg="End date should be greater than or equal to the start date" />
-                  <input type="text" data-type="date" data-role="datepicker" data-bind="value:end,visible:isAllDay" name="end" data-datecompare-msg="End date should be greater than or equal to the start date" />
-                  <span data-bind="text: endTimezone"></span>
-                  <span data-bind="text: startTimezone, invisible: endTimezone"></span>
-                  <span data-for="end" class="k-invalid-msg" style="display: none;"></span>
-                </div>
-                <div class="k-edit-label"><label for="buyTime">Прекратить продажу</label></div>
-                <div data-container-for="buyTime" class="k-edit-field">
-                  <input type="text"
-                    data-role="datetimepicker"
-                    data-interval="15"
-                    data-type="date"
-                    data-bind="value:buyTime,invisible:isAllDay"
-                    name="buyTime"/>
-                  <input type="text" data-type="date" data-role="datepicker" data-bind="value:buyTime,visible:isAllDay" name="buyTime" />
-                  <span data-bind="text: startTimezone"></span>
-                  <span data-for="buyTime" class="k-invalid-msg" style="display: none;"></span>
-                </div>
-                <div class="k-edit-label"><label for="recurrenceRule">Повторять</label></div>
-                <div data-container-for="recurrenceRule" class="k-edit-field">
-                  <div data-bind="value:recurrenceRule" name="recurrenceRule" data-role="recurrenceeditor"></div>
-                </div>
-                <div class="k-edit-label"><label for="ticketType">Тип времени</label></div>
-                <div data-container-for="ticketType" class="k-edit-field">
-                  <select id="ticketType" data-bind="value:ticketType" data-source="{transport: {read: getTicketType}}" data-role="dropdownlist" data-value-field="value" data-text-field="text"></select>
-                </div>
-                <div class="k-edit-label"><label for="pierStartId">Причал отправления</label></div>
-                <div data-container-for="pierStartId" class="k-edit-field">
-                  <select id="pierStartId" data-bind="value:pierStartId" data-role="dropdownlist"></select>
-                </div>
-                <div class="k-edit-label"><label for="pierFinishId">Причал прибытия</label></div>
-                <div data-container-for="pierFinishId" class="k-edit-field">
-                  <select id="pierFinishId" data-bind="value:pierFinishId" data-role="dropdownlist"></select>
-                </div>
-                <div class="k-edit-label"><label for="mapUrl">Карта маршрута</label></div>
-                <div data-container-for="mapUrl" class="k-edit-field">
-                  <input type="text" class="k-input k-textbox" name="mapUrl" data-bind="value:mapUrl">
-                </div>
-                <div class="k-edit-label"><label for="tripDirection">Направление</label></div>
-                <div data-container-for="tripDirection" class="k-edit-field">
-                  <input type="text" class="k-input k-textbox" name="tripDirection" data-bind="value:tripDirection">
-                </div>
-                <div class="k-edit-label"><label for="vehicleId">Транспортное средство</label></div>
-                <div data-container-for="vehicleId" class="k-edit-field">
-                  <select id="vehicleId" data-bind="value:vehicleId" data-role="dropdownlist"></select>
-                </div>
-                <div class="k-edit-label"><label for="vehicleFeaturesArray">На борту</label></div>
-                <div data-container-for="vehicleFeaturesArray" class="k-edit-field">
-                  <select id="vehicleFeaturesArray" data-bind="value:vehicleFeaturesArray" data-source="{transport: {read: getVehicleFeature}}" data-role="multiselect" multiple="multiple" data-value-field="value" data-text-field="text"></select>
-                </div>
-                <div class="k-edit-label"><label for="sightArray">Достопримечательности</label></div>
-                <div data-container-for="sightArray" class="k-edit-field">
-                  <select id="sightArray" data-bind="value:sightArray" multiple="multiple"></select>
-                </div>
-                <div class="k-edit-label"><label for="langArray">Язык экскурсии</label></div>
-                <div data-container-for="langArray" class="k-edit-field">
-                  <select id="langArray" data-bind="value:langArray" data-source="{transport: {read: getLang}}" data-role="multiselect" multiple="multiple" data-value-field="value" data-text-field="text"></select>
-                </div>
-                <div class="k-edit-label"><label for="tipBuy">Совет при покупке</label></div>
-                <div data-container-for="tipBuy" class="k-edit-field">
-                  <textarea name="tipBuy" class="k-textbox" data-bind="value:tipBuy" required="required"></textarea>
-                </div>
-                <div class="k-edit-label"><label for="tipTicket">Совет в билете</label></div>
-                <div data-container-for="tipTicket" class="k-edit-field">
-                  <textarea name="tipTicket" class="k-textbox" data-bind="value:tipTicket" required="required"></textarea>
-                </div>
-                <div class="k-edit-label"><label for="tagArray">Теги</label></div>
-                <div data-container-for="tagArray" class="k-edit-field">
-                  <select id="tagArray" data-bind="value:tagArray" data-source="{transport: {read: getTag}}" data-role="multiselect" multiple="multiple" data-value-field="value" data-text-field="text"></select>
-                </div>
-                <div class="k-edit-label"><label for="ticketPrint">Билет нужно распечатать</label></div>
-                <div data-container-for="ticketPrint" class="k-edit-field">
-                  <input type="checkbox" name="ticketPrint" data-type="boolean" data-bind="checked:ticketPrint">
-                </div>
-                <div class="k-edit-label"><label for="description">Описание</label></div>
-                <div data-container-for="description" class="k-edit-field">
-                  <textarea name="description" class="k-textbox" data-bind="value:description" rows="6"></textarea>
-                </div>
-                <div class="k-edit-label"><label for="count">Количество билетов</label></div>
-                <div data-container-for="count" class="k-edit-field">
-                  <input name="count" class="k-textbox" data-bind="value:count">
-                </div>
-              </div>
-              <hr>
-              <div class="container">
-                <h3>Билеты</h3>
-                <div id="grid-ticket"></div>
-              </div>
-              <hr>
-              <div class="container">
-                <h3>Доп. услуги</h3>
-                <div id="grid-additional"></div>
               </div>
             `
           }
@@ -220,8 +258,17 @@ block( 'page' )(
               /*
                * Tour
                ************
-              ${ JSON.stringify( node.api.result.tour.object, null, 2 ) }
+              ${ JSON.stringify( tour, null, 2 ) }
               */
+
+              // Прекратить продажу
+              const buyDay = request => {
+                request.success( [
+                  { text: "В этот же день", value: 0 },
+                  { text: "За день", value: 1 },
+                  { text: "За два дня", value: 2 }
+                ] )
+              }
 
               // Получаем список языков
               const getLang = request => {
@@ -255,24 +302,23 @@ block( 'page' )(
                 request.success( [
                   { text: "Открытое", value: 1 },
                   { text: "Закрытое", value: 2 },
-                  { text: "Гибридное", value: 3 },
-                  { text: "С открытой датой", value: 4 },
+                  { text: "С открытой датой", value: 3 },
                 ] )
               }
 
               // Сюда передаём данные экскурсии — они будут подставляться в значения
               // по умолчанию для дальнейшего переопределения
               const tour = {
-                name: "${ node.api.result.tour.object.longtitle }",
-                description: 'Описание экскурсии',
-                ticketType: 3,
-                pierStartId: 2,
-                pierFinishId: 1,
-                mapUrl: 'https://maps.yandex.ru/23784659356',
+                name: '${ tour.longtitle }',
+                description: '${ tour.description.replace( /\r\n/g, " " ) }',
+                ticketType: 1,
+                pierStartId: '${ tour.tv_e_from.id }',
+                // pierFinishId: 1,
+                mapUrl: '${ tour.tv_e_map }',
                 tripDirection: 'Москва — Петушки',
                 vehicleId: 1,
                 vehicleFeaturesArray: [ 2 ],
-                sightArray: [ 1 ],
+                sightArray: '${ tour.tv_e_showplaces.split( ',' ) }',
                 langArray: [ 2 ],
                 tipBuy: 'Купите этот билет',
                 tipTicket: 'Распечатайте этот билет',
@@ -303,18 +349,18 @@ block( 'page' )(
                           batch: true,
                           schema: {
                             type: "json",
-                            data: "object",
+                            data: "results",
                             model: {
                               id: "value",
                               fields: {
-                                value: { field: "value", type: "number" },
-                                text: { field: "text", type: "string" },
+                                value: { field: "id", type: "number" },
+                                text: { field: "pagetitle", type: "string" },
                               }
                             }
                           },
                           transport: {
                             read: {
-                              url: "https://9836511c-0527-4059-ac18-7966ba3f6793.mock.pstmn.io/fake/pier/",
+                              url: "https://nevatrip.dev.compaero.ru/rest/pier/",
                               data: {
                                 page: 1,
                                 perPage: 0,
@@ -361,18 +407,18 @@ block( 'page' )(
                           batch: true,
                           schema: {
                             type: "json",
-                            data: "object",
+                            data: "results",
                             model: {
                               id: "value",
                               fields: {
-                                value: { field: "value", type: "number" },
-                                text: { field: "text", type: "string" },
+                                value: { field: "id", type: "number" },
+                                text: { field: "pagetitle", type: "string" },
                               }
                             }
                           },
                           transport: {
                             read: {
-                              url: "https://9836511c-0527-4059-ac18-7966ba3f6793.mock.pstmn.io/fake/sight/",
+                              url: "https://nevatrip.dev.compaero.ru/rest/sight/",
                               data: {
                                 page: 1,
                                 perPage: 0,
@@ -408,10 +454,10 @@ block( 'page' )(
                       toolbar: ["create"],
                       columns: [
                         { field:"productName",title:"Билет" },
-                        // { field: "description", title: "Описание" },
                         { field: "price", title:"Стоимость", format: "{0:c}" },
                         { field: "buyed", title:"Продано" },
-                        { command: "destroy", title: " " }],
+                        { command: "destroy", title: " " }
+                      ],
                       editable: true
                     });
 
@@ -436,10 +482,10 @@ block( 'page' )(
                       // height: 550,
                       toolbar: ["create"],
                       columns: [
-                        { field:"productName",title:"Билет" },
-                        // { field: "description", title: "Описание" },
+                        { field:"productName",title:"Товар" },
                         { field: "price", title:"Стоимость", format: "{0:c}" },
-                        { command: "destroy", title: " " }],
+                        [{ command: "destroy", title: " " },{ command: "edit", title: " " }]
+                      ],
                       editable: true
                     });
                   },
@@ -460,19 +506,19 @@ block( 'page' )(
                     batch: true,
                     transport: {
                       read: {
-                        url: "https://nevatrip.dev.compaero.ru/rest/tour/${ node.api.result.tour.object.id }/trip/getlist",
+                        url: "https://nevatrip.dev.compaero.ru/rest/tour/${ tour.id }/trip/getlist",
                         dataType: "json"
                       },
                       update: {
-                        url: "https://nevatrip.dev.compaero.ru/rest/tour/${ node.api.result.tour.object.id }/trip/update",
+                        url: "https://nevatrip.dev.compaero.ru/rest/tour/${ tour.id }/trip/update",
                         dataType: "json"
                       },
                       create: {
-                        url: "https://nevatrip.dev.compaero.ru/rest/tour/${ node.api.result.tour.object.id }/trip/create",
+                        url: "https://nevatrip.dev.compaero.ru/rest/tour/${ tour.id }/trip/create",
                         dataType: "json"
                       },
                       destroy: {
-                        url: "https://nevatrip.dev.compaero.ru/rest/tour/${ node.api.result.tour.object.id }/trip/delete",
+                        url: "https://nevatrip.dev.compaero.ru/rest/tour/${ tour.id }/trip/delete",
                         dataType: "json"
                       },
                       parameterMap: function(options, operation) {
@@ -487,63 +533,34 @@ block( 'page' )(
                       model: {
                         id: "taskId",
                         fields: {
-                          // ID рейса
                           taskId: { from: "id", type: "number" },
-                          // ID экскурсии
-                          tourId: { from: "parent", type: "number", defaultValue: ${ node.api.result.tour.object.id } },
-                          // Название экскурсии
+                          tourId: { from: "parent", type: "number", defaultValue: ${ tour.id } },
                           title: { from: "pagetitle", defaultValue: tour.name, validation: { required: true } },
-                          // Начало рейса
                           start: { from: "tv_tripDateTimeStart", type: "date" },
-                          // Окончание рейса
                           end: { type: "date", from: "tv_tripDateTimeEnd" },
-                          // Рейс длится весь день
                           isAllDay: { type: "boolean", from: "tv_isAllDay" },
-                          // Повторение
                           recurrenceId: { from: "tv_recurrenceID" },
-                          // Правило повторения
                           recurrenceRule: { from: "tv_recurrenceRule" },
-                          // Исключение
                           recurrenceException: { from: "tv_recurrenceException" },
-                          // В каком часовом поясе начинается рейс
                           startTimezone: { from: "tv_startTimezone" },
-                          // В каком часовом поясе оканчивается рейс
                           endTimezone: { from: "tv_endTimezone" },
-                          // Описание экскурсии
                           description: { from: "description", defaultValue: tour.description },
-                          // Причал отправления
                           pierStartId: { from: "tv_pierStartId", defaultValue: tour.pierStartId },
-                          // Причал прибытия
                           pierFinishId: { from: "tv_pierFinishId", defaultValue: tour.pierFinishId },
-                          // Тип билета: открытое время, точное время, гибрид, открытая дата
                           ticketType: { from: "tv_ticketType", defaultValue: tour.ticketType },
-                          // Ссылка на схему маршрута
                           mapUrl: { from: "tv_mapURL", defaultValue: tour.mapUrl },
-                          // Направление
                           tripDirection: { from: "tv_tripDirection", defaultValue: tour.tripDirection },
-                          // ID транспортного средства
                           vehicleId: { from: "tv_vehicleId", defaultValue: tour.vehicleId },
-                          // Что есть на борту транспортного средства
                           vehicleFeaturesArray: { from: "tv_vehicleFeaturesArray", defaultValue: tour.vehicleFeaturesArray },
-                          // Достопримечательности
                           sightArray: { from: "tv_sightArray", defaultValue: tour.sightArray },
-                          // Языки экскурсии
                           langArray: { from: "tv_langArray", defaultValue: tour.langArray },
-                          // Совет при покупке
                           tipBuy: { from: "tv_tipBuy", defaultValue: tour.tipBuy },
-                          // Совет в билете
                           tipTicket: { from: "tv_tipTicket", defaultValue: tour.tipTicket },
-                          // Время прекращения продажи билета
                           buyTime: { from: "tv_buyTime", defaultValue: tour.buyTime },
-                          // Теги
                           tagArray: { from: "tv_tags", defaultValue: tour.tagArray },
-                          // Билет нужно распечатать
                           ticketPrint: { from: "tv_ticketPrint", defaultValue: tour.ticketPrint },
-                          // Количество билетов на продажу
                           count: { from: "tv_ticketCount", defaultValue: tour.count },
-                          // Билеты
                           tickets: { from: "tv_tickets" },
-                          // Доп. услуги
                           additional: { from: "tv_additional" },
                         }
                       }
@@ -555,7 +572,6 @@ block( 'page' )(
                   var widget = $("#scheduler").data("kendoScheduler");
                   var height = $(window).outerHeight();
 
-                  //size widget to take the whole view
                   widget.element.height(height);
                   widget.resize(true);
                 }
