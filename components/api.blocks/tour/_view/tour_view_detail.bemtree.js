@@ -5,6 +5,52 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
     gallery,
   } = node.api.entities;
 
+  // @TODO: rewrite string to template: https://stackoverflow.com/questions/37128624/terse-way-to-intersperse-element-between-all-elements-in-javascript-array
+
+  const renderTicketDescription = ticket => {
+    let description = [];
+
+    if ( parseInt( ticket.count ) > 1 ) {
+      description.push( 'от ' + ticket.count + ' человек' );
+    }
+
+    if ( /^\d+$/.test( ticket.price ) & parseInt( ticket.price ) > 0 ) {
+      description.push( ticket.price + ' ₽' );
+    } else if( ticket.price !== '0' ) {
+      description.push( ticket.price );
+    }
+
+    const name = `<abbr class="text text_inherit text_weight_bold text_size_m text_theme_nevatrip" title="${ ticket.description }">${ ticket.name.toLowerCase() }</abbr>`;
+
+    return `${ name } ${ description.length ? '(' + description.join( ', ' ) + ')' : '' }`;
+  };
+
+  const renderTicketGroup = tickets => {
+    const ticketsWPNRLastIndex = tickets.length - 1;
+    const ticketsWPNRLastItem = tickets[ ticketsWPNRLastIndex ];
+
+    if ( tickets.length > 1 ) {
+
+      return tickets.slice( 0, ticketsWPNRLastIndex )
+        .map( ticket => renderTicketDescription( ticket ) )
+        .join( ', ' ) + 
+        ` и ${ renderTicketDescription( ticketsWPNRLastItem ) }`;
+    }
+
+    return renderTicketDescription( ticketsWPNRLastItem );
+  };
+
+  const tickets = JSON.parse( tour.tv_e_tickets );
+  const ticketsSingleWithPriceNotRequired = tickets.filter( ticket => parseInt( ticket.count ) < 2 & parseInt( ticket.price ) > 0 & !ticket.required );
+  const ticketsSingleFreeNotRequired = tickets.filter( ticket => parseInt( ticket.count ) < 2 & parseInt( ticket.price ) === 0 & !ticket.required );
+  const ticketsGroup = tickets.filter( ticket => parseInt( ticket.count ) > 1 );
+
+  let ticketsTextArray = [];
+  ticketsTextArray.push( `Есть ${ renderTicketGroup( ticketsSingleWithPriceNotRequired ) } билеты` );
+  ticketsTextArray.push( `${ renderTicketGroup( ticketsSingleFreeNotRequired ) } — бесплатно` );
+  ticketsTextArray.push( `${ renderTicketGroup( ticketsGroup ) }` );
+  const ticketsText = ticketsTextArray.join( '; ' );
+
   return [
     {
       elem: 'image',
@@ -40,47 +86,51 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
             },
             {
               elem: 'aside',
-              content: {
-                elem: 'cost',
-                content: [
-                  // {
-                  //   elem: 'preprice',
-                  //   content: tour.tv_e_price_before
-                  // },
-                  {
-                    elem: 'tickets',
-                    content: [
-                      {
-                        block: 'text',
-                        mods: { weight: 'bold' },
-                        content: 'Скидки: ',
-                      },
-                      tour.tv_e_price_before,
-                      ' ',
-                      'Есть льготный (690 ₽) и детский (450 ₽) билет.',
-                      ' ',
-                      tour.tv_e_price_after
-                    ]
-                  },
-                  // {
-                  //   elem: 'postprice',
-                  //   content: tour.tv_e_price_after
-                  // },
-                  {
-                    elem: 'price',
-                    content: tour.tv_e_price
-                  },
-                  {
-                    elem: 'price',
-                    elemMods: { type: 'on-pier' },
-                    content: tour.tv_e_price_on_pier
-                  },
-                  {
-                    elem: 'buy',
-                    content: tour.id,
-                  },
-                ]
-              }
+              content: [
+                {
+                  elem: 'tickets',
+                  content: [
+                    {
+                      block: 'text',
+                      mods: { weight: 'bold' },
+                      content: 'Скидки: ',
+                    },
+                    tour.tv_e_price_before,
+                    ' ',
+                    {
+                      elem: 'tickets-text',
+                      content: {
+                        html: ticketsText
+                      }
+                    },
+                    '. ',
+                    tour.tv_e_price_after,
+                  ]
+                },
+                {
+                  elem: 'action',
+                  content: [
+                    {
+                      elem: 'cost',
+                      content: [
+                        {
+                          elem: 'price',
+                          content: tour.tv_e_price
+                        },
+                        {
+                          elem: 'price',
+                          elemMods: { type: 'on-pier' },
+                          content: tour.tv_e_price_on_pier
+                        },
+                      ]
+                    },
+                    {
+                      elem: 'buy',
+                      content: tour.id,
+                    },
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -149,25 +199,28 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
                   elem: 'sight',
                   content: tour.tv_e_showplaces.split( ',' ).map( sightID => sight[ sightID ].longtitle || sight[ sightID ].pagetitle )
                 },
+                {
+                  block: 'heading',
+                  mix: { block: node.block, elem: 'heading' },
+                  mods: { size: 's' },
+                  content: tour.tv_e_text_before_final_price,
                 },
                 {
-                  elem: 'cost',
+                  elem: 'action',
                   content: [
                     {
-                      block: 'heading',
-                      mix: { block: node.block, elem: 'heading' },
-                      mods: { size: 's' },
-                      content: tour.tv_e_text_before_final_price,
-                    },
-                    {
-                      elem: 'price',
-                      content: tour.price
-                    },
-                    {
-                      elem: 'price',
-                      elemMods: { type: 'on-pier' },
-                      // content: tour.old_price,
-                      content: 'Не реализуется на причале',
+                      elem: 'cost',
+                      content: [
+                        {
+                          elem: 'price',
+                          content: tour.tv_e_price
+                        },
+                        {
+                          elem: 'price',
+                          elemMods: { type: 'on-pier' },
+                          content: tour.tv_e_price_on_pier
+                        },
+                      ]
                     },
                     {
                       elem: 'buy',

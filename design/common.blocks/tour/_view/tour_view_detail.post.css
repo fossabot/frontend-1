@@ -84,8 +84,10 @@ block(tour).mod(view detail) {
     margin-bottom: 40px;
   }
 
-  elem(cost) {
+  elem(action) {
     margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
   }
 
   elem(route) {
