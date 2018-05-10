@@ -40,16 +40,19 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
     return renderTicketDescription( ticketsWPNRLastItem );
   };
 
-  const tickets = JSON.parse( tour.tv_e_tickets );
-  const ticketsSingleWithPriceNotRequired = tickets.filter( ticket => parseInt( ticket.count ) < 2 & parseInt( ticket.price ) > 0 & !ticket.required );
-  const ticketsSingleFreeNotRequired = tickets.filter( ticket => parseInt( ticket.count ) < 2 & parseInt( ticket.price ) === 0 & !ticket.required );
-  const ticketsGroup = tickets.filter( ticket => parseInt( ticket.count ) > 1 );
+  let ticketsText = '';
+  if ( tour.tv_e_tickets ) {
+    const tickets = JSON.parse( tour.tv_e_tickets );
+    const ticketsSingleWithPriceNotRequired = tickets.filter( ticket => parseInt( ticket.count ) < 2 & parseInt( ticket.price ) > 0 & !ticket.required );
+    const ticketsSingleFreeNotRequired = tickets.filter( ticket => parseInt( ticket.count ) < 2 & parseInt( ticket.price ) === 0 & !ticket.required );
+    const ticketsGroup = tickets.filter( ticket => parseInt( ticket.count ) > 1 );
 
-  let ticketsTextArray = [];
-  ticketsTextArray.push( `Есть ${ renderTicketGroup( ticketsSingleWithPriceNotRequired ) } билеты` );
-  ticketsTextArray.push( `${ renderTicketGroup( ticketsSingleFreeNotRequired ) } — бесплатно` );
-  ticketsTextArray.push( `${ renderTicketGroup( ticketsGroup ) }` );
-  const ticketsText = ticketsTextArray.join( '; ' );
+    let ticketsTextArray = [];
+    ticketsTextArray.push( `Есть ${ renderTicketGroup( ticketsSingleWithPriceNotRequired ) } билеты` );
+    ticketsTextArray.push( `${ renderTicketGroup( ticketsSingleFreeNotRequired ) } — бесплатно` );
+    ticketsTextArray.push( `${ renderTicketGroup( ticketsGroup ) }` );
+    ticketsText = ticketsTextArray.join( '; ' );
+  }
 
   return [
     {
@@ -197,7 +200,9 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
                 },
                 {
                   elem: 'sight',
-                  content: tour.tv_e_showplaces.split( ',' ).map( sightID => sight[ sightID ].longtitle || sight[ sightID ].pagetitle )
+                  content: tour.tv_e_showplaces
+                    ? tour.tv_e_showplaces.split( ',' ).map( sightID => sight[ sightID ].longtitle || sight[ sightID ].pagetitle )
+                    : []
                 },
                 {
                   block: 'heading',
