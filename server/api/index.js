@@ -23,6 +23,11 @@ const action = async ( { query }, { service, id } ) => {
   //   api.programs(),
   // ] );
 
+  // Astra
+  // const init = await api.init();
+  // console.log( init );
+
+
   if ( query.date ) {
     await api.date( query.date, { program: id, pier: query.pier } );
   }
