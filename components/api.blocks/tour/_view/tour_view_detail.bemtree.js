@@ -1,5 +1,8 @@
 block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
   const tour = ctx.tour;
+  const {
+    sight,
+  } = node.api.entities;
 
   return [
     {
@@ -143,25 +146,8 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
                 },
                 {
                   elem: 'sight',
-                  content: [
-                    'Зимний Дворец (Эрмитаж)',
-                    'Стрелка В.О.',
-                    'Петропавловская крепость',
-                    'Летний сад',
-                    'Летний дворец Петра I',
-                    'Чижик-Пыжик',
-                    'Мариинский театр',
-                    'Инженерный замок',
-                    'Цирк',
-                    'Шереметьевский дворец',
-                    'Аничков Мост',
-                    'Юсуповский дворец',
-                    'Музей-усадьба Державина',
-                    'Собор Св. Николая',
-                    'Исаакиевский собор',
-                    'Строгановский дворец',
-                    'Мраморный дворец',
-                  ]
+                  content: tour.tv_e_showplaces.split( ',' ).map( sightID => sight[ sightID ].longtitle || sight[ sightID ].pagetitle )
+                },
                 },
                 {
                   elem: 'cost',

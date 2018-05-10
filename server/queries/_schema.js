@@ -15,6 +15,7 @@ const tour = new schema.Entity( 'tour', {
   gallery: [ gallery ],
 }, { idAttribute: 'alias' } );
 const banner = new schema.Entity( 'banner', { url: tour } );
+const sight = new schema.Entity( 'sight' );
 
 module.exports = {
   resource,
@@ -22,4 +23,5 @@ module.exports = {
   setting,
   tour,
   banner,
+  sight,
 };

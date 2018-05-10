@@ -5,6 +5,7 @@ const schema = require( '../queries/_schema' );
 const getStructure = require( '../queries/getStructure' );
 const getSetting = require( '../queries/getSetting' );
 const getTour = require( '../queries/getTour' );
+const getSight = require( '../queries/getSight' );
 
 const data = async ( context, params ) => {
   const response = await Promise.all( [
@@ -12,6 +13,7 @@ const data = async ( context, params ) => {
     getStructure( { lang: params.lang, view: 'tree' } ),
     getSetting( { lang: params.lang }, context.session ),
     getTour( { lang: params.lang, name: params.tour /*, id: context.query.id */ }, context.session ),
+    getSight( { lang: params.lang }, context.session ),
   ] );
   return normalize(
     {
@@ -19,12 +21,14 @@ const data = async ( context, params ) => {
       structureTree: response[1],
       setting: response[2],
       tour: response[3],
+      sight: response[4],
     },
     {
       structureFlat: { object: [ schema.resource ] },
       structureTree: { object: schema.structure },
       setting: { results: [ schema.setting ] },
       tour: { object: schema.tour },
+      sight: { results: [ schema.sight ] },
     },
   );
 };
