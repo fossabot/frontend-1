@@ -1,6 +1,6 @@
 block( 'page' )(
   def()( ( node ) => {
-    const tour = node.api.result.tour.object;
+    const tour = node.api.entities.tour[ node.api.result.tour.object ];
 
     return {
       ...applyNext(),
@@ -211,9 +211,17 @@ block( 'page' )(
                   <div data-container-for="sightArray" class="k-edit-field">
                     <select id="sightArray" data-bind="value:sightArray" multiple="multiple"></select>
                   </div>
+                  <div class="k-edit-label"><label for="provider">Партнёр API</label></div>
+                  <div data-container-for="provider" class="k-edit-field">
+                    <select id="provider" data-bind="value:provider" data-role="dropdownlist"></select>
+                  </div>
                   <div class="k-edit-label"><label for="langArray">Язык экскурсии</label></div>
                   <div data-container-for="langArray" class="k-edit-field">
                     <select id="langArray" data-bind="value:langArray" data-source="{transport: {read: getLang}}" data-role="multiselect" multiple="multiple" data-value-field="value" data-text-field="text"></select>
+                  </div>
+                  <div class="k-edit-label"><label for="tagArray">Теги</label></div>
+                  <div data-container-for="tagArray" class="k-edit-field">
+                    <select id="tagArray" data-bind="value:tagArray" data-source="{transport: {read: getTag}}" data-role="multiselect" multiple="multiple" data-value-field="value" data-text-field="text"></select>
                   </div>
                   <div class="k-edit-label"><label for="tipBuy">Совет при покупке</label></div>
                   <div data-container-for="tipBuy" class="k-edit-field">
@@ -223,22 +231,17 @@ block( 'page' )(
                   <div data-container-for="tipTicket" class="k-edit-field">
                     <textarea name="tipTicket" class="k-textbox" data-bind="value:tipTicket" required="required"></textarea>
                   </div>
-                  <div class="k-edit-label"><label for="tagArray">Теги</label></div>
-                  <div data-container-for="tagArray" class="k-edit-field">
-                    <select id="tagArray" data-bind="value:tagArray" data-source="{transport: {read: getTag}}" data-role="multiselect" multiple="multiple" data-value-field="value" data-text-field="text"></select>
-                  </div>
                   <div class="k-edit-label"><label for="description">Описание</label></div>
                   <div data-container-for="description" class="k-edit-field">
                     <textarea name="description" class="k-textbox" data-bind="value:description" rows="3"></textarea>
                   </div>
+                  <div class="k-edit-label"><label for="printType">Печать билета</label></div>
+                  <div data-container-for="printType" class="k-edit-field">
+                    <select id="printType" data-bind="value:printType" data-source="{transport: {read: printType}}" data-role="dropdownlist" data-value-field="value" data-text-field="text"></select>
+                  </div>
                   <div class="k-edit-label"><label for="count">Количество билетов</label></div>
                   <div data-container-for="count" class="k-edit-field">
                     <input name="count" class="k-textbox" data-bind="value:count">
-                  </div>
-                  <div class="k-edit-label"></div>
-                  <div data-container-for="ticketPrint" class="k-edit-field">
-                    <input type="checkbox" name="ticketPrint" id="ticketPrint" data-type="boolean" data-bind="checked:ticketPrint">
-                    <label for="ticketPrint">Билет нужно распечатать</label>
                   </div>
                 </div>
                 <div class="container-tables">
@@ -267,6 +270,15 @@ block( 'page' )(
                   { text: "В этот же день", value: 0 },
                   { text: "За день", value: 1 },
                   { text: "За два дня", value: 2 }
+                ] )
+              }
+
+              const printType = request => {
+                request.success( [
+                  { text: "Не распечатывать, предьявить номер в кассе", value: 0 },
+                  { text: "Не распечатывать, предьявить номер на теплоходе", value: 1 },
+                  { text: "Распечатать", value: 2 },
+                  { text: "Астра", value: 3 },
                 ] )
               }
 
@@ -343,90 +355,119 @@ block( 'page' )(
                     e.event.set("isAllDay", false);
 
                     $("#pierStartId, #pierFinishId").kendoDropDownList({
-                        dataTextField: "text",
-                        dataValueField: "value",
-                        dataSource: {
-                          batch: true,
-                          schema: {
-                            type: "json",
-                            data: "results",
-                            model: {
-                              id: "value",
-                              fields: {
-                                value: { field: "id", type: "number" },
-                                text: { field: "pagetitle", type: "string" },
-                              }
+                      dataTextField: "text",
+                      dataValueField: "value",
+                      dataSource: {
+                        batch: true,
+                        schema: {
+                          type: "json",
+                          data: "results",
+                          model: {
+                            id: "value",
+                            fields: {
+                              value: { field: "id", type: "number" },
+                              text: { field: "pagetitle", type: "string" },
                             }
-                          },
-                          transport: {
-                            read: {
-                              url: "https://nevatrip.dev.compaero.ru/rest/pier/",
-                              data: {
-                                page: 1,
-                                perPage: 0,
-                                lang: "ru",
-                              }
+                          }
+                        },
+                        transport: {
+                          read: {
+                            url: "https://nevatrip.dev.compaero.ru/rest/pier/",
+                            data: {
+                              page: 1,
+                              perPage: 0,
+                              lang: "ru",
                             }
                           }
                         }
+                      }
                     });
 
                     $("#vehicleId").kendoDropDownList({
-                        dataTextField: "text",
-                        dataValueField: "value",
-                        dataSource: {
-                          batch: true,
-                          schema: {
-                            type: "json",
-                            data: "object",
-                            model: {
-                              id: "value",
-                              fields: {
-                                value: { field: "value", type: "number" },
-                                text: { field: "text", type: "string" },
-                              }
+                      dataTextField: "text",
+                      dataValueField: "value",
+                      dataSource: {
+                        batch: true,
+                        schema: {
+                          type: "json",
+                          data: "object",
+                          model: {
+                            id: "value",
+                            fields: {
+                              value: { field: "value", type: "number" },
+                              text: { field: "text", type: "string" },
                             }
-                          },
-                          transport: {
-                            read: {
-                              url: "https://9836511c-0527-4059-ac18-7966ba3f6793.mock.pstmn.io/fake/vehicle/",
-                              data: {
-                                page: 1,
-                                perPage: 0,
-                                lang: "ru",
-                              }
+                          }
+                        },
+                        transport: {
+                          read: {
+                            url: "https://9836511c-0527-4059-ac18-7966ba3f6793.mock.pstmn.io/fake/vehicle/",
+                            data: {
+                              page: 1,
+                              perPage: 0,
+                              lang: "ru",
                             }
                           }
                         }
+                      }
                     });
 
                     $("#sightArray").kendoMultiSelect({
-                        dataTextField: "text",
-                        dataValueField: "value",
-                        dataSource: {
-                          batch: true,
-                          schema: {
-                            type: "json",
-                            data: "results",
-                            model: {
-                              id: "value",
-                              fields: {
-                                value: { field: "id", type: "number" },
-                                text: { field: "pagetitle", type: "string" },
-                              }
+                      dataTextField: "text",
+                      dataValueField: "value",
+                      dataSource: {
+                        batch: true,
+                        schema: {
+                          type: "json",
+                          data: "results",
+                          model: {
+                            id: "value",
+                            fields: {
+                              value: { field: "id", type: "number" },
+                              text: { field: "pagetitle", type: "string" },
                             }
-                          },
-                          transport: {
-                            read: {
-                              url: "https://nevatrip.dev.compaero.ru/rest/sight/",
-                              data: {
-                                page: 1,
-                                perPage: 0,
-                                lang: "ru",
-                              }
+                          }
+                        },
+                        transport: {
+                          read: {
+                            url: "https://nevatrip.dev.compaero.ru/rest/sight/",
+                            data: {
+                              page: 1,
+                              perPage: 0,
+                              lang: "ru",
                             }
                           }
                         }
+                      }
+                    });
+
+                    $("#provider").kendoDropDownList({
+                      dataTextField: "text",
+                      dataValueField: "value",
+                      dataSource: {
+                        batch: true,
+                        schema: {
+                          type: "json",
+                          data: "results",
+                          model: {
+                            id: "value",
+                            fields: {
+                              value: { field: "id", type: "number" },
+                              text: { field: "name", type: "string" },
+                            }
+                          }
+                        },
+                        transport: {
+                          read: {
+                            url: "https://nevatrip.dev.compaero.ru/rest/vendor/",
+                            data: {
+                              page: 1,
+                              perPage: 0,
+                              lang: "ru",
+                            }
+                          }
+                        }
+                      }
                     });
 
                     let event = JSON.stringify( e.event );
@@ -438,24 +479,23 @@ block( 'page' )(
                         autoSync: true,
                         schema: {
                           model: {
-                            id: "productID",
+                            id: "MIGX_id",
                             fields: {
-                              productID: { editable: false, nullable: true },
-                              productName: { defaultValue: "Взрослый", validation: { required: true } },
+                              MIGX_id: { editable: false, nullable: true },
+                              name: { defaultValue: "Взрослый", validation: { required: true } },
                               description: { defaultValue: "" },
                               price: { type: "number", validation: { required: true, min: 0 } },
-                              buyed: { editable: false, type: "number", validation: { min: 0 } },
+                              count: { editable: false, type: "number", validation: { min: 0 } },
                             }
                           }
                         }
                       }),
                       pageable: false,
-                      // height: 550,
                       toolbar: ["create"],
                       columns: [
-                        { field:"productName",title:"Билет" },
+                        { field:"name",title:"Билет" },
                         { field: "price", title:"Стоимость", format: "{0:c}" },
-                        { field: "buyed", title:"Продано" },
+                        { field: "count", title:"Продано" },
                         { command: "destroy", title: " " }
                       ],
                       editable: true
@@ -529,39 +569,37 @@ block( 'page' )(
                     },
                     schema: {
                       data: "object",
-                      total: "total",
                       model: {
-                        id: "taskId",
                         fields: {
-                          taskId: { from: "id", type: "number" },
-                          tourId: { from: "parent", type: "number", defaultValue: ${ tour.id } },
-                          title: { from: "pagetitle", defaultValue: tour.name, validation: { required: true } },
-                          start: { from: "tv_tripDateTimeStart", type: "date" },
-                          end: { type: "date", from: "tv_tripDateTimeEnd" },
-                          isAllDay: { type: "boolean", from: "tv_isAllDay" },
-                          recurrenceId: { from: "tv_recurrenceID" },
-                          recurrenceRule: { from: "tv_recurrenceRule" },
-                          recurrenceException: { from: "tv_recurrenceException" },
-                          startTimezone: { from: "tv_startTimezone" },
-                          endTimezone: { from: "tv_endTimezone" },
-                          description: { from: "description", defaultValue: tour.description },
-                          pierStartId: { from: "tv_pierStartId", defaultValue: tour.pierStartId },
-                          pierFinishId: { from: "tv_pierFinishId", defaultValue: tour.pierFinishId },
-                          ticketType: { from: "tv_ticketType", defaultValue: tour.ticketType },
-                          mapUrl: { from: "tv_mapURL", defaultValue: tour.mapUrl },
-                          tripDirection: { from: "tv_tripDirection", defaultValue: tour.tripDirection },
-                          vehicleId: { from: "tv_vehicleId", defaultValue: tour.vehicleId },
-                          vehicleFeaturesArray: { from: "tv_vehicleFeaturesArray", defaultValue: tour.vehicleFeaturesArray },
-                          sightArray: { from: "tv_sightArray", defaultValue: tour.sightArray },
-                          langArray: { from: "tv_langArray", defaultValue: tour.langArray },
-                          tipBuy: { from: "tv_tipBuy", defaultValue: tour.tipBuy },
-                          tipTicket: { from: "tv_tipTicket", defaultValue: tour.tipTicket },
-                          buyTime: { from: "tv_buyTime", defaultValue: tour.buyTime },
-                          tagArray: { from: "tv_tags", defaultValue: tour.tagArray },
-                          ticketPrint: { from: "tv_ticketPrint", defaultValue: tour.ticketPrint },
-                          count: { from: "tv_ticketCount", defaultValue: tour.count },
-                          tickets: { from: "tv_tickets" },
-                          additional: { from: "tv_additional" },
+                          taskId               : { from: "id"                      , type: "number" },
+                          tourId               : { from: "parent"                  , type: "number", defaultValue: tour.id },
+                          title                : { from: "pagetitle"               , defaultValue: tour.name, validation: { required: true } },
+                          start                : { from: "tv_tripDateTimeStart"    , type: "date" },
+                          end                  : { from: "tv_tripDateTimeEnd"      , type: "date" },
+                          isAllDay             : { type: "boolean"                 , from: "tv_isAllDay" },
+                          recurrenceId         : { from: "tv_recurrenceID"          },
+                          recurrenceRule       : { from: "tv_recurrenceRule"        },
+                          recurrenceException  : { from: "tv_recurrenceException"   },
+                          startTimezone        : { from: "tv_startTimezone"         },
+                          endTimezone          : { from: "tv_endTimezone"           },
+                          description          : { from: "description"             , defaultValue: tour.description },
+                          pierStartId          : { from: "tv_pierStartId"          , defaultValue: tour.pierStartId },
+                          pierFinishId         : { from: "tv_pierFinishId"         , defaultValue: tour.pierFinishId },
+                          ticketType           : { from: "tv_ticketType"           , defaultValue: tour.ticketType },
+                          mapUrl               : { from: "tv_mapURL"               , defaultValue: tour.mapUrl },
+                          tripDirection        : { from: "tv_tripDirection"        , defaultValue: tour.tripDirection },
+                          vehicleId            : { from: "tv_vehicleId"            , defaultValue: tour.vehicleId },
+                          vehicleFeaturesArray : { from: "tv_vehicleFeaturesArray" , defaultValue: tour.vehicleFeaturesArray },
+                          sightArray           : { from: "tv_sightArray"           , defaultValue: tour.sightArray },
+                          langArray            : { from: "tv_langArray"            , defaultValue: tour.langArray },
+                          tipBuy               : { from: "tv_tipBuy"               , defaultValue: tour.tipBuy },
+                          tipTicket            : { from: "tv_tipTicket"            , defaultValue: tour.tipTicket },
+                          buyTime              : { from: "tv_buyTime"              , defaultValue: tour.buyTime },
+                          tagArray             : { from: "tv_tags"                 , defaultValue: tour.tagArray },
+                          ticketPrint          : { from: "tv_ticketPrint"          , defaultValue: tour.ticketPrint },
+                          count                : { from: "tv_ticketCount"          , defaultValue: tour.count },
+                          tickets              : { from: "tv_e_tickets"             },
+                          additional           : { from: "tv_additional"            },
                         }
                       }
                     },

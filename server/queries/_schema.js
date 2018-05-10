@@ -16,6 +16,7 @@ const tour = new schema.Entity( 'tour', {
 }, { idAttribute: 'alias' } );
 const banner = new schema.Entity( 'banner', { url: tour } );
 const sight = new schema.Entity( 'sight' );
+const trip = new schema.Entity( 'trip' )
 
 module.exports = {
   resource,
@@ -24,4 +25,5 @@ module.exports = {
   tour,
   banner,
   sight,
+  trip,
 };

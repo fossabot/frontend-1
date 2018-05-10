@@ -21,13 +21,14 @@ const data = async ( context, params ) => {
       structureTree: response[ 1 ],
       setting: response[ 2 ],
       trip: response[ 3 ],
-      tour,
+      tour: tour,
     },
     {
       structureFlat: { object: [ schema.resource ] },
       structureTree: { object: schema.structure },
       setting: { results: [ schema.setting ] },
-      tour: { results: [ schema.tour ] },
+      tour: { object: schema.tour },
+      trip: { object: [ schema.trip ] },
     },
   );
 };
