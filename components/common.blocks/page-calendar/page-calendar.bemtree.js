@@ -168,12 +168,12 @@ block( 'page' )(
                     <input type="text"
                       data-role="timepicker"
                       data-interval="15"
-                      data-bind="value:buyTime"
+                      data-bind="value:buyTime,invisible:isAllDay"
                       name="buyTime"/>
                   </div>
                   <div class="k-edit-label"><label for="buyDay">Прекратить продажу</label></div>
                   <div data-container-for="buyDay" class="k-edit-field">
-                    <select id="buyDay" data-bind="value:buyDay" data-source="{transport: {read: buyDay}}" data-role="dropdownlist" data-value-field="value" data-text-field="text"></select>
+                    <select id="buyDay" data-bind="value:buyDay,invisible:isAllDay" data-source="{transport: {read: buyDay}}" data-role="dropdownlist" data-value-field="value" data-text-field="text"></select>
                   </div>
                   <div class="k-edit-label"><label for="recurrenceRule">Повторять</label></div>
                   <div data-container-for="recurrenceRule" class="k-edit-field">
@@ -241,7 +241,7 @@ block( 'page' )(
                   </div>
                   <div class="k-edit-label"><label for="count">Количество билетов</label></div>
                   <div data-container-for="count" class="k-edit-field">
-                    <input name="count" class="k-textbox" data-bind="value:count">
+                    <input name="count" class="k-textbox" data-bind="value:count,invisible:isAllDay">
                   </div>
                 </div>
                 <div class="container-tables">
