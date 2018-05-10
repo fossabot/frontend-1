@@ -4,36 +4,21 @@ block( 'page-category' ).replace()( ( node ) => {
   return [
     {
       block: 'category',
-      content: [
-        {
-          elem: 'header',
-          attrs: {
-            style: `background-image: url('https://nevatrip.ru/assets/img/e/${ category.alias }/bg.jpg')`
-          },
-          content: {
-            elem: 'name',
-            content: category.longtitle || category.pagetitle,
-            url: category.alias,
-          },
+      category,
+      content: {
+        block: 'list',
+        mods: {
+          of: 'tours',
+          type: 'unstyled',
         },
-        {
-          elem: 'content',
-          content: {
-            block: 'list',
-            mods: {
-              of: 'tours',
-              type: 'unstyled',
-            },
-            items: Object.keys( node.api.entities.tour ).map( tourName => {
-              return {
-                block: 'tour',
-                mods: { view: 'preview' },
-                tour: node.api.entities.tour[ tourName ],
-              };
-            } )
-          },
-        }
-      ]
+        items: Object.keys( node.api.entities.tour ).map( tourName => {
+          return {
+            block: 'tour',
+            mods: { view: 'preview' },
+            tour: node.api.entities.tour[ tourName ],
+          };
+        } )
+      },
     },
     {
       elem: 'content',

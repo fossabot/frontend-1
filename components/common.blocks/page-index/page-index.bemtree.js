@@ -86,38 +86,22 @@ block( 'page-index' ).replace()( ( { api: { entities } } ) => {
       return {
         block: 'category',
         category: category,
-        content: [
-          {
-            elem: 'header',
-            attrs: {
-              style: `background-image: url('https://nevatrip.ru/assets/img/e/${ category.alias }/bg.jpg')`
-            },
-            content: {
-              elem: 'name',
-              content: category.longtitle || category.pagetitle,
-              url: category.alias,
-            },
+        content: {
+          block: 'list',
+          mods: {
+            of: 'tours',
+            type: 'unstyled',
           },
-          {
-            elem: 'content',
-            content: {
-              block: 'list',
-              mods: {
-                of: 'tours',
-                type: 'unstyled',
-              },
-              items: tours.map( tourId => {
-                const tour = entities.tour[ category.children[ tourId ].alias ] || {};
+          items: tours.map( tourId => {
+            const tour = entities.tour[ category.children[ tourId ].alias ] || {};
 
-                return {
-                  block: 'tour',
-                  mods: { view: 'preview' },
-                  tour: tour,
-                }
-              } ),
-            },
-          },
-        ],
+            return {
+              block: 'tour',
+              mods: { view: 'preview' },
+              tour: tour,
+            }
+          } ),
+        },
       }
     } )
   ];
