@@ -1,5 +1,7 @@
 block( 'page-category' ).replace()( ( node ) => {
   const category = node.api.entities.resource[ node.data.category ];
+  const tours = Object.values( node.api.entities.tour )
+    .sort( ( a, b ) => ( parseInt( a.menuindex ) - parseInt( b.menuindex ) ) );
 
   return [
     {
@@ -11,11 +13,12 @@ block( 'page-category' ).replace()( ( node ) => {
           of: 'tours',
           type: 'unstyled',
         },
-        items: Object.keys( node.api.entities.tour ).map( tourName => {
+        items: tours.map( tour => {
+
           return {
             block: 'tour',
             mods: { view: 'preview' },
-            tour: node.api.entities.tour[ tourName ],
+            tour: tour,
           };
         } )
       },

@@ -81,7 +81,12 @@ block( 'page-index' ).replace()( ( { api: { entities } } ) => {
     },
     [ 'day', 'night', 'meteors' ].map( categoryName => {
       const category = entities.resource[ categoryName ];
-      const tours = Object.keys( category.children );
+      const tours = Object.keys( category.children )
+        .map( tourId => {
+          category.children[ tourId ].menuindex = parseInt( category.children[ tourId ].menuindex );
+          return category.children[ tourId ];
+        } )
+        .sort( ( a, b ) => ( a.menuindex - b.menuindex ) );
 
       return {
         block: 'category',
@@ -92,8 +97,8 @@ block( 'page-index' ).replace()( ( { api: { entities } } ) => {
             of: 'tours',
             type: 'unstyled',
           },
-          items: tours.map( tourId => {
-            const tour = entities.tour[ category.children[ tourId ].alias ] || {};
+          items: tours.map( tourObj => {
+            const tour = entities.tour[ category.children[ tourObj.id ].alias ] || {};
 
             return {
               block: 'tour',
