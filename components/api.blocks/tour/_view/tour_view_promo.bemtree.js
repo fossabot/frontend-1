@@ -8,6 +8,7 @@ block( 'tour' ).mod( 'view', 'promo' )(
   match( ( node, ctx ) => !ctx.tour ).def()( '' ),
   content()( ( node, ctx ) => {
     const tour = ctx.tour;
+    const category = node.api.result.structureTree.object[ tour.parent ];
 
     return [
       {
@@ -17,7 +18,7 @@ block( 'tour' ).mod( 'view', 'promo' )(
           content: [
             {
               elem: 'name',
-              url: tour.uri,
+              url: `${ category }/${ tour.alias }`,
               content: tour.longtitle || tour.pagetitle
             },
             {
@@ -48,7 +49,7 @@ block( 'tour' ).mod( 'view', 'promo' )(
                 },
                 {
                   elem: 'show-more',
-                  url: tour.uri
+                  url: `${ category }/${ tour.alias }`,
                 },
               ]
             }

@@ -1,9 +1,10 @@
 block( 'tour' ).mod( 'view', 'cart' ).content()( ( node, { tour } ) => {
+  const category = node.api.result.structureTree.object[ tour.parent ];
 
   return [
     {
       elem: 'name',
-      url: tour.uri,
+      url: `${ category }/${ tour.alias }`,
       content: tour.longtitle || tour.pagetitle,
     },
     { elem: 'date' },

@@ -2,11 +2,12 @@ block( 'tour' ).mod( 'view', 'preview' )(
   match( ( node, ctx ) => !ctx.tour ).def()( '' ),
   content()( ( node, ctx ) => {
     const tour = ctx.tour;
+    const category = node.api.result.structureTree.object[ tour.parent ];
 
     return [
       {
         elem: 'image',
-        url: tour.uri,
+        url: `${ category }/${ tour.alias }`,
         content: tour.tv_e_image_320 ? `//nevatrip.dev.compaero.ru/${ tour.tv_e_image_320 }` : 'http://hunkholder.pixoil.com/img/373/16:9/?' + node.generateId(),
       },
       {
@@ -14,7 +15,7 @@ block( 'tour' ).mod( 'view', 'preview' )(
         content: [
           {
             elem: 'name',
-            url: tour.uri,
+            url: `${ category }/${ tour.alias }`,
             content: tour.longtitle || tour.pagetitle,
           },
           {
@@ -40,7 +41,7 @@ block( 'tour' ).mod( 'view', 'preview' )(
               },
               {
                 elem: 'show-more',
-                url: tour.uri,
+                url: `${ category }/${ tour.alias }`,
               }
             ]
           }
