@@ -65,6 +65,7 @@
     "express": "^4.16.2",
     "express-pino-logger": "^3.0.1",
     "express-session": "^1.15.6",
+    "fast-xml-parser": "^3.9.11",
     "lodash": "^4.17.4",
     "lost": "^8.2.0",
     "markdown-bemjson": "^3.1.1",
