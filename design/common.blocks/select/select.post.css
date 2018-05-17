@@ -55,13 +55,12 @@ block(select) {
 
   .elem(tick) {
     position: absolute;
-    top: 50%;
-    margin-top: -1em;
-    bottom: 0;
     right: 0;
+    height: 100%;
+    padding: .5em;
+    box-sizing: border-box;
+    background-origin: content-box;
     transition: transform 0.1s ease-out;
-    width: 1.5em;
-    padding: .25em .5em;
 
     &:empty:after {
       content: none
