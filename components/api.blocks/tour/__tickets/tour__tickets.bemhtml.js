@@ -1,4 +1,4 @@
-block( 'tour' ).elem( 'tickets' ).content()( () => {
+block( 'tour' ).elem( 'tickets' ).elemMod( 'loaded', true ).content()( () => {
   return {
     block: 'fieldset',
     legend: 'Билеты',

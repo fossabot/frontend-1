@@ -7,7 +7,7 @@
     },
     {
       block: 'tour',
-      mods: { view: 'cart' }
+      mods: { view: 'cart' },
     },
     {
       block: 'form',
@@ -17,6 +17,6 @@
         message: ['popup', 'text'],
       }
     },
-    'layout'
+    'layout',
   ]
 }]

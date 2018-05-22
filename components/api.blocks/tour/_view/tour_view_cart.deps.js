@@ -1,4 +1,5 @@
-[{
+[
+{
   shouldDeps: [
     {
       elems: [
@@ -12,4 +13,22 @@
       ]
     }
   ]
-}]
+},
+{
+  tech: 'js',
+  shouldDeps: [
+    {
+      tech: 'bemhtml',
+      elems: [
+        'date',
+        'direction',
+        'name',
+        'pier',
+        'place',
+        'tickets',
+        'time',
+      ]
+    }
+  ]
+}
+]

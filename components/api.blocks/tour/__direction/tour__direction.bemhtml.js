@@ -1,5 +1,5 @@
 block( 'tour' ).elem( 'direction' )(
-  match( node => node.mods.view === 'cart' ).replace()( ( node, ctx ) => {
+  match( node => node.mods.view === 'cart' && node.elemMods.loaded ).replace()( ( node, ctx ) => {
     return {
       block: 'fieldset',
       mix: { block: node.block, elem: node.elem },

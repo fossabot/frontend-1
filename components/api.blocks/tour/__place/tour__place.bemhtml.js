@@ -1,4 +1,4 @@
-block( 'tour' ).elem( 'place' ).content()( () => {
+block( 'tour' ).elem( 'place' ).elemMod( 'loaded', true ).content()( () => {
   return {
     block: 'fieldset',
     legend: 'Выбор мест',

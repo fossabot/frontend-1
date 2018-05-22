@@ -3,6 +3,7 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
   const {
     sight,
     gallery,
+    pier,
   } = node.api.entities;
 
   // @TODO: rewrite string to template: https://stackoverflow.com/questions/37128624/terse-way-to-intersperse-element-between-all-elements-in-javascript-array
@@ -49,8 +50,12 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
 
     let ticketsTextArray = [];
     ticketsTextArray.push( `Есть ${ renderTicketGroup( ticketsSingleWithPriceNotRequired ) } билеты` );
-    ticketsTextArray.push( `${ renderTicketGroup( ticketsSingleFreeNotRequired ) } — бесплатно` );
-    ticketsTextArray.push( `${ renderTicketGroup( ticketsGroup ) }` );
+    if ( ticketsSingleFreeNotRequired.length ) {
+      ticketsTextArray.push( `${ renderTicketGroup( ticketsSingleFreeNotRequired ) } — бесплатно` );
+    }
+    if ( ticketsGroup.length ) {
+      ticketsTextArray.push( `${ renderTicketGroup( ticketsGroup ) }` );
+    }
     ticketsText = ticketsTextArray.join( '; ' );
   }
 
@@ -81,7 +86,7 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
                   duration: true,
                 },
                 languages: tour.tv_e_excursion,
-                pierStart: tour.tv_e_from,
+                pierStart: pier[ tour.tv_e_from ],
                 pierFinish: tour.tv_e_to,
                 duration: tour.tv_e_duration,
                 onVehicle: tour.tv_e_on_boat,
@@ -201,7 +206,12 @@ block( 'tour' ).mod( 'view', 'detail' ).content()( ( node, ctx ) => {
                 {
                   elem: 'sight',
                   content: tour.tv_e_showplaces
-                    ? tour.tv_e_showplaces.split( ',' ).map( sightID => sight[ sightID ].longtitle || sight[ sightID ].pagetitle )
+                    ? tour.tv_e_showplaces.split( ',' ).map( sightID => {
+                      if ( sight[ sightID ] ) {
+                        return sight[ sightID ].longtitle || sight[ sightID ].pagetitle;
+                      }
+                      return '';
+                    } )
                     : []
                 },
                 {

@@ -15,6 +15,12 @@
         width: 'available',
       },
     },
+    {
+      block: 'radio-group',
+      mods: {
+        type: 'button'
+      },
+    },
     'label',
     'fieldset',
   ]

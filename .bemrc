@@ -33,14 +33,17 @@ module.exports = {
             },
             "bundles": {
               tech: [ "bemdecl.js" ]
-            }
+            },
             "components/desktop.blocks": {},
             "components/touch.blocks": {},
             "design/common.blocks": {
               techs: [ "post.css", "deps.js" ]
             },
             "design/desktop.blocks": {},
-            "design/touch.blocks": {}
+            "design/touch.blocks": {},
+            "design/nevatrip.blocks": {},
+            "design/moskvatrip.blocks": {},
+            "design/busguide.blocks": {},
           },
         }
       }

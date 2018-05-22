@@ -1,8 +1,9 @@
 block( 'tour' ).elem( 'time' )(
-  match( node => node.mods.view === 'cart' ).replace()( () => {
+  match( node => node.mods.view === 'cart' && node.elemMods.loaded ).replace()( ( node, ctx ) => {
 
     return {
       block: 'fieldset',
+      mix: { block: node.block, elem: node.elem },
       content: [
         {
           block: 'form-field',
@@ -17,26 +18,29 @@ block( 'tour' ).elem( 'time' )(
             {
               block: 'radio-group',
               mods: {
-                type: 'button'
+                type: 'button',
+                width: 'available',
               },
               val: 1,
               name: 'radio-button',
               options: [
-                  {
-                      val: 1,
-                      text: 'Открытое время'
-                  },
-                  {
-                      val: 2,
-                      text: 'Фиксированное'
-                  },
+                {
+                  val: 1,
+                  text: 'Открытое время'
+                },
+                {
+                  val: 2,
+                  text: 'Фиксированное'
+                },
               ]
             },
           ]
         },
         {
           block: 'paragraph',
-          content: 'Билет будет действовать в течение дня. Начало движения в 10:30, последний отходит в 14:35.'
+          content: ctx.timeLast
+            ? `Билет будет действовать в течение дня. Начало движения в ${ ctx.timeFirst }, последний отходит в ${ ctx.timeLast }.`
+            : `Теплоход отходит от причала в ${ ctx.timeFirst }.`
         },
         { tag: 'hr' },
         {
@@ -62,24 +66,7 @@ block( 'tour' ).elem( 'time' )(
                   width: 'available',
                 },
                 val: 1,
-                options: [
-                  {
-                    val: 1,
-                    text: '14:00 (прибытие в 15:00)',
-                  },
-                  {
-                    val: 2,
-                    text: '15:30 (прибытие в 16:30)',
-                  },
-                  {
-                    val: 3,
-                    text: '17:40 (прибытие в 18:40)',
-                  },
-                  {
-                    val: 4,
-                    text: '18:20 (прибытие в 19:20)',
-                  },
-                ]
+                options: ctx.options
               }
             ]
           },

@@ -1,6 +1,7 @@
 'use strict';
 
 const { normalize } = require( 'normalizr' );
+const schema = require( '../queries/_schema' );
 const getStructure = require( '../queries/getStructure' );
 const getSetting = require( '../queries/getSetting' );
 const getCart = require( '../queries/getCart' );
@@ -42,18 +43,21 @@ const data = async ( context, params ) => {
   } )
 
   const response = await Promise.all( [
-    getStructure( { lang: params.lang } ),
+    getStructure( { lang: params.lang, view: 'flat' } ),
+    getStructure( { lang: params.lang, view: 'tree' } ),
     getSetting( { lang: params.lang } ),
   ] );
   return normalize(
     {
-      structure: response[0],
-      setting: response[1],
+      structureFlat: response[0],
+      structureTree: response[1],
+      setting: response[2],
       cart: cart,
     },
     {
-      // structure: { object: schema.structure },
-      // settings: { results: [ schema.settings ] },
+      structureFlat: { object: [ schema.resource ] },
+      structureTree: { object: schema.structure },
+      setting: { results: [ schema.setting ] },
       // cart: { results: [ schema.settings ] },
     },
   );

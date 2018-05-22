@@ -30,7 +30,7 @@ block( 'tour' ).elem( 'features' )(
           mods: { weight: 'bold' },
           content: 'Теплоход'
         },
-        ': комфортабельный отапливаемый двухпалубный теплоход с закрытой и открытой палубой класса «Москва».'
+        ': этот метод пока не реализован и поэтому захардкожен'
       ] );
     }
 
@@ -44,28 +44,17 @@ block( 'tour' ).elem( 'features' )(
         ': ',
         languages.split( '\n' ).map( language => {
           switch ( language ) {
-            case 'ru':
-              return '🇷🇺 русский';
-            case 'es':
-              return '🇪🇸 испанский';
-            case 'ir':
-              return '🇮🇷 иранский';
-            case 'gb':
-              return '🇺🇸 английский';
-            case 'it':
-              return '🇮🇹 итальянский';
-            case 'ch':
-              return '🇨🇳 китайский';
-            case 'de':
-              return '🇩🇪 немецкий';
-            case 'fi':
-              return '🇫🇮 финский';
-            case 'fr':
-              return '🇫🇷 французский';
-            case 'se':
-              return '🇸🇪 шведский';
-            case 'jp':
-              return '🇯🇵 японский';
+            case 'ru': return /* 🇷🇺 */ 'русский';
+            case 'es': return /* 🇪🇸 */ 'испанский';
+            case 'ir': return /* 🇮🇷 */ 'иранский';
+            case 'gb': return /* 🇺🇸 */ 'английский';
+            case 'it': return /* 🇮🇹 */ 'итальянский';
+            case 'ch': return /* 🇨🇳 */ 'китайский';
+            case 'de': return /* 🇩🇪 */ 'немецкий';
+            case 'fi': return /* 🇫🇮 */ 'финский';
+            case 'fr': return /* 🇫🇷 */ 'французский';
+            case 'se': return /* 🇸🇪 */ 'шведский';
+            case 'jp': return /* 🇯🇵 */ 'японский';
             default:
               break;
           }
@@ -84,16 +73,11 @@ block( 'tour' ).elem( 'features' )(
         ': ',
         onVehicle.split( '\n' ).map( feature => {
           switch ( feature ) {
-            case 'male':
-              return '🚾 туалет';
-            case 'comment':
-              return '🎤 экскурсия';
-            case 'glass':
-              return '🍸 бар';
-            case 'cutlery':
-              return '🍳 еда';
-            case 'music':
-              return '🎵 музыка';
+            case 'male'    : return /* 🚾 */ 'туалет';
+            case 'comment' : return /* 🎤 */ 'экскурсия';
+            case 'glass'   : return /* 🍸 */ 'бар';
+            case 'cutlery' : return /* 🍳 */ 'еда';
+            case 'music'   : return /* 🎵 */ 'музыка';
             default:
               break;
           }

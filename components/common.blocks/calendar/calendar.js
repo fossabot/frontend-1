@@ -182,6 +182,7 @@ modules.define( 'calendar', ['i-bem-dom', 'BEMHTML', 'jquery'], function( provid
 
       return null;
     },
+
     _getToday: function() {
       var today = new Date();
       today.setHours( 0, 0, 0, 0 );
