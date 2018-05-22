@@ -104,6 +104,10 @@ block( 'page' )(
         },
         {
           elem: 'js',
+          url: '/assets/calendar/js/kendo.timezones.min.js'
+        },
+        {
+          elem: 'js',
           url: '/assets/calendar/js/cultures/kendo.culture.ru-RU.min.js'
         },
         {
@@ -119,7 +123,7 @@ block( 'page' )(
           content: {
             html: `
               <div class="trip-template">
-                #: kendo.toString(start, "hh:mm") # - #: kendo.toString(end, "hh:mm") # | #: title #
+                #: kendo.toString(start, "HH:mm", "ru-RU") #—#: kendo.toString(end, "HH:mm", "ru-RU") # | #: title #
               </div>
             `
           }
@@ -549,7 +553,7 @@ block( 'page' )(
                     { type: "month", selected: true },
                     "agenda"
                   ],
-                  timezone: "Etc/UTC",
+                  timezone: "Europe/Moscow",
                   dataSource: {
                     batch: true,
                     transport: {
