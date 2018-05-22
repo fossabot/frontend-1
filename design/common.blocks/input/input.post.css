@@ -1,10 +1,10 @@
 block(input) {
-  --border-radius: 6px;
-  --border-width: 1px;
+  /* --border-radius: 6px; */
+  /* --border-width: 1px; */
   position: relative;
   display: inline-block;
   color: inherit;
-  border-radius: var(--border-radius);
+  border-radius: 6px;
   box-sizing: border-box;
 
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -13,11 +13,11 @@ block(input) {
   &:before {
     content: '';
     position: absolute;
-    top: var(--border-width);
-    right: var(--border-width);
-    bottom: var(--border-width);
-    left: var(--border-width);
-    border-radius: calc( var(--border-radius) - var(--border-width) );
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    left: 1px;
+    border-radius: 5px;
   }
 
   .elem(box) {
