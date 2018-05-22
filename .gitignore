@@ -9,6 +9,7 @@ node_modules/
 static/assets/font/
 static/assets/img/svg/
 static/assets/*/*/*.min.*
+!static/assets/calendar
 
 .enb/tmp/
 
