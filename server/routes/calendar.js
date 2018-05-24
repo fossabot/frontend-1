@@ -8,12 +8,12 @@ const getTour = require( '../queries/getTour' );
 const getTrip = require( '../queries/getTrip' );
 
 const data = async ( context, params ) => {
-  const tour = await getTour( { lang: params.lang, name: params.tour } );
   const response = await Promise.all( [
     getStructure( { lang: params.lang, view: 'flat' } ),
     getStructure( { lang: params.lang, view: 'tree' } ),
     getSetting( { lang: params.lang } ),
-    getTrip( { tour: tour.object.id } ),
+    getTrip( { tour: params.tour } ),
+    getTour( { lang: params.lang, id: params.tour } ),
   ] );
   return normalize(
     {
@@ -21,7 +21,7 @@ const data = async ( context, params ) => {
       structureTree: response[ 1 ],
       setting: response[ 2 ],
       trip: response[ 3 ],
-      tour: tour,
+      tour: response[ 4 ],
     },
     {
       structureFlat: { object: [ schema.resource ] },
