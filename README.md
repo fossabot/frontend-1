@@ -2,6 +2,7 @@
 
 [![GitHub issues](https://img.shields.io/github/issues/Nevatrip/frontend.svg)](https://github.com/Nevatrip/frontend/issues)
 [![Build Status](https://travis-ci.org/Nevatrip/frontend.svg?branch=master)](https://travis-ci.org/Nevatrip/frontend)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FNevatrip%2Ffrontend.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FNevatrip%2Ffrontend?ref=badge_shield)
 
 ## Установка
 
@@ -148,3 +149,6 @@ pier
 sight
 rent
 ```
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FNevatrip%2Ffrontend.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FNevatrip%2Ffrontend?ref=badge_large)
